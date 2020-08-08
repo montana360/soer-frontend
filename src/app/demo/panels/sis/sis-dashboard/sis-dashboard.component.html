@@ -1,0 +1,111 @@
+<div class="row">
+  <div class="col-xl-3 col-md-6">
+    <app-card [hidHeader]="true">
+      <div class="row align-items-center m-l-0">
+        <div class="col-auto">
+          <i class="fas fa-sign-out-alt f-36 text-c-purple"></i>
+        </div>
+        <div class="col-auto">
+          <h6 class="text-muted m-b-10">Leave</h6>
+          <h2 class="m-b-0">45</h2>
+        </div>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-xl-3 col-md-6">
+    <app-card [hidHeader]="true">
+      <div class="row align-items-center m-l-0">
+        <div class="col-auto">
+          <i class="fas fa-book f-36 text-c-red"></i>
+        </div>
+        <div class="col-auto">
+          <h6 class="text-muted m-b-10">Submission</h6>
+          <h2 class="m-b-0">9</h2>
+        </div>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-xl-3 col-md-6">
+    <app-card [hidHeader]="true">
+      <div class="row align-items-center m-l-0">
+        <div class="col-auto">
+          <i class="fas fa-running f-36 text-c-green"></i>
+        </div>
+        <div class="col-auto">
+          <h6 class="text-muted m-b-10">Event</h6>
+          <h2 class="m-b-0">5</h2>
+        </div>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-xl-3 col-md-6">
+    <app-card [hidHeader]="true">
+      <div class="row align-items-center m-l-0">
+        <div class="col-auto">
+          <i class="fas fa-bug f-36 text-c-blue"></i>
+        </div>
+        <div class="col-auto">
+          <h6 class="text-muted m-b-10">Bug</h6>
+          <h2 class="m-b-0">25</h2>
+        </div>
+      </div>
+    </app-card>
+  </div>
+
+  <div class="col-sm-12">
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      Your <strong>Web Design</strong>Exam will active now <a href="javascript:" class="alert-link">Click hear</a> to start exam.
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+  </div>
+
+  <div class="col-xl-5 col-md-12">
+    <app-card cardTitle="Notice" cardClass="task-card">
+      <ul class="p-t-20 list-unstyled task-list">
+        <li>
+          <i class="feather icon-check f-w-600 task-icon bg-c-green"></i>
+          <p class="m-b-5">8:50</p>
+          <h6 class="text-muted">Your first semester Exam will held on <span class="text-c-blue">19-04-2018</span>.</h6>
+        </li>
+        <li>
+          <i class="task-icon bg-c-blue"></i>
+          <p class="m-b-5">Sat, 5 Mar</p>
+          <h6 class="text-muted">In your school campus on <span class="text-c-blue">1-03-2018</span> will held a program of <span class="text-c-blue">annual sports day</span>.You are all invited.</h6>
+        </li>
+        <li>
+          <i class="task-icon bg-c-red"></i>
+          <p class="m-b-5">Sun, 17 Feb</p>
+          <h6 class="text-muted">Your second semester exam will held on 30-08-2018.Please be prepare for your exam</h6>
+        </li>
+        <li>
+          <i class="task-icon bg-c-yellow"></i>
+          <p class="m-b-5">Sat, 18 Mar</p>
+          <h6 class="text-muted">On <span class="text-c-blue">20-11-2018</span> will held a programming contest in school campus.Registration start from today. </h6>
+        </li>
+        <li class="pb-2 mb-0">
+          <i class="task-icon bg-c-green"></i>
+          <p class="m-b-5">Sat, 22 Mar</p>
+          <h6 class="text-muted">Prize giving ceremony will held on <span class="text-c-blue">03-01-2019</span>.Best Student List published In your Website.</h6>
+        </li>
+      </ul>
+    </app-card>
+  </div>
+  <div class="col-xl-7 col-md-12">
+    <app-card [hidHeader]="true" cardClass="overflow-hidden" blockClass="bg-c-blue" [isCardFooter]="true">
+      <app-apex-chart chartID="project-earning--chart" [chartConfig]="this.projectEarningChartData"></app-apex-chart>
+      <div class="app-card-footer">
+        <h6 class="text-muted m-b-30 m-t-15">Total completed project and earning</h6>
+        <div class="row text-center">
+          <div class="col-6 border-right">
+            <h6 class="text-muted m-b-10">Completed Projects</h6>
+            <h3 class="m-b-0">175</h3>
+          </div>
+          <div class="col-6">
+            <h6 class="text-muted m-b-10">Total Earnings</h6>
+            <h3 class="m-b-0">76.6M</h3>
+          </div>
+        </div>
+      </div>
+    </app-card>
+  </div>
+</div>

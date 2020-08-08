@@ -1,0 +1,226 @@
+<div class="row btn-page">
+  <div class="col-sm-12 stastic-slider-full-card">
+    <div class="row no-gutters">
+      <div class="col-md-6 col-xl-3">
+        <app-card [hidHeader]="true" cardClass="rounded-0">
+          <div class="row justify-content-between align-items-center mb-3">
+            <div class="col">
+              <span class="d-flex justify-content-center align-items-center"><i class="fab fa-bitcoin text-c-yellow f-22 m-r-5"></i>Bitcoin(BTC)</span>
+            </div>
+            <div class="col">
+              <h6 class="badge badge-light-warning float-right d-inline-block m-0">-0.997896</h6>
+            </div>
+          </div>
+          <app-apex-chart chartID="seo-chart-1" [chartConfig]="this.seoChartData4"></app-apex-chart>
+        </app-card>
+      </div>
+      <div class="col-md-6 col-xl-3">
+        <app-card [hidHeader]="true" cardClass="rounded-0">
+          <div class="row justify-content-between align-items-center mb-3">
+            <div class="col">
+              <span class="d-flex justify-content-center align-items-center"><i class="fab fa-ethereum text-c-red f-22 m-r-5"></i>Ethereum(ETH)</span>
+            </div>
+            <div class="col">
+              <h6 class="badge badge-light-danger float-right d-inline-block m-0">+1.1456</h6>
+            </div>
+          </div>
+          <app-apex-chart chartID="seo-chart-2" [chartConfig]="this.seoChartData3"></app-apex-chart>
+        </app-card>
+      </div>
+      <div class="col-md-6 col-xl-3">
+        <app-card [hidHeader]="true" cardClass="rounded-0">
+          <div class="row justify-content-between align-items-center mb-3">
+            <div class="col">
+              <span class="d-flex justify-content-center align-items-center"><i class="fab fa-asymmetrik text-c-blue f-22 m-r-5"></i>Neo(NEO)</span>
+            </div>
+            <div class="col">
+              <h6 class="badge badge-light-primary float-right d-inline-block m-0">+5.78787</h6>
+            </div>
+          </div>
+          <app-apex-chart chartID="seo-chart-3" [chartConfig]="this.seoChartData1"></app-apex-chart>
+        </app-card>
+      </div>
+      <div class="col-md-6 col-xl-3">
+        <app-card [hidHeader]="true" cardClass="rounded-0">
+          <div class="row justify-content-between align-items-center mb-3">
+            <div class="col">
+              <span class="d-flex justify-content-center align-items-center"><i class="fab fa-cloudsmith text-c-green f-22 m-r-5"></i>Ripple(RPL)</span>
+            </div>
+            <div class="col">
+              <h6 class="badge badge-light-success float-rightd-inline-block m-0">-7.99999</h6>
+            </div>
+          </div>
+          <app-apex-chart chartID="seo-chart-4" [chartConfig]="this.seoChartData2"></app-apex-chart>
+        </app-card>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-12">
+    <app-card cardTitle="Bitcoin (USD) Price" [options]="false">
+      <app-apex-chart chartID="candlestick-chart-1" [chartConfig]="this.candlestickChartData1"></app-apex-chart>
+    </app-card>
+  </div>
+
+  <div class="col-lg-4">
+    <app-card cardTitle="Transfer Coins" [options]="false">
+      <h5 class="text-primary">Payment* <small class="text-muted ml-5">0.00001BTC</small></h5>
+      <div class="input-group mb-5">
+        <input type="text" class="form-control" aria-label="Text input with dropdown button" placeholder="Enter your payment">
+        <div class="input-group-append">
+          <select class="form-control">
+            <option value="">BTC</option>
+            <option value="">ETH</option>
+            <option value="">BTC</option>
+            <option value="">BTC</option>
+          </select>
+        </div>
+      </div>
+      <h5 class="text-primary">Wallet Address</h5>
+      <div class="input-group mb-5">
+        <div class="input-group-prepend">
+          <div class="input-group-text flex-column justify-content-center">
+            <span><i class="fa fa-credit-card" aria-hidden="true"></i></span>
+          </div>
+        </div>
+        <input type="text" class="form-control" placeholder="2xsD12F42xvR2deD4..." readonly="readonly">
+      </div>
+      <div class="row align-items-end">
+        <div class="col">
+          <table class="table table-borderless m-b-0">
+            <tbody>
+            <tr>
+              <td class="p-0">
+                <p class="m-b-10">Sub total</p>
+                <p class="m-b-10">Coin fee</p>
+                <h6 class="m-b-0">Total</h6>
+              </td>
+              <td class="p-0">
+                <p class="m-b-10">BTC 143266</p>
+                <p class="m-b-10">BTC 1320</p>
+                <h6 class="m-b-0">BTC 12,342.098</h6>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-auto">
+          <button class="btn btn-primary">Transfer</button>
+        </div>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-lg-4">
+    <app-card cardTitle="Wallet Address" [options]="false">
+      <h5 class="text-success mt-2">Bitcoin Wallet Address*</h5>
+      <div class="form-group fill mb-5">
+        <label class="floating-label" for="text1">Key</label>
+        <input type="text" class="form-control" id="text1" aria-describedby="emailHelp" value="2xsD12F42xvR2deD42xsD12F">
+      </div>
+      <h5 class="text-success">Ethereum Wallet Address*</h5>
+      <div class="form-group fill mb-5">
+        <label class="floating-label" for="text2">Key</label>
+        <input type="text" class="form-control" id="text2" aria-describedby="emailHelp" value="sD12F42xvR2de2xsD12F42xv">
+      </div>
+      <a href="javascript:" class="btn btn-success btn-sl-sm">Settings</a>
+      <a href="javascript:" class="btn btn-outline-success btn-sl-sm">View All</a>
+    </app-card>
+  </div>
+  <div class="col-lg-4">
+    <app-card cardTitle="Choose asset to trade" [options]="false">
+      <div class="input-group input-group-prepend-big mb-4">
+        <div class="input-group-prepend">
+          <div class="input-group-text flex-column justify-content-center px-5 border-0 border-bottom">
+            <p class="m-0 ">BTC</p>
+            <span>945.34 <span><i class="fa fa-level-down"></i></span></span>
+          </div>
+        </div>
+        <input type="text" class="form-control h-auto pl-5" aria-label="Text input with dropdown button" placeholder="0.25">
+      </div>
+      <div class="text-center">
+        <i class="fas fa-exchange-alt f-20"></i>
+      </div>
+      <div class="input-group input-group-prepend-big mt-4 mb-0">
+        <div class="input-group-prepend">
+          <div class="input-group-text flex-column justify-content-center px-5 border-0 border-bottom">
+            <p class="m-0 ">ETH</p>
+            <span>945.34 <span><i class="fa fa-level-down"></i></span></span>
+          </div>
+        </div>
+        <input type="text" class="form-control h-auto pl-5" aria-label="Text input with dropdown button" placeholder="0.25">
+      </div>
+      <div class="text-center">
+        <p class="muted-text my-3 ">You could save up to $45,42</p>
+        <button type="submit" class="btn btn-primary mt-3">Exchange</button>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-lg-4">
+    <app-card cardTitle="Buy Bitcoin" [options]="false" cardClass="recent-operations-card">
+      <h6 class="m-b-25 text-primary">Amount</h6>
+      <div class="input-group mb-3">
+        <span class="input-group-prepend"><label class="input-group-text"><i class="fab fa-bitcoin"></i></label></span>
+        <input type="text" class="form-control" placeholder="Value" value="2">
+      </div>
+      <h6 class="m-b-25 text-primary">Ask Price</h6>
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Value" value="at 721.3478  BTC each" disabled>
+      </div>
+      <div class="row align-items-end">
+        <div class="col">
+          <table class="table table-borderless m-b-0">
+            <tr>
+              <td class="p-0">
+                <p class="m-b-10">Sub total</p>
+                <p class="m-b-10">Coin fee</p>
+                <h6 class="m-b-0">Total</h6>
+              </td>
+              <td class="p-0">
+                <p class="m-b-10">BTC 143266</p>
+                <p class="m-b-10">BTC 1320</p>
+                <h6 class="m-b-0">BTC 12,342.098</h6>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="col-auto">
+          <button class="btn btn-primary">Buy</button>
+        </div>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-lg-4">
+    <app-card cardTitle="Sell Bitcoin" [options]="false">
+      <h6 class="m-b-25 text-warning">Amount</h6>
+      <div class="input-group mb-3">
+        <span class="input-group-prepend"><label class="input-group-text"><i class="fab fa-bitcoin"></i></label></span>
+        <input type="text" class="form-control" placeholder="Value" value="2">
+      </div>
+      <h6 class="m-b-25 text-warning">Ask Price</h6>
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Value" value="at 721.3478  BTC each" disabled>
+      </div>
+      <div class="row align-items-end">
+        <div class="col">
+          <table class="table table-borderless m-b-0">
+            <tr>
+              <td class="p-0">
+                <p class="m-b-10">Sub total</p>
+                <p class="m-b-10">Coin fee</p>
+                <h6 class="m-b-0">Total</h6>
+              </td>
+              <td class="p-0">
+                <p class="m-b-10">BTC 143266</p>
+                <p class="m-b-10">BTC 1320</p>
+                <h6 class="m-b-0">BTC 12,342.098</h6>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="col-auto">
+          <button class="btn btn-warning">SELL</button>
+        </div>
+      </div>
+    </app-card>
+  </div>
+</div>

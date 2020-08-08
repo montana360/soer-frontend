@@ -1,0 +1,451 @@
+<div class="row btn-page">
+  <div class="col-sm-12 btn-page">
+    <app-card [hidHeader]="true" cardClass="card-datatable">
+      <div *ngIf="this.isLoading" class="d-flex justify-content-center">
+        <div class="spinner-border" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+
+      <div *ngIf="!this.isLoading" class="row align-items-center m-l-0">
+        <div class="col-sm-6"></div>
+        <div class="col-sm-6 text-right">
+          <button class="btn btn-primary btn-sm btn-round has-ripple" (click)="RepositRecords.show()">
+            <i class="feather icon-search"></i>
+            Search
+          </button>
+          <button class="btn btn-success btn-sm btn-round has-ripple" (click)="AccountCustomer.show()">
+            <i class="feather icon-plus"></i>
+            Make Deposits
+          </button>
+        </div>
+
+        <!-- Creating Debtor -->
+        <app-ui-modal #modalCustomer [dialogClass]="'modal-md'">
+          <div class="app-modal-header">
+            <h5 class="modal-title">Depositor Deposit Forms</h5>
+            <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close"
+              (click)="depositForm.reset(); modalCustomer.hide()"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="app-modal-body">
+
+            <form [formGroup]="depositForm">
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <h6>Customer Name</h6>
+                    <input type="text" class="form-control" id="name" formControlName="name" placeholder="Full Name"
+                      [attr.disabled]="true">
+                  </div>
+
+                  <div class="form-group">
+                    <h6>Account Number</h6>
+                    <input type="text" class="form-control" id="account_number" formControlName="account_number"
+                      placeholder="Account Number" [attr.disabled]="true">
+                  </div>
+
+                  <div class="form-group">
+                    <h6>Initial Price</h6>
+                    <input type="text" class="form-control" id="product_price" formControlName="product_price"
+                      placeholder="Initial Cost Amount" [attr.disabled]="true">
+                  </div>
+
+                  <div class="form-group">
+                    <h6>Balance</h6>
+                    <input type="text" class="form-control" id="amount_paid" formControlName="amount_paid"
+                      placeholder="Amount Paid" [attr.disabled]="true">
+                  </div>
+
+                </div>
+
+
+                <!-- Second Column-->
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <select class="form-control" formControlName="payment_type" (change)="payIn($event.target.value)">
+                      <option value="null">Select Payment Type</option>
+                      <option value="Agent">Agent Pay-In</option>
+                      <option value="Walkin">Walk-In</option>
+                    </select>
+                  </div>
+
+
+                  <div *ngIf="!isWalkin">
+                    <div class="form-group">
+                      <select class="form-control" formControlName="agent_id"
+                        (change)="getAgentDeposit($event.target.value)">
+                        <option value="null">Select Agent</option>
+                        <option *ngFor="let agent of allAgents" value="{{ agent.id }}">
+                          {{ agent.first_name }} {{ agent.last_name }}</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form-group" *ngIf="notice">
+                    <p style="color: red;">Agent has no current Deposit Balance. Select another Agent.</p>
+                  </div>
+
+                  <div class="form-group" *ngIf="isAmount">
+                    <h6>Amount Deposited</h6>
+                    <input type="number" min="0" class="form-control" formControlName="agentDeposit" [(ngModel)]="agentDeposit"
+                      placeholder="Agent Deposit Account" [attr.disabled]="true">
+                  </div>
+
+                  <div class="form-group" *ngIf="isAmount">
+                    <h6>Amount Remaining</h6>
+                    <input type="number" min="0" class="form-control" formControlName="agentAmount" [(ngModel)]="agentAmount"
+                      placeholder="Agent Deposit Account" [attr.disabled]="true">
+                  </div>
+
+
+                  <div class="form-group">
+                    <input type="number" min="0" class="form-control" formControlName="amount" placeholder="Deposit" [(ngModel)]="debAmount">
+                    <p style="color: red;"
+                      *ngIf="depositForm.get('amount').touched && depositForm.get('amount').hasError('required')">
+                      Please enter amount to deposit
+                    </p>
+                  </div>
+
+                  <div class="form-group" *ngIf="!isWalkin && (debAmount > agentAmount)? true:false">
+                    <p style="color: red;">
+                      Amount specified is much higher than Agent Remaining Amount
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </form>
+
+          </div>
+
+          <div class="app-modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="clear();">Clear</button>
+            <button type="button" [disabled]="!isWalkin && (debAmount > agentAmount)? true:false" class="btn btn-primary" (click)="createDeposit(); clear(); modalCustomer.hide()">
+              Make Deposit
+            </button>
+          </div>
+        </app-ui-modal>
+
+
+
+        <!-- Searching for Depositor Account Details using Acct Number -->
+        <app-ui-modal #AccountCustomer>
+          <div class="app-modal-header">
+            <h5 class="modal-title">Search Depositor Account</h5>
+            <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close"
+              (click)="searchForm.reset(); AccountCustomer.hide()"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="app-modal-body">
+
+            <form [formGroup]="searchForm">
+              <!-- <div class="form-group">
+                <select class="form-control" formControlName="account_number">
+                  <option value="null">Select Depositor Account</option>
+                  <option *ngFor="let depo of Depos" value="{{ depo.account_number }}">
+                    {{ depo.name }} | {{ depo.account_number }}</option>
+                </select>
+
+                <p style="color: red;"
+                  *ngIf="searchForm.get('account_number').touched && searchForm.get('account_number').hasError('required')">
+                  Please enter the account number of the client
+                </p>
+              </div> -->
+
+              <div class="form-group">
+                <input type="text" class="form-control" id="search" formControlName="search" [(ngModel)]="search"
+                  placeholder="Search for Deposit Customer" (keyup)="clearUserSearch()"
+                  (input)="searchDepositors($event.target.value);" autocomplete="off">
+                <br>
+
+                <div *ngIf="isSearching" class="d-flex justify-content-center">
+                  <div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                </div>
+
+
+                <select *ngIf="isFound" class="form-control" formControlName="account_number">
+                  <option value="null">Select Deposit Customer</option>
+                  <option *ngFor="let item of searchList" value="{{ item.account_number }}">
+                    {{ item.name }} ({{ item.account_number }})
+                  </option>
+                </select>
+
+                <p style="color: red;"
+                  *ngIf="searchForm.get('account_number').touched && searchForm.get('account_number').hasError('required')">
+                  Please select customer
+                </p>
+              </div>
+
+              <!-- If Product is not found -->
+              <div *ngIf="isInfo" class="form-group">
+                <p style="color: red;">
+                  No Customer with this details found
+                </p>
+              </div>
+
+            </form>
+
+          </div>
+          <div class="app-modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal"
+              (click)="clearUserSearch(); searchForm.reset()">Clear</button>
+            <button type="button" class="btn btn-primary"
+              (click)="getClient(); AccountCustomer.hide(); clearUserSearch(); searchForm.reset(); modalCustomer.show()">
+              Search
+            </button>
+          </div>
+        </app-ui-modal>
+
+
+        <!-- Searching for Customer Deposit Records -->
+        <app-ui-modal #RepositRecords>
+          <div class="app-modal-header">
+            <h5 class="modal-title">Search Depositor Account</h5>
+            <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close"
+              (click)="searchForm.reset(); RepositRecords.hide()"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="app-modal-body">
+
+            <form [formGroup]="searchForm">
+
+              <!-- <div class="form-group">
+                <select class="form-control" formControlName="account_number">
+                  <option value="null">Select Depositor Account</option>
+                  <option *ngFor="let depo of Depos" value="{{ depo.account_number }}">
+                    {{ depo.name }} | {{ depo.account_number }}</option>
+                </select>
+                <p style="color: red;"
+                  *ngIf="searchForm.get('account_number').touched && searchForm.get('account_number').hasError('required')">
+                  Please enter the account number of the client
+                </p>
+              </div> -->
+
+              <div class="form-group">
+                <input type="text" class="form-control" id="search" formControlName="search" [(ngModel)]="search"
+                  placeholder="Search for Deposit Customer" (keyup)="clearUserSearch()"
+                  (input)="searchDepositors($event.target.value);" autocomplete="off">
+                <br>
+
+                <div *ngIf="isSearching" class="d-flex justify-content-center">
+                  <div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                </div>
+
+
+                <select *ngIf="isFound" class="form-control" formControlName="account_number">
+                  <option value="null">Select Deposit Customer</option>
+                  <option *ngFor="let item of searchList" value="{{ item.account_number }}">
+                    {{ item.name }} ({{ item.account_number }})
+                  </option>
+                </select>
+
+                <p style="color: red;"
+                  *ngIf="searchForm.get('account_number').touched && searchForm.get('account_number').hasError('required')">
+                  Please select customer
+                </p>
+              </div>
+
+              <!-- If Product is not found -->
+              <div *ngIf="isInfo" class="form-group">
+                <p style="color: red;">
+                  No Customer found
+                </p>
+              </div>
+
+
+            </form>
+
+          </div>
+          <div class="app-modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal"
+              (click)="clearUserSearch(); searchForm.reset()">Clear</button>
+            <button type="button" class="btn btn-primary"
+              (click)="getClientRecords(); clearUserSearch();  RepositRecords.hide(); searchForm.reset();">
+              Search
+            </button>
+          </div>
+        </app-ui-modal>
+
+      </div>
+
+      <div *ngIf="!this.isLoading" class="table-responsive">
+        <table datatable  [dtOptions]="dtOptions" id="report-table" class="table table-striped table-hover mb-0">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Account Number</th>
+              <th>Deposit</th>
+              <!-- <th>Balance</th> -->
+              <th>Paid By</th>
+              <th>Session Date</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let depo of allDeposits">
+              <td>{{ depo.name }}</td>
+              <td> {{ depo.account_number }}
+              </td>
+              <td>GH¢{{ depo.deposit | number:'1.2-2' }}</td>
+              <!-- <td>GH¢{{ depo.balance | number:'1.2-2' }}</td> -->
+              <td>{{ depo.payment_type }}</td>
+              <td>{{ depo.session_date }}</td>
+
+
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Edit Modal -->
+        <app-ui-modal #editCustomer [dialogClass]="'modal-md'">
+          <div class="app-modal-header">
+            <h5 class="modal-title">Deposit Details</h5>
+            <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close"
+              (click)="editDepositForm.reset(); editCustomer.hide()"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="app-modal-body">
+
+            <form [formGroup]="editDepositForm">
+
+              <div class="row">
+                <div class="col-md-6">
+
+                  <div class="form-group">
+                    <h6>Account Number</h6>
+                    <input type="text" class="form-control" id="account_number" formControlName="account_number"
+                      placeholder="Account Number" [attr.disabled]="true">
+                  </div>
+
+                  <div class="form-group">
+                    <h6>Customer Full Name</h6>
+                    <input type="text" class="form-control" id="name" formControlName="name" placeholder="Full Name"
+                      [attr.disabled]="true">
+                  </div>
+
+                </div>
+                <!-- Second Column-->
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <h6>Money Deposited</h6>
+                    <input type="number" min="0" class="form-control" formControlName="amount" placeholder="Deposit">
+                  </div>
+                </div>
+              </div>
+            </form>
+
+          </div>
+          <div class="app-modal-footer">
+            <button type="button" class="btn btn-primary"
+              (click)="editDeposit(); editDepositForm.reset(); editCustomer.hide()">
+              Save
+            </button>
+          </div>
+        </app-ui-modal>
+
+
+        <!-- View Modal -->
+        <app-ui-modal #viewDeposit [dialogClass]="'modal-xl'">
+          <div class="app-modal-header">
+            <h5 class="modal-title">Deposit Details</h5>
+            <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close"
+              (click)=" viewDeposit.hide()"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="app-modal-body">
+
+            
+              <app-card id="contentToConvert">
+                <div class="no-gutters">
+                  <div class="col-sm-12">
+                    <img src="../../../../assets/kcc.jpg" style="width:100%;">
+                    <img *ngIf="comData?.company_logo !== null" src="{{ comData?.company_logo }}" alt="logotipo"
+                      style="width: 100%; height: 160px;">
+                  </div>
+                </div>
+                <table class="example-table" >
+                  <tr>
+                    <td><B>Account Number:</B> {{ deposit?.account_number }}</td>
+
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+
+                    <td><b>Name:</b> {{ deposit?.name }}</td>
+
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+
+                    <td>
+                      <div *ngFor="let branch of branches">
+                        <div *ngIf="branch.id == deposit?.branch_id"><b>Branch:</b> {{ branch.name }}
+                        </div>
+                      </div>
+                    </td>
+
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+
+                    <td>
+                      <!-- {{ deposit?.name }} -->
+                      <div *ngFor="let user of allStaff">
+                        <div *ngIf="user.id == deposit?.agent_id"><b>Agent:</b>
+                          {{ user.first_name }}
+                          {{ user.last_name }}</div>
+                      </div>
+                    </td>
+
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+
+                    <td><b>Session Date: </b> {{ deposit?.session_date }}</td>
+                  </tr>
+
+                </table>
+
+                <br>
+
+                <table class="table table-striped table-hover mb-0">
+                  <thead>
+                    <tr>
+                      <th><b>Intial Price</b></th>
+                      <th><b>Previous Payment</b></th>
+                      <th><b>Deposit</b></th>
+                      <th><b>Balance</b></th>
+                      <th><b>Payment Type</b></th>
+                      <th><b>Received By</b></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>GH₵{{ deposit?.initial_price | number:'1.2-2' }}</td>
+                      <td>GH₵{{ deposit?.amount_paid | number:'1.2-2' }}</td>
+                      <td>GH₵{{ deposit?.deposit | number:'1.2-2' }}</td>
+                      <td>GH₵{{ deposit?.balance | number:'1.2-2' }}</td>
+                      <td>{{ deposit?.payment_type }}</td>
+                      <td>
+                        <!-- {{ product?.balance }} -->
+                        <div *ngFor="let user of allStaff">
+                          <div *ngIf="user.id == deposit?.depositor_id">
+                            {{ user.first_name }}
+                            {{ user.last_name }}</div>
+                        </div>
+                      </td>
+                    </tr>
+
+
+                  </tbody>
+
+
+                </table>
+              </app-card>
+
+
+          </div>
+          <div class="app-modal-footer">
+            <button type="button" class="btn btn-primary"
+              (click)="captureScreen(deposit?.account_number);  viewDeposit.hide()">
+              Download
+            </button>
+          </div>
+        </app-ui-modal>
+
+      </div>
+    </app-card>
+  </div>
+</div>

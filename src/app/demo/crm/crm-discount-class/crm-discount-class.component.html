@@ -1,0 +1,134 @@
+<div class="row btn-page">
+  <div class="col-sm-12">
+
+
+    <app-card [hidHeader]="true" cardClass="card-datatable">
+
+      <div *ngIf="this.isLoading" class="d-flex justify-content-center">
+        <div class="spinner-border" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+
+
+      <div *ngIf="!this.isLoading" class="row align-items-center m-l-0">
+        <div class="col-sm-6"></div>
+        <div class="col-sm-6 text-right">
+          <button class="btn btn-success btn-sm btn-round has-ripple" (click)="newDiscount.show()"><i
+              class="feather icon-plus"></i> Add Discount</button>
+        </div>
+        <app-ui-modal #newDiscount>
+          <div class="app-modal-header">
+            <h5 class="modal-title">Create New Discount</h5>
+            <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close"
+              (click)="newDiscount.hide()"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="app-modal-body">
+            <form [formGroup]="discountForm">
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="Name" placeholder="Name" formControlName="name">
+                    <p style="color: red;"
+                      *ngIf="discountForm.get('name').touched && discountForm.get('name').hasError('required')">
+                      Required Field
+                    </p>
+                  </div>
+                </div>
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <textarea class="form-control" id="Description" placeholder="Discount Rate"
+                      formControlName="rate"></textarea>
+                    <p style="color: red;"
+                      *ngIf="discountForm.get('rate').touched && discountForm.get('rate').hasError('required')">
+                      Required Field
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="app-modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="discountForm.reset()">
+              Clear
+            </button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" [disabled]="!discountForm.valid"
+              (click)="createDiscount(); discountForm.reset(); newDiscount.hide()">
+              <span *ngIf="this.isLoading" class="spinner-border spinner-border-sm" role="status"></span>
+              <span *ngIf="this.isLoading" class="load-text"> Saving...</span>
+              <span *ngIf="!this.isLoading" class="btn-text">Submit</span>
+            </button>
+          </div>
+        </app-ui-modal>
+      </div>
+
+
+      <div *ngIf="!this.isLoading" class="table-responsive">
+
+        <table datatable id="report-table" class="table table-bordered table-striped mb-0">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th width="50%">Rate</th>
+              <th>Options</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let discount of allDiscount">
+              <td>{{ discount.name }}</td>
+              <td>{{ discount.rate }}%</td>
+              <td>
+                <a href="javascript:" (click)="edit(discount?.id); editDiscount.show()" class="btn btn-info btn-sm"><i
+                    class="feather icon-edit"></i>&nbsp; Edit </a>
+                <a href="javascript:" (click)="confirmAlert(discount?.id)" class="btn btn-danger btn-sm"><i
+                    class="feather icon-trash-2"></i>&nbsp;Delete </a>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+
+        <app-ui-modal #editDiscount>
+          <div class="app-modal-header">
+            <h5 class="modal-title">Edit Discount Class</h5>
+            <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close"
+              (click)="editDiscount.hide()"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="app-modal-body">
+            <form [formGroup]="editDiscountForm">
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="Name" placeholder="Name" formControlName="name">
+                    <p style="color: red;"
+                      *ngIf="editDiscountForm.get('name').touched && editDiscountForm.get('name').hasError('required')">
+                      Required Field
+                    </p>
+                  </div>
+                </div>
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="Description" placeholder="Rate" formControlName="rate">
+                    <p style="color: red;"
+                      *ngIf="editDiscountForm.get('rate').touched && editDiscountForm.get('rate').hasError('required')">
+                      Required Field
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="app-modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal" [disabled]="!editDiscountForm.valid"
+              (click)="editDiscounts(); editDiscount.hide()">
+              <span *ngIf="this.isLoading" class="spinner-border spinner-border-sm" role="status"></span>
+              <span *ngIf="this.isLoading" class="load-text"> Saving Changes...</span>
+              <span *ngIf="!this.isLoading" class="btn-text">Submit</span>
+            </button>
+          </div>
+        </app-ui-modal>
+
+      </div>
+    </app-card>
+  </div>
+</div>

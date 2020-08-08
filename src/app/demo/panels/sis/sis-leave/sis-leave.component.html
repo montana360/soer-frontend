@@ -1,0 +1,110 @@
+<div class="row btn-page">
+  <div class="col-sm-12">
+    <app-card cardTitle="Leave List" cardClass="card-datatable" [options]="false">
+      <div class="row align-items-center m-l-0">
+        <div class="col-sm-6"></div>
+        <div class="col-sm-6 text-right">
+          <button class="btn btn-success btn-sm btn-round has-ripple" (click)="modalLeave.show()"><i class="feather icon-plus"></i> Add Leave</button>
+        </div>
+        <app-ui-modal #modalLeave [dialogClass]="'modal-md btn-page'">
+          <div class="app-modal-header">
+            <h5 class="modal-title">Apply for Leave</h5>
+            <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="modalLeave.hide()"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="app-modal-body">
+            <div class="row">
+              <div class="col-12">
+                <h5>From Date</h5>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group fill">
+                  <input type="date" class="form-control" id="Date1" placeholder="Date">
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group fill">
+                  <input type="time" class="form-control" id="Time1" placeholder="Time">
+                </div>
+              </div>
+              <div class="col-12">
+                <h5>To Date</h5>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group fill">
+                  <input type="date" class="form-control" id="Date2" placeholder="Date">
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group fill">
+                  <input type="time" class="form-control" id="Time2" placeholder="Time">
+                </div>
+              </div>
+              <div class="col-12">
+                <h5>Reason</h5>
+              </div>
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <textarea class="form-control" id="Reason" rows="3" placeholder="Reason"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="app-modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="modalLeave.hide()">Clear</button>
+            <button type="button" class="btn btn-primary">Submit</button>
+          </div>
+        </app-ui-modal>
+      </div>
+      <div class="table-responsive">
+        <table datatable id="report-table" class="table table-bordered table-striped mb-0">
+          <thead>
+          <tr>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Leave Reason</th>
+            <th>Leave Status</th>
+            <th>Remark</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>16/09/2016 11:15 AM</td>
+            <td>16/09/2016 03:30 PM</td>
+            <td>Go to company for Interview.</td>
+            <td>Granted</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>07/09/2016 11:15 AM</td>
+            <td>07/09/2016 03:30 PM</td>
+            <td>i am not feel so well</td>
+            <td>Granted</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>23/08/2016 08:30 AM</td>
+            <td>23/08/2016 03:30 PM</td>
+            <td>for personal reason i am not attend tomorrow lecture.</td>
+            <td>Granted</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>19/01/2016 08:00 AM</td>
+            <td>22/01/2016 04:30 PM</td>
+            <td>for high fever i did not come in college</td>
+            <td>Granted</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>25/11/2015 12:12 PM</td>
+            <td>26/11/2015 04:30 PM</td>
+            <td>Go to attain family social function.</td>
+            <td>Granted</td>
+            <td></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </app-card>
+  </div>
+</div>

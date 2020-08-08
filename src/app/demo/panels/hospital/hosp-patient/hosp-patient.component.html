@@ -1,0 +1,350 @@
+<div class="row btn-page">
+  <div class="col-sm-12">
+    <app-card [hidHeader]="true" cardClass="card-datatable">
+      <div class="row align-items-center m-l-0">
+        <div class="col-sm-6"></div>
+        <div class="col-sm-6 text-right">
+          <button class="btn btn-success btn-sm btn-round has-ripple" (click)="modalPatient.show()"><i class="feather icon-plus"></i> Add Patient</button>
+        </div>
+        <app-ui-modal #modalPatient>
+          <div class="app-modal-header">
+            <h5 class="modal-title">Add Patient</h5>
+            <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="modalPatient.hide()"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="app-modal-body">
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="Name" placeholder="Name">
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group fill">
+                  <input type="email" class="form-control" id="Email" placeholder="Email">
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group fill">
+                  <input type="password" class="form-control" id="Password" placeholder="Password">
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="Phone" placeholder="Phone">
+                </div>
+              </div>
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <textarea class="form-control" id="Address" placeholder="Address" rows="3"></textarea>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <select class="form-control" id="Sex">
+                    <option value="">Select Sex</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group fill">
+                  <label class="floating-label" for="Icon">Profie Image</label>
+                  <input type="file" class="form-control" id="Icon" placeholder="sdf">
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group fill">
+                  <input type="date" class="form-control" id="Birth" placeholder="Birth Date">
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="Age" placeholder="Age">
+                </div>
+              </div>
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <select class="form-control" id="Blood">
+                    <option value="">Select Blood Group</option>
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="app-modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="modalPatient.hide()">Clear</button>
+            <button type="button" class="btn btn-primary">Submit</button>
+          </div>
+        </app-ui-modal>
+      </div>
+      <div class="table-responsive">
+        <table datatable id="report-table" class="table table-bordered table-striped mb-0">
+          <thead>
+          <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Sex</th>
+            <th>Birth Date</th>
+            <th>Age</th>
+            <th>Blood G.</th>
+            <th>Options</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>
+              <img src="assets/images/user/avatar-2.jpg" class="img-fluid img-radius wid-40" alt="">
+            </td>
+            <td>Micheal Pewd</td>
+            <td>patient@temp.com</td>
+            <td>+984-9388638</td>
+            <td>male</td>
+            <td>09/10/1990</td>
+            <td>27</td>
+            <td>B+</td>
+            <td>
+              <a href="javascript:" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Edit </a>
+              <a href="javascript:" class="btn btn-danger btn-sm"><i class="feather icon-trash-2"></i>&nbsp;Delete </a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img src="assets/images/user/avatar-3.jpg" class="img-fluid img-radius wid-40" alt="">
+            </td>
+            <td>Erich Mcbride</td>
+            <td>xidim@temp.com</td>
+            <td>+612-1385682</td>
+            <td>female</td>
+            <td>09/10/1990</td>
+            <td>27</td>
+            <td>B+</td>
+            <td>
+              <a href="javascript:" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Edit </a>
+              <a href="javascript:" class="btn btn-danger btn-sm"><i class="feather icon-trash-2"></i>&nbsp;Delete </a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img src="assets/images/user/avatar-3.jpg" class="img-fluid img-radius wid-40" alt="">
+            </td>
+            <td>Micheal Pewd</td>
+            <td>patient@temp.com</td>
+            <td>+984-9388638</td>
+            <td>male</td>
+            <td>09/10/1990</td>
+            <td>27</td>
+            <td>B+</td>
+            <td>
+              <a href="javascript:" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Edit </a>
+              <a href="javascript:" class="btn btn-danger btn-sm"><i class="feather icon-trash-2"></i>&nbsp;Delete </a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img src="assets/images/user/avatar-5.jpg" class="img-fluid img-radius wid-40" alt="">
+            </td>
+            <td>Erich Mcbride</td>
+            <td>xidim@temp.com</td>
+            <td>+612-1385682</td>
+            <td>female</td>
+            <td>09/10/1990</td>
+            <td>27</td>
+            <td>B+</td>
+            <td>
+              <a href="javascript:" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Edit </a>
+              <a href="javascript:" class="btn btn-danger btn-sm"><i class="feather icon-trash-2"></i>&nbsp;Delete </a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img src="assets/images/user/avatar-1.jpg" class="img-fluid img-radius wid-40" alt="">
+            </td>
+            <td>Micheal Pewd</td>
+            <td>patient@temp.com</td>
+            <td>+984-9388638</td>
+            <td>male</td>
+            <td>09/10/1990</td>
+            <td>27</td>
+            <td>B+</td>
+            <td>
+              <a href="javascript:" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Edit </a>
+              <a href="javascript:" class="btn btn-danger btn-sm"><i class="feather icon-trash-2"></i>&nbsp;Delete </a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img src="assets/images/user/avatar-2.jpg" class="img-fluid img-radius wid-40" alt="">
+            </td>
+            <td>Micheal Pewd</td>
+            <td>patient@temp.com</td>
+            <td>+984-9388638</td>
+            <td>male</td>
+            <td>09/10/1990</td>
+            <td>27</td>
+            <td>B+</td>
+            <td>
+              <a href="javascript:" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Edit </a>
+              <a href="javascript:" class="btn btn-danger btn-sm"><i class="feather icon-trash-2"></i>&nbsp;Delete </a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img src="assets/images/user/avatar-3.jpg" class="img-fluid img-radius wid-40" alt="">
+            </td>
+            <td>Erich Mcbride</td>
+            <td>xidim@temp.com</td>
+            <td>+612-1385682</td>
+            <td>female</td>
+            <td>09/10/1990</td>
+            <td>27</td>
+            <td>B+</td>
+            <td>
+              <a href="javascript:" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Edit </a>
+              <a href="javascript:" class="btn btn-danger btn-sm"><i class="feather icon-trash-2"></i>&nbsp;Delete </a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img src="assets/images/user/avatar-3.jpg" class="img-fluid img-radius wid-40" alt="">
+            </td>
+            <td>Micheal Pewd</td>
+            <td>patient@temp.com</td>
+            <td>+984-9388638</td>
+            <td>male</td>
+            <td>09/10/1990</td>
+            <td>27</td>
+            <td>B+</td>
+            <td>
+              <a href="javascript:" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Edit </a>
+              <a href="javascript:" class="btn btn-danger btn-sm"><i class="feather icon-trash-2"></i>&nbsp;Delete </a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img src="assets/images/user/avatar-5.jpg" class="img-fluid img-radius wid-40" alt="">
+            </td>
+            <td>Erich Mcbride</td>
+            <td>xidim@temp.com</td>
+            <td>+612-1385682</td>
+            <td>female</td>
+            <td>09/10/1990</td>
+            <td>27</td>
+            <td>B+</td>
+            <td>
+              <a href="javascript:" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Edit </a>
+              <a href="javascript:" class="btn btn-danger btn-sm"><i class="feather icon-trash-2"></i>&nbsp;Delete </a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img src="assets/images/user/avatar-1.jpg" class="img-fluid img-radius wid-40" alt="">
+            </td>
+            <td>Micheal Pewd</td>
+            <td>patient@temp.com</td>
+            <td>+984-9388638</td>
+            <td>male</td>
+            <td>09/10/1990</td>
+            <td>27</td>
+            <td>B+</td>
+            <td>
+              <a href="javascript:" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Edit </a>
+              <a href="javascript:" class="btn btn-danger btn-sm"><i class="feather icon-trash-2"></i>&nbsp;Delete </a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img src="assets/images/user/avatar-2.jpg" class="img-fluid img-radius wid-40" alt="">
+            </td>
+            <td>Micheal Pewd</td>
+            <td>patient@temp.com</td>
+            <td>+984-9388638</td>
+            <td>male</td>
+            <td>09/10/1990</td>
+            <td>27</td>
+            <td>B+</td>
+            <td>
+              <a href="javascript:" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Edit </a>
+              <a href="javascript:" class="btn btn-danger btn-sm"><i class="feather icon-trash-2"></i>&nbsp;Delete </a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img src="assets/images/user/avatar-3.jpg" class="img-fluid img-radius wid-40" alt="">
+            </td>
+            <td>Erich Mcbride</td>
+            <td>xidim@temp.com</td>
+            <td>+612-1385682</td>
+            <td>female</td>
+            <td>09/10/1990</td>
+            <td>27</td>
+            <td>B+</td>
+            <td>
+              <a href="javascript:" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Edit </a>
+              <a href="javascript:" class="btn btn-danger btn-sm"><i class="feather icon-trash-2"></i>&nbsp;Delete </a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img src="assets/images/user/avatar-3.jpg" class="img-fluid img-radius wid-40" alt="">
+            </td>
+            <td>Micheal Pewd</td>
+            <td>patient@temp.com</td>
+            <td>+984-9388638</td>
+            <td>male</td>
+            <td>09/10/1990</td>
+            <td>27</td>
+            <td>B+</td>
+            <td>
+              <a href="javascript:" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Edit </a>
+              <a href="javascript:" class="btn btn-danger btn-sm"><i class="feather icon-trash-2"></i>&nbsp;Delete </a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img src="assets/images/user/avatar-5.jpg" class="img-fluid img-radius wid-40" alt="">
+            </td>
+            <td>Erich Mcbride</td>
+            <td>xidim@temp.com</td>
+            <td>+612-1385682</td>
+            <td>female</td>
+            <td>09/10/1990</td>
+            <td>27</td>
+            <td>B+</td>
+            <td>
+              <a href="javascript:" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Edit </a>
+              <a href="javascript:" class="btn btn-danger btn-sm"><i class="feather icon-trash-2"></i>&nbsp;Delete </a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img src="assets/images/user/avatar-1.jpg" class="img-fluid img-radius wid-40" alt="">
+            </td>
+            <td>Micheal Pewd</td>
+            <td>patient@temp.com</td>
+            <td>+984-9388638</td>
+            <td>male</td>
+            <td>09/10/1990</td>
+            <td>27</td>
+            <td>B+</td>
+            <td>
+              <a href="javascript:" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Edit </a>
+              <a href="javascript:" class="btn btn-danger btn-sm"><i class="feather icon-trash-2"></i>&nbsp;Delete </a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </app-card>
+  </div>
+</div>

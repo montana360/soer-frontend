@@ -1,0 +1,474 @@
+<div class="row">
+  <div class="col-sm-6">
+    <app-card cardTitle="Sale Shop" [options]="false">
+
+      <div *ngIf="this.isLoading" class="d-flex justify-content-center">
+        <div class="spinner-border" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+
+      <div *ngIf="!this.isLoading" class="row">
+
+        <!-- Multi Search -->
+        <div class="col-sm-6">
+          <form [formGroup]="salesMulti">
+            <label><b>General Reports</b></label>
+            <div class="form-group">
+              <input type="text" class="form-control" formControlName="from_date" placeholder="From date"
+                onfocus="(this.type='date')" onblur="(this.type='text')">
+
+              <p style="color: red;"
+                *ngIf="salesMulti.get('from_date').touched && salesMulti.get('from_date').hasError('required')">
+                Please Select Date
+              </p>
+            </div>
+
+            <div class="form-group">
+              <input type="text" class="form-control" formControlName="to_date" placeholder="To date"
+                onfocus="(this.type='date')" onblur="(this.type='text')">
+
+              <p style="color: red;"
+                *ngIf="salesMulti.get('to_date').touched && salesMulti.get('to_date').hasError('required')">
+                Please Select Date
+              </p>
+            </div>
+
+
+            <button *ngIf="salesMulti.touched" (click)="salesMulti.reset()" type="button" class="btn btn-danger"
+              color="primary">
+              Cancel
+            </button>
+
+            &nbsp;
+
+            <button (click)="getSalesMultiReport(); salesMulti.reset()" [disabled]="!salesMulti.valid" type="button" class="btn btn-success"
+              color="primary">
+              Search
+            </button>
+
+
+          </form>
+        </div>
+
+        <!-- Single Search  -->
+        <div class="col-sm-6">
+
+          <form [formGroup]="salesSingle">
+            <label><b>Daily Reports</b></label>
+            <div class="form-group">
+              <input type="text" class="form-control" formControlName="date" placeholder="Select date"
+                onfocus="(this.type='date')" onblur="(this.type='text')">
+
+              <p style="color: red;"
+                *ngIf="salesSingle.get('date').touched && salesSingle.get('date').hasError('required')">
+                Please Select Date
+              </p>
+            </div>
+
+            <button (click)="getSalesDailyReport(); salesSingle.reset(); clearSales()" [disabled]="!salesSingle.valid" type="button" class="btn btn-success"
+              color="primary">
+              Search
+            </button>
+
+
+          </form>
+
+        </div>
+      </div>
+    </app-card>
+  </div>
+
+  <div class="col-sm-6">
+    <app-card cardTitle="Sale Shop WalkIn" [options]="false">
+
+      <div *ngIf="this.isLoading" class="d-flex justify-content-center">
+        <div class="spinner-border" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+
+      <div *ngIf="!this.isLoading" class="row">
+
+        <!-- Multi Search -->
+        <div class="col-sm-6">
+          <form [formGroup]="walkinMulti">
+            <label><b>General Reports</b></label>
+            <div class="form-group">
+              <input type="text" class="form-control" formControlName="from_date" placeholder="From date"
+                onfocus="(this.type='date')" onblur="(this.type='text')">
+
+              <p style="color: red;"
+                *ngIf="walkinMulti.get('from_date').touched && walkinMulti.get('from_date').hasError('required')">
+                Please Select Date
+              </p>
+            </div>
+
+            <div class="form-group">
+              <input type="text" class="form-control" formControlName="to_date" placeholder="To date"
+                onfocus="(this.type='date')" onblur="(this.type='text')">
+
+              <p style="color: red;"
+                *ngIf="walkinMulti.get('to_date').touched && walkinMulti.get('to_date').hasError('required')">
+                Please Select Date
+              </p>
+            </div>
+
+
+            <button *ngIf="walkinMulti.touched" (click)="walkinMulti.reset()" type="button" class="btn btn-danger"
+              color="primary">
+              Cancel
+            </button>
+
+            &nbsp;
+
+            <button (click)="getSalesWalkinMultiReport(); walkinMulti.reset()" [disabled]="!walkinMulti.valid" type="button" class="btn btn-success"
+              color="primary">
+              Search
+            </button>
+
+
+          </form>
+        </div>
+
+        <!-- Single Search -->
+        <div class="col-sm-6">
+
+          <form [formGroup]="walkinSingle">
+            <label><b>Daily Reports</b></label>
+            <div class="form-group">
+              <input type="text" class="form-control" formControlName="date" placeholder="Select date"
+                onfocus="(this.type='date')" onblur="(this.type='text')">
+
+              <p style="color: red;"
+                *ngIf="walkinSingle.get('date').touched && walkinSingle.get('date').hasError('required')">
+                Please Select Date
+              </p>
+            </div>
+
+            <button (click)="getSalesWalkinDailyReport(); walkinSingle.reset(); clearSales()" [disabled]="!walkinSingle.valid" type="button" class="btn btn-success"
+              color="primary">
+              Search
+            </button>
+
+
+          </form>
+
+        </div>
+
+      </div>
+    </app-card>
+  </div>
+</div>
+
+<!-- Sale shop table -->
+<div class="row btn-page" *ngIf="isSales">
+  <div class="col-sm-12 btn-page">
+
+    <app-card [hidHeader]="true" cardClass="card-datatable">
+
+      <div *ngIf="this.isLoading" class="d-flex justify-content-center">
+        <div class="spinner-border" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+
+      <div *ngIf="!this.isLoading" class="row align-items-center m-l-0">
+        <div class="col-sm-6"></div>
+        <div class="col-sm-6 text-right">
+          <button *ngIf="isLoaded" class="btn btn-danger btn-sm btn-round has-ripple" (click)="clearSales()">
+            <i class="feather icon-trash"></i>
+          </button>
+        </div>
+
+      </div>
+
+
+      <div *ngIf="!this.isLoading" class="table-responsive">
+
+        <table datatable [dtOptions]="dtOptions" id="report-table" class="table table-striped table-hover mb-0">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Transaction Number</th>
+              <th>Account Number</th>
+              <th>Customer Name</th>
+              <th>Payment Made</th>
+              <th>Item(s) issued cost</th>
+              <th>Date issued</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let sale of allSales">
+              <td>{{ sale.id }}</td>
+              <td> {{ sale.transaction_number }}
+                <small class="d-block">
+                <a href="javascript:" (click)="viewSales(sale?.id); editCustomer.show()">View</a>
+                </small>
+              </td>
+              <td>{{ sale.account_number }}</td>
+              <td>{{ sale.customer_name }}</td>
+              <td>GH¢{{ sale.amount_paid | number:'1.2-2' }}</td>
+              <td>GH¢{{ sale.total | number:'1.2-2' }}</td>
+              <td>{{ sale.created_at }}</td>
+            </tr>
+          </tbody>
+        </table>
+
+
+         <!-- view transaction -->
+         <app-ui-modal #editCustomer [dialogClass]="'modal-xl'">
+          <div class="app-modal-header">
+            <h5 class="modal-title">Transaction Details</h5>
+            <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close"
+              (click)="editCustomer.hide()"><span aria-hidden="true">&times;</span></button>
+          </div>
+
+          <div class="app-modal-body">
+            <div>
+              <app-card id="contentToConvert">
+                <div class="no-gutters">
+                  <div class="col-sm-12">
+                    <img src="../../../../assets/kcc.jpg" style="width:100%;">
+                    <img *ngIf="comData?.company_logo !== null" src="{{ comData?.company_logo }}" alt="logotipo"
+                      style="width: 100%; height: 160px;">
+                  </div>
+                </div>
+                <table class="example-table" >
+                  <tr>
+                    <td><b>Transaction Number:</b> {{ saleDetails?.transaction_number }}</td>
+                    <td><b>A/C No:</b> {{ saleDetails?.account_number }}</td>
+                    <td><b>Customer Name:</b> {{ saleDetails?.customer_name }}</td>
+                    <td><b>Intial Product:</b> GH₵{{ saleDetails?.initial_product_name }}</td>
+                    <td><b>Product Cost:</b> GH₵{{ saleDetails?.initial_product_price }}</td>
+                    <td><b>Payment Made:</b> GH₵{{ saleDetails?.amount_paid }}</td>
+                    <td>
+                      <div *ngFor="let branch of AllBranches">
+                        <div *ngIf="branch.id == saleDetails?.branch_id"><b>Issued Branch:</b> {{ branch.name }}</div>
+                      </div>
+                    </td>
+                    <td><b>Date Issued:</b> {{ saleDetails?.created_at }} </td>
+                    <td><b>Total:</b> GH₵{{ saleDetails?.total | number:'1.2-2' }} </td>
+                  </tr>
+
+                  <br>
+
+                  <tr>
+                    <td>
+                      <div *ngFor="let user of AllStaff">
+                        <div *ngIf="user.id == saleDetails?.issued_by"><b>Issued By:</b>
+                          {{ user.first_name }}
+                          {{ user.last_name }}</div>
+                      </div>
+                    </td>
+                    <td>
+                      <div *ngFor="let user of AllStaff">
+                        <div *ngIf="user.id == saleDetails?.receiver_id"><b>Received By:</b>
+                          {{ user.first_name }}
+                          {{ user.last_name }}</div>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+
+                <br>
+
+                <table class="table table-striped table-hover mb-0">
+                  <thead>
+                    <tr>
+                      <th><b>Product</b></th>
+                      <th><b>Initial Price</b></th>
+                      <th><b>Sales Price</b></th>
+                      <th><b>Quantity</b></th>
+                      <th><b>Intial Total</b></th>
+                      <th><b>Sales Total</b></th>
+                      <th><b>Profit Made</b></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let product of saleDetails?.products">
+                      <td>{{ product.name }}</td>
+                      <td>GH₵{{ product.initial_cost | number:'1.2-2'  }}</td>
+                      <td>GH₵{{ product.cost | number:'1.2-2'  }}</td>
+                      <td>{{ product.quantity }}</td>
+                      <td>GH₵{{ product.initial_sales | number:'1.2-2'  }}</td>
+                      <td>GH₵{{ product.total | number:'1.2-2'  }}</td>
+                      <td>GH₵{{ product.profit | number:'1.2-2'  }}</td>
+                    </tr>
+
+
+                  </tbody>
+
+
+                </table>
+              </app-card>
+
+            </div>
+          </div>
+          <div class="app-modal-footer">
+            <button type="button" class="btn btn-primary buttons"
+              (click)="captureScreen(saleDetails?.transaction_number); editCustomer.hide()">
+              Download
+            </button>
+          </div>
+
+        </app-ui-modal>
+
+      </div>
+    </app-card>
+  </div>
+
+</div>
+
+
+<!-- Sales Shop Walkin table -->
+<div class="row btn-page" *ngIf="isWalkin">
+  <div class="col-sm-12 btn-page">
+    <app-card [hidHeader]="true" cardClass="card-datatable">
+
+      <div *ngIf="this.isLoading" class="d-flex justify-content-center">
+        <div class="spinner-border" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+
+      <div *ngIf="!this.isLoading" class="row align-items-center m-l-0">
+        <div class="col-sm-6"></div>
+        <div class="col-sm-6 text-right">
+          <button *ngIf="isLoaded" class="btn btn-danger btn-sm btn-round has-ripple" (click)="clearWalkin()">
+            <i class="feather icon-trash"></i>
+          </button>
+        </div>
+      </div>
+
+      <div *ngIf="!this.isLoading" class="table-responsive">
+        <table datatable [dtOptions]="dtOptions" id="report-table" class="table table-striped table-hover mb-0">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Transaction Number</th>
+              <th>Customer Name</th>
+              <th>Customer Number</th>
+              <th>Item(s) issued cost</th>
+              <th>Date issued</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let sale of allWalkins">
+              <td>{{ sale.id }}</td>
+              <td> {{ sale.transaction_number }}
+                <small class="d-block">
+                <a href="javascript:" (click)="view(sale?.id); editCustomer2.show()">View</a>
+                </small>
+              </td>
+              <td>{{ sale.customer_name }}</td>
+              <td>{{ sale.customer_number }}</td>
+              <td>GH¢{{ sale.total | number:'1.2-2' }}</td>
+              <td>{{ sale.created_at }}</td>
+            </tr>
+          </tbody>
+        </table>
+
+
+           <!-- view transaction -->
+           <app-ui-modal #editCustomer2 [dialogClass]="'modal-xl'">
+            <div class="app-modal-header">
+              <h5 class="modal-title">Transaction Details</h5>
+              <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close"
+                (click)="editCustomer2.hide()"><span aria-hidden="true">&times;</span></button>
+            </div>
+
+            <div class="app-modal-body">
+              <div>
+                <app-card id="contentToConvert">
+                  <div class="no-gutters">
+                    <div class="col-sm-12">
+                      <img src="../../../../assets/kcc.jpg" style="width:100%;">
+                      <img *ngIf="comData?.company_logo !== null" src="{{ comData?.company_logo }}" alt="logotipo"
+                        style="width: 100%; height: 160px;">
+                    </div>
+                  </div>
+                  <table class="example-table">
+                    <tr>
+                      <td><b>Transaction Number:</b> {{ saleDetails?.transaction_number }}</td>
+                      <td><b>Name:</b> {{ saleDetails?.customer_name }}</td>
+                      <td><b>Number:</b> {{ saleDetails?.customer_number }}</td>
+                      <td>
+                        <div *ngFor="let branch of AllBranches">
+                          <div *ngIf="branch.id == saleDetails?.branch_id"><b>Issued Branch:</b> {{ branch.name }}</div>
+                        </div>
+                      </td>
+                      <td><b>Date Issued:</b> {{ saleDetails?.created_at }} </td>
+                      <td><b>Total:</b> GH¢{{ saleDetails?.total | number:'1.2-2' }} </td>
+                    </tr>
+
+                    <br>
+
+                    <tr>
+                      <td>
+                        <div *ngFor="let user of AllStaff">
+                          <div *ngIf="user.id == saleDetails?.issued_by"><b>Issued By:</b>
+                            {{ user.first_name }}
+                            {{ user.last_name }}
+                          </div>
+                        </div>
+                      </td>
+                      <!-- <td>
+                        <div *ngFor="let user of allStaff">
+                          <div *ngIf="user.id == saleDetails?.receiver_id"><b>Received By:</b>
+                            {{ user.first_name }}
+                            {{ user.last_name }}</div>
+                        </div>
+                      </td> -->
+                    </tr>
+                  </table>
+
+                  <br>
+
+                  <table class="table table-striped table-hover mb-0">
+                    <thead>
+                      <tr>
+                        <th><b>Product</b></th>
+                        <th><b>Initial Price</b></th>
+                        <th><b>Sales Price</b></th>
+                        <th><b>Quantity</b></th>
+                        <th><b>Intial Total</b></th>
+                        <th><b>Sales Total</b></th>
+                        <th><b>Profit Made</b></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let product of saleDetails?.products">
+                        <td>{{ product.name }}</td>
+                        <td>GH₵{{ product.initial_cost | number:'1.2-2'  }}</td>
+                        <td>GH₵{{ product.cost | number:'1.2-2'  }}</td>
+                        <td>{{ product.quantity }}</td>
+                        <td>GH₵{{ product.initial_sales | number:'1.2-2'  }}</td>
+                        <td>GH₵{{ product.total | number:'1.2-2'  }}</td>
+                        <td>GH₵{{ product.profit | number:'1.2-2'  }}</td>
+                      </tr>
+
+
+                    </tbody>
+
+
+                  </table>
+                </app-card>
+
+              </div>
+            </div>
+            <div class="app-modal-footer">
+              <button type="button" class="btn btn-primary buttons"
+                (click)="captureScreen(saleDetails?.transaction_number); editCustomer2.hide()">
+                Download
+              </button>
+            </div>
+
+          </app-ui-modal>
+
+
+      </div>
+    </app-card>
+  </div>
+
+</div>

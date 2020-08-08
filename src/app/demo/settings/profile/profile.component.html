@@ -1,0 +1,210 @@
+<!-- <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#ffffff" type="ball-clip-rotate-pulse">
+  <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner> -->
+
+<!-- [ breadcrumb ] start -->
+<!-- <div class="page-header doNotPrint">
+  <div class="page-block">
+    <div class="row align-items-center">
+      <div class="col-md-8">
+        <div class="page-header-title">
+          <h4 class="m-b-10">PROFILE</h4>
+        </div>
+        <ul class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a [routerLink]="['/manage-users']">
+              <i class="feather icon-home"></i>
+            </a>
+          </li>
+          <li class="breadcrumb-item"><a>Settings</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="">Profile</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div> -->
+<!-- [ breadcrumb ] end -->
+
+
+<div class="pcoded-inner-content">
+  <div class="main-body">
+    <div class="page-wrapper">
+
+      <!-- Page-body start -->
+      <div class="page-body">
+        <!-- Row start -->
+        <div class="row">
+
+          <!-- subscribe start -->
+
+          <!-- subscribe end -->
+
+          <div class="col-md-12 doNotPrint">
+            <!-- Multi-column table start -->
+            <div class="card">
+              <!-- <div class="card-header"> -->
+                <!-- <div style="float:left;">
+                  <button [routerLink]="['/dashboard']" type="button"
+                    class="btn btn-sm btn-round btn-info waves-effect"><i class="icofont icofont-arrow-left"></i>
+                    Back
+                  </button>
+                </div>&nbsp;&nbsp;&nbsp; -->
+                &nbsp;&nbsp;&nbsp;
+                <!-- <h5>Existing Colon Specimens</h5>
+                                <button style="float: right" data-backdrop="static" type="button"
+                                    class="btn btn-sm btn-round btn-primary waves-effect" data-toggle="modal"
+                                    data-target="#new-Modal"><i class="icofont icofont-ui-add"></i>New
+                                    Specimen</button> -->
+              <!-- </div> -->
+              <div class="card-block">
+                <form [formGroup]="manageEditForm">
+
+                  <div class="card-block accordion-block color-accordion-block">
+                    <div class="color-accordion">
+                      <div class="accordion-msg text-center" style="background-color:#195c92; color:white">
+                        <!-- <h5 class="card-header-text" style="text-transform: capitalize;">
+                                                    {{ id }}'s&nbsp; Details</h5> -->
+                      </div>
+                      <div class="accordion-desc  look">
+
+                        <div class="card ">
+                          <div class="card-block">
+                            <!-- <h4 class="sub-title">Basic Inputs</h4> -->
+                            <div class="form-group row">
+                              <div class="col-sm-6">
+                                <input type="text" class="form-control form-control-inverse"
+                                  formControlName="first_name" placeholder="First Name" [attr.disabled]="true">
+                              </div>
+                              <div class="col-sm-6">
+                                <input type="text" class="form-control form-control-inverse" formControlName="last_name"
+                                  placeholder="Last Name" [attr.disabled]="true">
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <div class="col-sm-6">
+                                <input type="text" class="form-control form-control-inverse" formControlName="email"
+                                  placeholder="Email" [attr.disabled]="true">
+                              </div>
+                              <div class="col-sm-6">
+                                <input type="tel" class="form-control form-control-inverse" formControlName="phone"
+                                  placeholder="Phone" [attr.disabled]="true">
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                            <div class="col-sm-6">
+                            <input type="tel" class="form-control form-control-inverse" formControlName="role" placeholder="role" [attr.disabled]="true">
+                            </div>
+                              <div class="col-sm-6">
+                              <div class="form-group">
+                                <select class="form-control" formControlName="branch_id" [attr.disabled]="true">
+                                  <option value="null">Select Branch</option>
+                                  <option *ngFor="let branch of branches" value="{{ branch.id }}">
+                                    {{ branch.name }}</option>
+
+                                </select>
+
+                                <!-- <p style="color: red;"
+                                  *ngIf="editStaffForm.get('branch_id').touched && editStaffForm.get('branch_id').hasError('required')">
+                                  Please select an assigned branch
+                                </p> -->
+
+                              </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Color Open Accordion ends -->
+
+                  <!-- <div class="modal-footer">
+                    <button type="button" class="btn btn-primary waves-effect waves-light"
+                      (click)="editManageUser()">Update</button> -->
+                    <!-- <button type="button" class="btn btn-sm btn-danger waves-effect " data-dismiss="modal"
+                                            (click)="manageEditForm.reset()">
+                                            Close
+                                        </button> -->
+                  <!-- </div> -->
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- .......................................................................START NEW SPECIMEN.................................................................... -->
+  <!-- Modal Starts-->
+  <!-- <div class="modal fade doNotPrint" id="profile-Modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" style="float:right; font-weight: bold;">Edit Profiles</h4>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="manageEditForm">
+
+            <div class="card-block accordion-block color-accordion-block">
+              <div class="color-accordion">
+                <div class="accordion-msg text-center" style="background-color:#195c92; color:white">
+
+                </div>
+                <div class="accordion-desc  look">
+
+                  <div class="card ">
+                    <div class="card-block">
+                      <div class="form-group row">
+                        <div class="col-sm-6">
+                          <input type="text" class="form-control form-control-inverse" formControlName="first_name"
+                            placeholder="First Name">
+                        </div>
+                        <div class="col-sm-6">
+                          <input type="text" class="form-control form-control-inverse" formControlName="last_name"
+                            placeholder="Last Name">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <div class="col-sm-6">
+                          <input type="text" class="form-control form-control-inverse" formControlName="email"
+                            placeholder="Email">
+                        </div>
+                        <div class="col-sm-6">
+                          <input type="tel" class="form-control form-control-inverse" formControlName="phone"
+                            placeholder="Phone">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <div class="col-sm-6">
+                          <input type="tel" class="form-control form-control-inverse" formControlName="role" placeholder="Role">
+                        </div>
+                        <div class="col-sm-6">
+                          <input type="tel" class="form-control form-control-inverse" formControlName="status" placeholder="Status">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-sm btn-primary waves-effect waves-light" data-dismiss="modal"
+                (click)="editManageUser()">Update</button>
+              <button type="button" class="btn btn-sm btn-danger waves-effect " data-dismiss="modal"
+                (click)="manageEditForm.reset()">
+                Close
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div> -->
+  <!-- Modal  ends -->
+  <!-- .........................................................END NEW SPECIMEN........................................................................................ -->

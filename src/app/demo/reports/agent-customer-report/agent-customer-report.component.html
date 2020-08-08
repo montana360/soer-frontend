@@ -1,0 +1,129 @@
+<div class="row btn-page">
+  <div class="col-sm-12 btn-page">
+    <app-card [hidHeader]="true" cardClass="card-datatable">
+      <div *ngIf="this.isLoading" class="d-flex justify-content-center">
+        <div class="spinner-border" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+
+      <div *ngIf="!this.isLoading" class="row align-items-center m-l-0">
+        <div class="col-sm-6"></div>
+        <div class="col-sm-6 text-right">
+          <label *ngIf="isLoaded"><b>Total: GH₵{{ total | number:'1.2-2' }}</b></label>
+          &nbsp;
+          <button class="btn btn-success btn-sm btn-round has-ripple" (click)="modalCustomer.show()">
+            Search Record(s)
+          </button>
+          &nbsp;
+          <button *ngIf="isLoaded" class="btn btn-danger btn-sm btn-round has-ripple" (click)="clear()">
+            <i class="feather icon-trash"></i>
+          </button>
+        </div>
+
+        <app-ui-modal #modalCustomer [dialogClass]="'modal-md'">
+          <div class="app-modal-header">
+            <h5 class="modal-title">Agent Customer Details</h5>
+            <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close"
+              (click)="AgentDepForm.reset(); modalCustomer.hide()"><span aria-hidden="true">&times;</span></button>
+          </div>
+
+          <div class="app-modal-body">
+            <form [formGroup]="AgentDepForm">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <select class="form-control" formControlName="agent_id"
+                      (change)="findCustomer($event.target.value)">
+                      <option value="null">Select Agent</option>
+                      <option *ngFor="let agent of allAgents" value="{{ agent.id }}">
+                        {{ agent.first_name }} {{ agent.last_name }}</option>
+                    </select>
+
+                    <p style="color: red;"
+                      *ngIf="AgentDepForm.get('agent_id').touched && AgentDepForm.get('agent_id').hasError('required')">
+                      Please select an agent
+                    </p>
+                  </div>
+                </div>
+
+                <p style="color: red;" *ngIf="isNotice">
+                  Selected Agent has no associated Customer
+                </p>
+
+                <div class="col-md-12">
+                  <div *ngIf="isChecking" class="d-flex justify-content-center">
+                    <div class="spinner-border" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-12" *ngIf="!isFinding">
+                  <div class="form-group">
+                    <select class="form-control" formControlName="account_number">
+                      <option value="null">Select Customer</option>
+                      <option *ngFor="let dep of allCustomers" value="{{ dep.account_number }}">
+                        {{ dep.name }} | {{ dep.account_number }}</option>
+                    </select>
+
+                    <p style="color: red;"
+                      *ngIf="AgentDepForm.get('account_number').touched && AgentDepForm.get('account_number').hasError('required')">
+                      Please select an agent
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="app-modal-footer" *ngIf="!isFinding">
+            <button type="button" class="btn btn-danger" data-dismiss="modal"
+              (click)="clear(); AgentDepForm.reset()">Clear</button>
+            <button type="button" class="btn btn-primary"
+              (click)="getRecords(); modalCustomer.hide(); AgentDepForm.reset(); clear();">
+              Search
+            </button>
+          </div>
+
+        </app-ui-modal>
+      </div>
+
+      <div *ngIf="!this.isLoading" class="table-responsive">
+        <table datatable [dtOptions]="dtOptions" id="report-table" class="table table-striped table-hover mb-0">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Customer Name</th>
+              <th>Agent Collector</th>
+              <th>Amount</th>
+              <th>Date Deposited</th>
+              <th>Deposited By</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let record of allTransactions">
+              <td>{{ record.id }}</td>
+              <td>{{ record.name }}</td>
+              <td>
+                <div *ngFor="let user of allStaff">
+                  <div *ngIf="user.id == record?.agent_id">
+                    {{ user.first_name }}
+                    {{ user.last_name }}</div>
+                </div>
+              </td>             
+              <td>GH₵{{ record.deposit | number:'1.2-2'  }}</td>
+              <td>{{ record.created_at }}</td>
+              <td>
+                <div *ngFor="let user of allStaff">
+                  <div *ngIf="user.id == record?.depositor_id">
+                    {{ user.first_name }}
+                    {{ user.last_name }}</div>
+                </div>
+              </td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+    </app-card>
+  </div>
+</div>

@@ -1,0 +1,76 @@
+<div class="row">
+  <div class="col-lg-12">
+    <app-card [hidHeader]="true" cardClass="bg-pattern" blockClass="py-5 text-center">
+      <h2 class="text-center mb-4"><span class="text-primary">Crypto</span> The <span class="text-primary">Revolution</span> In Crypto Market</h2>
+      <h4 class="text-center mb-4">Buy now and get +30% extra bonus</h4>
+      <h5>Distribution Ends In</h5>
+      <div class="clock m-5">
+        <div class="counter text-center">
+          <div id="timer" class="text-white">
+            <span [style.line-height]="2" class="m-2 px-2 bg-dark rounded display-4">{{(dYears !== 0 && dYears !== undefined) ? dYears : '0'}}</span><span class="m-2 px-2 bg-dark rounded display-4">Y</span> <span class="text-dark m-2 display-4">:</span>
+            <span [style.line-height]="2" class="m-2 px-2 bg-dark rounded display-4">{{dDays}}</span><span class="m-2 px-2 bg-dark rounded display-4">D</span> <span class="text-dark m-2 display-4">:</span>
+            <span [style.line-height]="2" class="m-2 px-2 bg-dark rounded display-4">{{dHours}}</span><span class="m-2 px-2 bg-dark rounded display-4">H</span> <span class="text-dark m-2 display-4">:</span>
+            <span [style.line-height]="2" class="m-2 px-2 bg-dark rounded display-4">{{dMinutes}}</span><span class="m-2 px-2 bg-dark rounded display-4">M</span> <span class="text-dark m-2 display-4">:</span>
+            <span [style.line-height]="2" class="m-2 px-2 bg-dark rounded display-4">{{dSeconds}}</span><span class="m-2 px-2 bg-dark rounded display-4">S</span>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-sm-9">
+          <button class="btn btn-success mb-2">Buy Token</button>
+          <div class="row justify-content-between">
+            <div class="col-auto">
+              <p>Midcap in <b>267 days</b></p>
+            </div>
+            <div class="col-auto">
+              <p>Midcap in <b>267 days</b></p>
+            </div>
+          </div>
+          <div class="progress">
+            <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+          <div class="row justify-content-between text-center mt-3">
+            <div class="col-auto">
+              <h5>Total Tokens: 123.0122</h5>
+            </div>
+            <div class="col-auto">
+              <h5>Tokens In Circulation: 5603.3011</h5>
+            </div>
+            <div class="col-auto">
+              <h5>Token Price: $1.0023</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </app-card>
+
+    <app-card [hidHeader]="true" cardClass="bg-pattern" blockClass="py-5 text-center">
+      <h2 class="text-center mb-4"><span class="text-primary">Crypto</span> The <span class="text-primary">Revolution</span> In Crypto Market</h2>
+      <div class="row align-items-end">
+        <div class="col-sm-2"><p>1300 ETH raised</p></div>
+        <div class="col-sm-2"><div class="badge badge-pill badge-success m-b-5">bonus</div><p>23%</p></div>
+        <div class="col-sm-2"><div class="badge badge-pill badge-success m-b-5">bonus</div><p>14%</p></div>
+        <div class="col-sm-2"><div class="badge badge-pill badge-success m-b-5">bonus</div><p>15%</p></div>
+        <div class="col-sm-2"><div class="badge badge-pill badge-success m-b-5">bonus</div><p>7%</p></div>
+        <div class="col-sm-2"><p>Last-chance!</p></div>
+        <div class="col-sm-2"></div>
+      </div>
+      <div class="progress mb-4 hei-40">
+        <div class="progress-bar" role="progressbar" style="width: 16.66%" aria-valuenow="16.66" aria-valuemin="0" aria-valuemax="100"></div>
+        <div class="progress-bar bg-success" role="progressbar" style="width: 16.66%" aria-valuenow="16.66" aria-valuemin="0" aria-valuemax="100"></div>
+        <div class="progress-bar bg-success" role="progressbar" style="width: 16.66%" aria-valuenow="16.66" aria-valuemin="0" aria-valuemax="100"></div>
+        <div class="progress-bar bg-success" role="progressbar" style="width: 16.66%" aria-valuenow="16.66" aria-valuemin="0" aria-valuemax="100"></div>
+        <div class="progress-bar bg-danger active-progress" role="progressbar" style="width: 6.66%" aria-valuenow="16.66" aria-valuemin="0" aria-valuemax="100"></div>
+        <div class="progress-bar bg-transparent" role="progressbar" style="width: 16.66%" aria-valuenow="16.66" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+      <div class="row align-items-top text-left">
+        <div class="col-sm-2"><p>Round First</p></div>
+        <div class="col-sm-2"><p>Round Second</p></div>
+        <div class="col-sm-2"><p>2600 ETH</p></div>
+        <div class="col-sm-2"><p>3900 ETH</p></div>
+        <div class="col-sm-2"><p>7900 ETH</p></div>
+        <div class="col-sm-2 text-right"><p>19000 ETH</p></div>
+      </div>
+    </app-card>
+  </div>
+</div>

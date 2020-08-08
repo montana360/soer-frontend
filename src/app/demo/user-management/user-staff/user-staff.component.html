@@ -1,0 +1,648 @@
+<div class="row btn-page">
+
+    <!-- <div class="col-sm-12">
+
+        <app-card cardTitle="Projects Summary" [options]="false">
+
+            <div *ngIf="this.isLoading" class="d-flex justify-content-center">
+                <div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+
+            <div *ngIf="!this.isLoading" class="row">
+                <div class="col-md-3 col-xs-6 border-right">
+                    <h3>2</h3>
+                    <span class="">Total Staff</span>
+                </div>
+                <div class="col-md-3 col-xs-6 border-right">
+                    <h3>12</h3>
+                    <span class="text-primary">Branch Managers</span>
+                </div>
+                <div class="col-md-3 col-xs-6 border-right">
+                    <h3>0</h3>
+                    <span class="text-danger">Sales Executives</span>
+                </div>
+                <div class="col-md-2 col-xs-6 border-right">
+                    <h3>1</h3>
+                    <span class="">Agents</span>
+                </div>
+            </div>
+        </app-card>
+    </div> -->
+
+    <div class="col-sm-12">
+
+        <app-card [hidHeader]="true">
+
+            <div *ngIf="this.isLoading" class="d-flex justify-content-center">
+                <div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+
+            <ngb-tabset>
+                <ngb-tab *ngIf="!this.isLoading" title="STAFF">
+                    <ng-template ngbTabContent>
+                        <div class="table-responsive p-t-20">
+                            <table datatable id="project-1" class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <!-- <th>Picture</th> -->
+                                        <th>Name</th>
+                                        <th>Contact</th>
+                                        <th>Email</th>
+                                        <th>Role</th>
+                                        <th>Account Created</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="has-row-options odd" role="row" *ngFor="let staff of allStaff">
+                                        <td>{{ staff.id }}</td>
+                                        <!-- <td>
+                                            <img class="img-radius wid-30 mr-1" src="assets/images/user/avatar-1.jpg"
+                                                data-toggle="tooltip" data-title="Guido Nolan"
+                                                alt="Generic placeholder image">
+                                        </td> -->
+                                        <td> {{ staff.first_name }} {{ staff.last_name }}
+                                            <small class="d-block">
+                                                <!-- <a href="javascript:">View</a> | -->
+                                                <a href="javascript:" class="text-warning"
+                                                    (click)="edit(staff?.id); editStaffModal.show()"> View & Edit</a> |
+                                                <a href="javascript:" class="text-danger"
+                                                    (click)="confirmAlert(staff?.id)"> Delete </a>
+                                            </small>
+                                        </td>
+                                        <td>0{{ staff.phone }}</td>
+                                        <td>
+                                            {{ staff.email }}
+                                        </td>
+                                        <td>{{ staff.role }}</td>
+                                        <td>{{ staff.created_at }}</td>
+                                        <td *ngIf="staff.status === 'Active'"><span
+                                                class="badge badge-success inline-block">{{ staff.status }}</span></td>
+                                        <td *ngIf="staff.status === 'Inactive'"><span
+                                                class="badge badge-warning inline-block">{{ staff.status }}</span></td>
+                                        <td *ngIf="staff.status === 'Suspended'"><span
+                                                class="badge badge-danger inline-block">{{ staff.status }}</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </ng-template>
+                </ngb-tab>
+
+                <ngb-tab *ngIf="!this.isLoading" title="NEW">
+                    <ng-template ngbTabContent>
+
+                        <form [formGroup]="staffForm">
+                            <div class="row p-t-20">
+                                <div class="col-md-6">
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" formControlName="first_name"
+                                                    placeholder="First Name">
+
+                                                <p style="color: red;"
+                                                    *ngIf="staffForm.get('first_name').touched && staffForm.get('first_name').hasError('required')">
+                                                    Staff`s first name is reqiured
+                                                </p>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" formControlName="last_name"
+                                                    placeholder="Last Name">
+
+                                                <p style="color: red;"
+                                                    *ngIf="staffForm.get('last_name').touched && staffForm.get('last_name').hasError('required')">
+                                                    Staff`s last name is reqiured
+                                                </p>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <select class="form-control" formControlName="gender">
+                                                    <option value="null">Select Gender</option>
+                                                    <option value="Male">Male</option>
+                                                    <option value="Female">Female</option>
+                                                </select>
+
+                                                <p style="color: red;"
+                                                    *ngIf="staffForm.get('gender').touched && staffForm.get('gender').hasError('required')">
+                                                    Please select staff gender
+                                                </p>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <select class="form-control" formControlName="role">
+                                                    <option value="null">Select Role</option>
+                                                    <option value="Agent">Agent</option>
+                                                    <option value="Secretary">Secretary</option>
+                                                    <option value="Sales Executive">Sales Executive</option>
+                                                    <option value="Marketer">Marketer</option>
+                                                    <option value="Operations Manager">Operations Manager</option>
+                                                    <option value="Sales Manger">Sales Manager</option>
+                                                    <option value="Marketing Manager">Marketing Manager</option>
+                                                    <option value="Finance & Audit">Finance & Audit</option>
+<<<<<<< HEAD
+=======
+                                                    <option value="Stock Secretary">Head Office & Stock Secretary</option>
+>>>>>>> origin/dev-evans
+                                                </select>
+
+                                                <p style="color: red;"
+                                                    *ngIf="staffForm.get('role').touched && staffForm.get('role').hasError('required')">
+                                                    Please select staff`s role
+                                                </p>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <select class="form-control" formControlName="branch_id">
+                                                    <option value="null">Select Branch</option>
+                                                    <option *ngFor="let branch of branches" value="{{ branch.id }}">
+                                                        {{ branch.name }}</option>
+
+                                                </select>
+
+                                                <p style="color: red;"
+                                                    *ngIf="staffForm.get('branch_id').touched && staffForm.get('branch_id').hasError('required')">
+                                                    Please select an assigned branch
+                                                </p>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+
+                                            <div class="form-group">
+                                                <select class="form-control" formControlName="status">
+                                                    <option value="null">Select Status</option>
+                                                    <option value="Active">Active</option>
+                                                    <option value="Inactive">Inactive</option>
+                                                    <option value="Suspended">Suspended</option>
+
+                                                </select>
+
+                                                <p style="color: red;"
+                                                    *ngIf="staffForm.get('status').touched && staffForm.get('status').hasError('required')">
+                                                    Please select an assigned branch
+                                                </p>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <input type="number" class="form-control" formControlName="phone"
+                                                    placeholder="Phone / Mobile">
+
+                                                <p style="color: red;"
+                                                    *ngIf="staffForm.get('phone').touched && staffForm.get('phone').hasError('required')">
+                                                    Please provide a valid contact number
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <input type="email" class="form-control" formControlName="email"
+                                                    placeholder="email">
+
+                                                <p style="color: red;"
+                                                    *ngIf="staffForm.get('email').touched && staffForm.get('email').hasError('required')">
+                                                    Please provide a valid email address
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <input type="password" class="form-control"
+                                                    [(ngModel)]="staffData.password" formControlName="password"
+                                                    placeholder="Password">
+
+                                                <p style="color: red;"
+                                                    *ngIf="staffForm.get('password').touched && staffForm.get('password').hasError('required')">
+                                                    Please provide a provisional password for the staff
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <input type="password" class="form-control"
+                                                    [(ngModel)]="staffData.confirm_password"
+                                                    formControlName="confirm_password" placeholder="Confirm Password">
+
+                                                <p style="color: red;"
+                                                    *ngIf="staffForm.get('confirm_password').touched && staffForm.get('confirm_password').hasError('required')">
+                                                    Please confirm password
+                                                </p>
+
+                                                <p style="color: red;"
+                                                    *ngIf="staffData.password != staffData.confirm_password">
+                                                    Password mismatch, please check and correct!!!
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-6">
+                                    <h5 class="mb-4">Staff Permissions</h5>
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group fill">
+                                                <div class="custom-control custom-checkbox mb-3">
+                                                    <input type="checkbox" class="custom-control-input" id="proset1"
+                                                        formControlName="reverse_transaction">
+                                                    <label class="custom-control-label" for="proset1">
+                                                        Reverse
+                                                        Transaction
+                                                    </label>
+                                                </div>
+                                                <hr>
+                                                <div class="custom-control custom-checkbox mb-3">
+                                                    <input type="checkbox" class="custom-control-input" id="proset2"
+                                                        formControlName="inventory">
+                                                    <label class="custom-control-label" for="proset2">View
+                                                        Inventory</label>
+                                                </div>
+                                                <hr>
+                                                <div class="custom-control custom-checkbox mb-3">
+                                                    <input type="checkbox" class="custom-control-input" id="proset3"
+                                                        formControlName="sales_report">
+                                                    <label class="custom-control-label" for="proset3">Sales
+                                                        Report</label>
+                                                </div>
+                                                <hr>
+                                                <div class="custom-control custom-checkbox mb-3">
+                                                    <input type="checkbox" class="custom-control-input" id="proset4"
+                                                        formControlName="cash_report">
+                                                    <label class="custom-control-label" for="proset4">Cash
+                                                        Report</label>
+                                                </div>
+                                                <hr>
+                                                <div class="custom-control custom-checkbox mb-3">
+                                                    <input type="checkbox" class="custom-control-input" id="proset5"
+                                                        formControlName="stock_report">
+                                                    <label class="custom-control-label" for="proset5">Stock
+                                                        Report</label>
+                                                </div>
+                                                <hr>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="form-group fill">
+                                                <div class="custom-control custom-checkbox mb-3">
+                                                    <input type="checkbox" class="custom-control-input" id="proset6"
+                                                        formControlName="transaction_menu">
+                                                    <label class="custom-control-label" for="proset6">Transaction
+                                                        Menu</label>
+                                                </div>
+                                                <hr>
+                                                <div class="custom-control custom-checkbox mb-3">
+                                                    <input type="checkbox" class="custom-control-input" id="proset7"
+                                                        formControlName="setup">
+                                                    <label class="custom-control-label" for="proset7">Setup</label>
+                                                </div>
+                                                <hr>
+                                                <div class="custom-control custom-checkbox mb-3">
+                                                    <input type="checkbox" class="custom-control-input" id="proset8"
+                                                        formControlName="crm">
+                                                    <label class="custom-control-label" for="proset8">CRM</label>
+                                                </div>
+                                                <hr>
+                                                <div class="custom-control custom-checkbox mb-3">
+                                                    <input type="checkbox" class="custom-control-input" id="proset9"
+                                                        formControlName="work_order">
+                                                    <label class="custom-control-label" for="proset9">Work Order</label>
+                                                </div>
+                                                <hr>
+                                                <div class="custom-control custom-checkbox mb-3">
+                                                    <input type="checkbox" class="custom-control-input" id="proset10"
+                                                        formControlName="sm_master_report">
+                                                    <label class="custom-control-label" for="proset10">SM Master
+                                                        Report</label>
+                                                </div>
+                                                <hr>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="col-12">
+                                    <button class="btn btn-primary" (click)="createStaff(); staffForm.reset()"
+                                        [disabled]="!staffForm.valid"> Save </button>
+                                    <button class="btn btn-danger" (click)="staffForm.reset()"> Clear </button>
+                                </div>
+                            </div>
+                        </form>
+                    </ng-template>
+                </ngb-tab>
+
+            </ngb-tabset>
+        </app-card>
+    </div>
+
+    <app-ui-modal #editStaffModal>
+        <div class="app-modal-header">
+            <h5 class="modal-title">Edit Staff</h5>
+            <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close"
+                (click)="editStaffModal.hide()"><span aria-hidden="true">&times;</span>
+            </button>
+
+
+            <form [formGroup]="editStaffForm">
+                <div class="row p-t-20">
+                    <div class="col-md-12">
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" formControlName="first_name"
+                                        placeholder="First Name">
+
+                                    <p style="color: red;"
+                                        *ngIf="editStaffForm.get('first_name').touched && editStaffForm.get('first_name').hasError('required')">
+                                        Staff`s first name is reqiured
+                                    </p>
+
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" formControlName="last_name"
+                                        placeholder="Last Name">
+
+                                    <p style="color: red;"
+                                        *ngIf="editStaffForm.get('last_name').touched && editStaffForm.get('last_name').hasError('required')">
+                                        Staff`s last name is reqiured
+                                    </p>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <select class="form-control" formControlName="gender">
+                                        <option value="null">Select Gender</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                    </select>
+
+                                    <p style="color: red;"
+                                        *ngIf="editStaffForm.get('gender').touched && editStaffForm.get('gender').hasError('required')">
+                                        Please select staff gender
+                                    </p>
+
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <select class="form-control" formControlName="role">
+                                        <option value="null">Select Role</option>
+                                        <option value="Agent">Agent</option>
+                                        <option value="Secretary">Secretary</option>
+                                        <option value="Sales Executive">Sales Executive</option>
+                                        <option value="Marketer">Marketer</option>
+                                        <option value="Operations Manager">Operations Manager</option>
+                                        <option value="Sales Manger">Sales Manager</option>
+                                        <option value="Marketing Manager">Marketing Manager</option>
+                                        <option value="Finance & Audit">Finance & Audit</option>
+                                    </select>
+
+                                    <p style="color: red;"
+                                        *ngIf="editStaffForm.get('role').touched && editStaffForm.get('role').hasError('required')">
+                                        Please select staff`s role
+                                    </p>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <select class="form-control" formControlName="branch_id">
+                                        <option value="null">Select Branch</option>
+                                        <option *ngFor="let branch of branches" value="{{ branch.id }}">
+                                            {{ branch.name }}</option>
+
+                                    </select>
+
+                                    <p style="color: red;"
+                                        *ngIf="editStaffForm.get('branch_id').touched && editStaffForm.get('branch_id').hasError('required')">
+                                        Please select an assigned branch
+                                    </p>
+
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+
+                                <div class="form-group">
+                                    <select class="form-control" formControlName="status">
+                                        <option value="null">Select Status</option>
+                                        <option value="Active">Active</option>
+                                        <option value="Inactive">Inactive</option>
+                                        <option value="Suspended">Suspended</option>
+
+                                    </select>
+
+                                    <p style="color: red;"
+                                        *ngIf="editStaffForm.get('status').touched && editStaffForm.get('status').hasError('required')">
+                                        Please select staff current status
+                                    </p>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <input type="number" class="form-control" formControlName="phone"
+                                        placeholder="Phone / Mobile">
+
+                                    <p style="color: red;"
+                                        *ngIf="editStaffForm.get('phone').touched && editStaffForm.get('phone').hasError('required')">
+                                        Please provide a valid contact number
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <input type="email" class="form-control" formControlName="email"
+                                        placeholder="email">
+
+                                    <p style="color: red;"
+                                        *ngIf="editStaffForm.get('email').touched && editStaffForm.get('email').hasError('required')">
+                                        Please provide a valid email address
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <input type="password" class="form-control" [(ngModel)]="staffData.password" formControlName="password"
+                                        placeholder="Password">
+
+                                    <p style="color: red;"
+                                        *ngIf="editStaffForm.get('password').touched && editStaffForm.get('password').hasError('required')">
+                                        Please provide a provisional password for the staff
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <input type="password" class="form-control"  [(ngModel)]="staffData.confirm_password"
+                                        formControlName="confirm_password" placeholder="Confirm Password">
+
+                                    <p style="color: red;"
+                                        *ngIf="editStaffForm.get('confirm_password').touched && editStaffForm.get('confirm_password').hasError('required')">
+                                        Please confirm password
+                                    </p>
+
+                                    <p style="color: red;"
+                                        *ngIf="staffData.password != staffData.confirm_password">
+                                        Password mismatch, please check and correct!!!
+                                    </p>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+
+
+                    <div class="col-md-12">
+                        <h5 class="mb-4">Staff Permissions</h5>
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group fill">
+                                    <div class="custom-control custom-checkbox mb-3">
+                                        <input type="checkbox" class="custom-control-input" id="proset1"
+                                            formControlName="reverse_transaction">
+                                        <label class="custom-control-label" for="proset1">
+                                            Reverse
+                                            Transaction
+                                        </label>
+                                    </div>
+                                    <hr>
+                                    <div class="custom-control custom-checkbox mb-3">
+                                        <input type="checkbox" class="custom-control-input" id="proset2"
+                                            formControlName="inventory">
+                                        <label class="custom-control-label" for="proset2">View
+                                            Inventory</label>
+                                    </div>
+                                    <hr>
+                                    <div class="custom-control custom-checkbox mb-3">
+                                        <input type="checkbox" class="custom-control-input" id="proset3"
+                                            formControlName="sales_report">
+                                        <label class="custom-control-label" for="proset3">Sales
+                                            Report</label>
+                                    </div>
+                                    <hr>
+                                    <div class="custom-control custom-checkbox mb-3">
+                                        <input type="checkbox" class="custom-control-input" id="proset4"
+                                            formControlName="cash_report">
+                                        <label class="custom-control-label" for="proset4">Cash
+                                            Report</label>
+                                    </div>
+                                    <hr>
+                                    <div class="custom-control custom-checkbox mb-3">
+                                        <input type="checkbox" class="custom-control-input" id="proset5"
+                                            formControlName="stock_report">
+                                        <label class="custom-control-label" for="proset5">Stock
+                                            Report</label>
+                                    </div>
+                                    <hr>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <div class="form-group fill">
+                                    <div class="custom-control custom-checkbox mb-3">
+                                        <input type="checkbox" class="custom-control-input" id="proset6"
+                                            formControlName="transaction_menu">
+                                        <label class="custom-control-label" for="proset6">Transaction
+                                            Menu</label>
+                                    </div>
+                                    <hr>
+                                    <div class="custom-control custom-checkbox mb-3">
+                                        <input type="checkbox" class="custom-control-input" id="proset7"
+                                            formControlName="setup">
+                                        <label class="custom-control-label" for="proset7">Setup</label>
+                                    </div>
+                                    <hr>
+                                    <div class="custom-control custom-checkbox mb-3">
+                                        <input type="checkbox" class="custom-control-input" id="proset8"
+                                            formControlName="crm">
+                                        <label class="custom-control-label" for="proset8">CRM</label>
+                                    </div>
+                                    <hr>
+                                    <div class="custom-control custom-checkbox mb-3">
+                                        <input type="checkbox" class="custom-control-input" id="proset9"
+                                            formControlName="work_order">
+                                        <label class="custom-control-label" for="proset9">Work Order</label>
+                                    </div>
+                                    <hr>
+                                    <div class="custom-control custom-checkbox mb-3">
+                                        <input type="checkbox" class="custom-control-input" id="proset10"
+                                            formControlName="sm_master_report">
+                                        <label class="custom-control-label" for="proset10">SM Master
+                                            Report</label>
+                                    </div>
+                                    <hr>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-12">
+                        <button class="btn btn-primary"
+                            (click)="updateStaff(); editStaffForm.reset(); editStaffModal.hide()"
+                            [disabled]="!editStaffForm.valid"> Save </button>
+                        <!-- <button class="btn btn-danger" (click)="editStaffForm.reset()"> Clear </button> -->
+                    </div>
+                </div>
+            </form>
+
+        </div>
+
+    </app-ui-modal>
+</div>

@@ -1,0 +1,177 @@
+<div class="row btn-page">
+  <div class="col-sm-12">
+    <app-card [hidHeader]="true" cardClass="card-datatable">
+      <div class="row align-items-center m-l-0">
+        <div class="col-sm-6"></div>
+        <div class="col-sm-6 text-right">
+          <button class="btn btn-success btn-sm btn-round has-ripple" (click)="modalLaboratory.show()"><i class="feather icon-plus"></i> Add Laboratory</button>
+        </div>
+        <app-ui-modal #modalLaboratory>
+          <div class="app-modal-header">
+            <h5 class="modal-title">Add Laboratory</h5>
+            <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="modalLaboratory.hide()"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="app-modal-body">
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="Name" placeholder="Name">
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group fill">
+                  <input type="email" class="form-control" id="Email" placeholder="Email">
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group fill">
+                  <input type="password" class="form-control" id="Password" placeholder="Password">
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="Phone" placeholder="Phone">
+                </div>
+              </div>
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <textarea class="form-control" id="Address" placeholder="Address" rows="3"></textarea>
+                </div>
+              </div>
+              <div class="col-sm-12">
+                <div class="form-group fill">
+                  <label class="floating-label" for="Icon">Profie Image</label>
+                  <input type="file" class="form-control" id="Icon" placeholder="sdf">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="app-modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="modalLaboratory.hide()">Clear</button>
+            <button type="button" class="btn btn-primary">Submit</button>
+          </div>
+        </app-ui-modal>
+      </div>
+      <div class="table-responsive">
+        <table datatable id="report-table" class="table table-bordered table-striped mb-0">
+          <thead>
+          <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th>Phone</th>
+            <th>Options</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>
+              <img src="assets/images/user/avatar-1.jpg" class="img-fluid img-radius wid-40" alt="">
+            </td>
+            <td>Micheal Pewd</td>
+            <td>Pharmacist@example.com</td>
+            <td>Some address</td>
+            <td>+984-46-9388638</td>
+            <td>
+              <a href="javascript:" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Edit </a>
+              <a href="javascript:" class="btn btn-danger btn-sm"><i class="feather icon-trash-2"></i>&nbsp;Delete </a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img src="assets/images/user/avatar-3.jpg" class="img-fluid img-radius wid-40" alt="">
+            </td>
+            <td>Erich Mcbride</td>
+            <td>xidim@gmail.com</td>
+            <td>Some address</td>
+            <td>+612-92-1385682</td>
+            <td>
+              <a href="javascript:" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Edit </a>
+              <a href="javascript:" class="btn btn-danger btn-sm"><i class="feather icon-trash-2"></i>&nbsp;Delete </a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img src="assets/images/user/avatar-1.jpg" class="img-fluid img-radius wid-40" alt="">
+            </td>
+            <td>Micheal Pewd</td>
+            <td>nurse@example.com</td>
+            <td>Some address</td>
+            <td>+984-46-9388638</td>
+            <td>
+              <a href="javascript:" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Edit </a>
+              <a href="javascript:" class="btn btn-danger btn-sm"><i class="feather icon-trash-2"></i>&nbsp;Delete </a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img src="assets/images/user/avatar-3.jpg" class="img-fluid img-radius wid-40" alt="">
+            </td>
+            <td>Erich Mcbride</td>
+            <td>xidim@gmail.com</td>
+            <td>Some address</td>
+            <td>+612-92-1385682</td>
+            <td>
+              <a href="javascript:" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Edit </a>
+              <a href="javascript:" class="btn btn-danger btn-sm"><i class="feather icon-trash-2"></i>&nbsp;Delete </a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img src="assets/images/user/avatar-1.jpg" class="img-fluid img-radius wid-40" alt="">
+            </td>
+            <td>Micheal Pewd</td>
+            <td>Pharmacist@example.com</td>
+            <td>Some address</td>
+            <td>+984-46-9388638</td>
+            <td>
+              <a href="javascript:" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Edit </a>
+              <a href="javascript:" class="btn btn-danger btn-sm"><i class="feather icon-trash-2"></i>&nbsp;Delete </a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img src="assets/images/user/avatar-3.jpg" class="img-fluid img-radius wid-40" alt="">
+            </td>
+            <td>Erich Mcbride</td>
+            <td>xidim@gmail.com</td>
+            <td>Some address</td>
+            <td>+612-92-1385682</td>
+            <td>
+              <a href="javascript:" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Edit </a>
+              <a href="javascript:" class="btn btn-danger btn-sm"><i class="feather icon-trash-2"></i>&nbsp;Delete </a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img src="assets/images/user/avatar-1.jpg" class="img-fluid img-radius wid-40" alt="">
+            </td>
+            <td>Micheal Pewd</td>
+            <td>nurse@example.com</td>
+            <td>Some address</td>
+            <td>+984-46-9388638</td>
+            <td>
+              <a href="javascript:" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Edit </a>
+              <a href="javascript:" class="btn btn-danger btn-sm"><i class="feather icon-trash-2"></i>&nbsp;Delete </a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img src="assets/images/user/avatar-3.jpg" class="img-fluid img-radius wid-40" alt="">
+            </td>
+            <td>Erich Mcbride</td>
+            <td>xidim@gmail.com</td>
+            <td>Some address</td>
+            <td>+612-92-1385682</td>
+            <td>
+              <a href="javascript:" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Edit </a>
+              <a href="javascript:" class="btn btn-danger btn-sm"><i class="feather icon-trash-2"></i>&nbsp;Delete </a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </app-card>
+  </div>
+</div>

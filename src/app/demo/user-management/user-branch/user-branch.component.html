@@ -1,0 +1,139 @@
+<div class="row btn-page">
+    <div class="col-sm-12">
+
+
+        <app-card [hidHeader]="true" cardClass="card-datatable">
+
+            <div *ngIf="this.isLoading" class="d-flex justify-content-center">
+                <div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+
+
+            <div *ngIf="!this.isLoading" class="row align-items-center m-l-0">
+                <div class="col-sm-6"></div>
+                <div class="col-sm-6 text-right">
+                    <button class="btn btn-success btn-sm btn-round has-ripple" (click)="newBranch.show()"><i
+                            class="feather icon-plus"></i> Add Branch</button>
+                </div>
+                <app-ui-modal #newBranch>
+                    <div class="app-modal-header">
+                        <h5 class="modal-title">Create New Branch</h5>
+                        <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close"
+                            (click)="newBranch.hide()"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="app-modal-body">
+                        <form [formGroup]="branchForm">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="Name" placeholder="Name"
+                                            formControlName="name">
+                                        <p style="color: red;"
+                                            *ngIf="branchForm.get('name').touched && branchForm.get('name').hasError('required')">
+                                            Required Field
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <textarea class="form-control" id="Description" placeholder="Location of Branch"
+                                            rows="3" formControlName="location"></textarea>
+                                        <p style="color: red;"
+                                            *ngIf="branchForm.get('location').touched && branchForm.get('location').hasError('required')">
+                                            Required Field
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="app-modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="branchForm.reset()">
+                            Clear
+                        </button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal"
+                            [disabled]="!branchForm.valid" (click)="createBranch(); branchForm.reset(); newBranch.hide()">
+                            <span *ngIf="this.isLoading" class="spinner-border spinner-border-sm" role="status"></span>
+                            <span *ngIf="this.isLoading" class="load-text"> Saving...</span>
+                            <span *ngIf="!this.isLoading" class="btn-text">Submit</span>
+                        </button>
+                    </div>
+                </app-ui-modal>
+            </div>
+
+
+            <div *ngIf="!this.isLoading" class="table-responsive">
+
+                <table datatable id="report-table" class="table table-bordered table-striped mb-0">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th width="50%">Location</th>
+                            <th>Options</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let branch of allBranches">
+                            <td>{{ branch.name }}</td>
+                            <td>{{ branch.location }}</td>
+                            <td>
+                                <a href="javascript:" (click)="edit(branch?.id); editBranch.show()"
+                                    class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Edit </a>
+                                <a href="javascript:" (click)="confirmAlert(branch?.id)"
+                                    class="btn btn-danger btn-sm"><i class="feather icon-trash-2"></i>&nbsp;Delete </a>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+                <app-ui-modal #editBranch>
+                    <div class="app-modal-header">
+                        <h5 class="modal-title">Edit Branch</h5>
+                        <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close"
+                            (click)="editBranch.hide()"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="app-modal-body">
+                        <form [formGroup]="editBranchForm">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="Name" placeholder="Name"
+                                            formControlName="name">
+                                        <p style="color: red;"
+                                            *ngIf="editBranchForm.get('name').touched && editBranchForm.get('name').hasError('required')">
+                                            Required Field
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <textarea class="form-control" id="Description" placeholder="Location of Branch"
+                                            rows="3" formControlName="location"></textarea>
+                                        <p style="color: red;"
+                                            *ngIf="editBranchForm.get('location').touched && editBranchForm.get('location').hasError('required')">
+                                            Required Field
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="app-modal-footer">
+                        <!-- <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="editBranch.hide()">
+                            Clear
+                        </button> -->
+                        <button type="button" class="btn btn-primary" data-dismiss="modal"
+                            [disabled]="!editBranchForm.valid" (click)="editBranches(); editBranch.hide()">
+                            <span *ngIf="this.isLoading" class="spinner-border spinner-border-sm" role="status"></span>
+                            <span *ngIf="this.isLoading" class="load-text"> Saving Changes...</span>
+                            <span *ngIf="!this.isLoading" class="btn-text">Submit</span>
+                        </button>
+                    </div>
+                </app-ui-modal>
+            </div>
+        </app-card>
+    </div>
+</div>

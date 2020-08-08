@@ -1,0 +1,406 @@
+<div class="row justify-content-center">
+  <div class="col-sm-12">
+    <app-card [hidHeader]="true" blockClass="text-center">
+      <div class="row align-items-center m-l-0">
+        <div class="col-sm-6 text-left">
+          <h5>User Management</h5>
+        </div>
+        <div class="col-sm-6 text-right">
+          <button type="button" class="btn btn-primary btn-sm" (click)="modalCustomer.show()"><i class="feather icon-plus"></i>New User</button>
+        </div>
+      </div>
+
+      <ul class="list-inline">
+        <li class="list-inline-item border-right m-0"><a href="javascript:" class="pr-2 pl-1 text-muted"> Sorting Options </a></li>
+        <li class="list-inline-item border-right m-0"><a href="javascript:" class="pr-2 pl-1 font-weight-bolder"> Reset </a></li>
+        <li class="list-inline-item border-right m-0"><a href="javascript:" class="pr-2 pl-1 text-muted"> Membership </a></li>
+        <li class="list-inline-item"><a href="javascript:" class="text-muted"> Username </a></li>
+      </ul>
+      <ul class="list-inline mb-0">
+        <li class="list-inline-item border-right m-0"><a href="javascript:" class="pr-2 pl-1 text-muted"> A </a></li>
+        <li class="list-inline-item border-right m-0"><a href="javascript:" class="pr-2 pl-1 text-muted"> B </a></li>
+        <li class="list-inline-item border-right m-0"><a href="javascript:" class="pr-2 pl-1 text-muted"> C </a></li>
+        <li class="list-inline-item border-right m-0"><a href="javascript:" class="pr-2 pl-1 text-muted"> D </a></li>
+        <li class="list-inline-item border-right m-0"><a href="javascript:" class="pr-2 pl-1 text-muted"> E </a></li>
+        <li class="list-inline-item border-right m-0"><a href="javascript:" class="pr-2 pl-1 text-muted"> F </a></li>
+        <li class="list-inline-item border-right m-0"><a href="javascript:" class="pr-2 pl-1 text-muted"> G </a></li>
+        <li class="list-inline-item border-right m-0"><a href="javascript:" class="pr-2 pl-1 text-muted"> H </a></li>
+        <li class="list-inline-item border-right m-0"><a href="javascript:" class="pr-2 pl-1 text-muted"> I </a></li>
+        <li class="list-inline-item border-right m-0"><a href="javascript:" class="pr-2 pl-1 text-muted"> J </a></li>
+        <li class="list-inline-item border-right m-0"><a href="javascript:" class="pr-2 pl-1 text-muted"> K </a></li>
+        <li class="list-inline-item border-right m-0"><a href="javascript:" class="pr-2 pl-1 text-muted"> L </a></li>
+        <li class="list-inline-item border-right m-0"><a href="javascript:" class="pr-2 pl-1 text-muted"> M </a></li>
+        <li class="list-inline-item border-right m-0"><a href="javascript:" class="pr-2 pl-1 text-muted"> N </a></li>
+        <li class="list-inline-item border-right m-0"><a href="javascript:" class="pr-2 pl-1 text-muted"> O </a></li>
+        <li class="list-inline-item border-right m-0"><a href="javascript:" class="pr-2 pl-1 text-muted"> P </a></li>
+        <li class="list-inline-item border-right m-0"><a href="javascript:" class="pr-2 pl-1 text-muted"> Q </a></li>
+        <li class="list-inline-item border-right m-0"><a href="javascript:" class="pr-2 pl-1 text-muted"> R </a></li>
+        <li class="list-inline-item border-right m-0"><a href="javascript:" class="pr-2 pl-1 text-muted"> S </a></li>
+        <li class="list-inline-item border-right m-0"><a href="javascript:" class="pr-2 pl-1 text-muted"> T </a></li>
+        <li class="list-inline-item border-right m-0"><a href="javascript:" class="pr-2 pl-1 text-muted"> U </a></li>
+        <li class="list-inline-item border-right m-0"><a href="javascript:" class="pr-2 pl-1 text-muted"> V </a></li>
+        <li class="list-inline-item border-right m-0"><a href="javascript:" class="pr-2 pl-1 text-muted"> W </a></li>
+        <li class="list-inline-item border-right m-0"><a href="javascript:" class="pr-2 pl-1 text-muted"> X </a></li>
+        <li class="list-inline-item border-right m-0"><a href="javascript:" class="pr-2 pl-1 text-muted"> Y </a></li>
+        <li class="list-inline-item border-right m-0"><a href="javascript:" class="pr-2 pl-1 text-muted"> Z </a></li>
+        <li class="list-inline-item"><a href="javascript:" class="font-weight-bolder"> All </a></li>
+      </ul>
+    </app-card>
+  </div>
+
+  <div class="col-lg-4 col-md-6">
+    <app-card [hidHeader]="true" cardClass="user-card user-card-1 mt-4" blockClass="pt-0">
+      <div class="user-about-block text-center">
+        <div class="row align-items-end">
+          <div class="col text-left pb-3">
+            <span class="badge badge-success">Active</span>
+          </div>
+          <div class="col"><img class="img-radius img-fluid wid-80" src="assets/images/user/avatar-2.jpg" alt="User image"></div>
+          <div class="col text-right pb-3">
+            <div class="dropdown" ngbDropdown>
+              <a class="drp-icon dropdown-toggle" ngbDropdownToggle data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="feather icon-more-horizontal"></i></a>
+              <div class="dropdown-menu dropdown-menu-right" ngbDropdownMenu>
+                <a class="dropdown-item" href="javascript:">Edit</a>
+                <a class="dropdown-item" href="javascript:">History</a>
+                <a class="dropdown-item" href="javascript:">Trash</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center">
+        <a href="javascript:" data-toggle="modal" data-target="#modal-report">
+          <h4 class="mb-1 mt-3">Andrew Burns</h4>
+        </a>
+        <p class="mb-3 text-muted"><i class="feather icon-calendar"> </i> 19 Jul 2016</p>
+        <p class="mb-1"><b>Email : </b><a href="mailto:dummy@example.com">andrew.burns@example.com</a></p>
+        <p class="mb-0"><b>Membership : </b>Platinum <span class="badge badge-warning">member</span></p>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-lg-4 col-md-6">
+    <app-card [hidHeader]="true" cardClass="user-card user-card-1 mt-4" blockClass="pt-0">
+      <div class="user-about-block text-center">
+        <div class="row align-items-end">
+          <div class="col text-left pb-3">
+            <span class="badge badge-success">Active</span>
+          </div>
+          <div class="col"><img class="img-radius img-fluid wid-80" src="assets/images/user/avatar-3.jpg" alt="User image"></div>
+          <div class="col text-right pb-3">
+            <div class="dropdown" ngbDropdown>
+              <a class="drp-icon dropdown-toggle" ngbDropdownToggle data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="feather icon-more-horizontal"></i></a>
+              <div class="dropdown-menu dropdown-menu-right" ngbDropdownMenu>
+                <a class="dropdown-item" href="javascript:">Edit</a>
+                <a class="dropdown-item" href="javascript:">History</a>
+                <a class="dropdown-item" href="javascript:">Trash</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center">
+        <a href="javascript:" data-toggle="modal" data-target="#modal-report">
+          <h4 class="mb-1 mt-3">Keith Butler</h4>
+        </a>
+        <p class="mb-3 text-muted"><i class="feather icon-calendar"> </i> 27 Apr 2016</p>
+        <p class="mb-1"><b>Email : </b><a href="mailto:dummy@example.com">Keith.butler@example.com</a></p>
+        <p class="mb-0"><b>Membership : </b>TRIAL <span class="badge badge-warning">member</span></p>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-lg-4 col-md-6">
+    <app-card [hidHeader]="true" cardClass="user-card user-card-1 mt-4" blockClass="pt-0">
+      <div class="user-about-block text-center">
+        <div class="row align-items-end">
+          <div class="col text-left pb-3">
+            <span class="badge badge-success">Active</span>
+          </div>
+          <div class="col"><img class="img-radius img-fluid wid-80" src="assets/images/user/avatar-4.jpg" alt="User image"></div>
+          <div class="col text-right pb-3">
+            <div class="dropdown" ngbDropdown>
+              <a class="drp-icon dropdown-toggle" ngbDropdownToggle data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="feather icon-more-horizontal"></i></a>
+              <div class="dropdown-menu dropdown-menu-right" ngbDropdownMenu>
+                <a class="dropdown-item" href="javascript:">Edit</a>
+                <a class="dropdown-item" href="javascript:">History</a>
+                <a class="dropdown-item" href="javascript:">Trash</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center">
+        <a href="javascript:" data-toggle="modal" data-target="#modal-report">
+          <h4 class="mb-1 mt-3">Christina Bowman</h4>
+        </a>
+        <p class="mb-3 text-muted"><i class="feather icon-calendar"> </i> 17 Apr 2016</p>
+        <p class="mb-1"><b>Email : </b><a href="mailto:dummy@example.com">Christina.Bowman@example.com</a></p>
+        <p class="mb-0"><b>Membership : </b>- <span class="badge badge-primary">staff</span></p>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-lg-4 col-md-6">
+    <app-card [hidHeader]="true" cardClass="user-card user-card-1 mt-4" blockClass="pt-0">
+      <div class="user-about-block text-center">
+        <div class="row align-items-end">
+          <div class="col text-left pb-3">
+            <span class="badge badge-danger">Banned</span>
+          </div>
+          <div class="col"><img class="img-radius img-fluid wid-80" src="assets/images/user/avatar-1.jpg" alt="User image"></div>
+          <div class="col text-right pb-3">
+            <div class="dropdown" ngbDropdown>
+              <a class="drp-icon dropdown-toggle" ngbDropdownToggle data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="feather icon-more-horizontal"></i></a>
+              <div class="dropdown-menu dropdown-menu-right" ngbDropdownMenu>
+                <a class="dropdown-item" href="javascript:">Edit</a>
+                <a class="dropdown-item" href="javascript:">History</a>
+                <a class="dropdown-item" href="javascript:">Trash</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center">
+        <a href="javascript:" data-toggle="modal" data-target="#modal-report">
+          <h4 class="mb-1 mt-3">Kelly Montgomery</h4>
+        </a>
+        <p class="mb-3 text-muted"><i class="feather icon-calendar"> </i> 23 Mar 2016</p>
+        <p class="mb-1"><b>Email : </b><a href="mailto:dummy@example.com">Kelly.Montgomery@example.com</a></p>
+        <p class="mb-0"><b>Membership : </b>Bronze <span class="badge badge-warning">member</span></p>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-lg-4 col-md-6">
+    <app-card [hidHeader]="true" cardClass="user-card user-card-1 mt-4" blockClass="pt-0">
+      <div class="user-about-block text-center">
+        <div class="row align-items-end">
+          <div class="col text-left pb-3">
+            <span class="badge badge-dark">Pending</span>
+          </div>
+          <div class="col"><img class="img-radius img-fluid wid-80" src="assets/images/user/avatar-2.jpg" alt="User image"></div>
+          <div class="col text-right pb-3">
+            <div class="dropdown" ngbDropdown>
+              <a class="drp-icon dropdown-toggle" ngbDropdownToggle data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="feather icon-more-horizontal"></i></a>
+              <div class="dropdown-menu dropdown-menu-right" ngbDropdownMenu>
+                <a class="dropdown-item" href="javascript:">Edit</a>
+                <a class="dropdown-item" href="javascript:">History</a>
+                <a class="dropdown-item" href="javascript:">Trash</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center">
+        <a href="javascript:" data-toggle="modal" data-target="#modal-report">
+          <h4 class="mb-1 mt-3">Steve Castillo</h4>
+        </a>
+        <p class="mb-3 text-muted"><i class="feather icon-calendar"> </i> 23 Mar 2016</p>
+        <p class="mb-1"><b>Email : </b><a href="mailto:dummy@example.com">Steve.Castillo@example.com</a></p>
+        <p class="mb-0"><b>Membership : </b>GOLD <span class="badge badge-warning">member</span></p>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-lg-4 col-md-6">
+    <app-card [hidHeader]="true" cardClass="user-card user-card-1 mt-4" blockClass="pt-0">
+      <div class="user-about-block text-center">
+        <div class="row align-items-end">
+          <div class="col text-left pb-3">
+            <span class="badge badge-info">Inactive</span>
+          </div>
+          <div class="col"><img class="img-radius img-fluid wid-80" src="assets/images/user/avatar-3.jpg" alt="User image"></div>
+          <div class="col text-right pb-3">
+            <div class="dropdown" ngbDropdown>
+              <a class="drp-icon dropdown-toggle" ngbDropdownToggle data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="feather icon-more-horizontal"></i></a>
+              <div class="dropdown-menu dropdown-menu-right" ngbDropdownMenu>
+                <a class="dropdown-item" href="javascript:">Edit</a>
+                <a class="dropdown-item" href="javascript:">History</a>
+                <a class="dropdown-item" href="javascript:">Trash</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center">
+        <a href="javascript:" data-toggle="modal" data-target="#modal-report">
+          <h4 class="mb-1 mt-3">Kenneth Hart</h4>
+        </a>
+        <p class="mb-3 text-muted"><i class="feather icon-calendar"> </i> 25 Dec 2015</p>
+        <p class="mb-1"><b>Email : </b><a href="mailto:dummy@example.com">Steve.Castillo@example.com</a></p>
+        <p class="mb-0"><b>Membership : </b>BRONZE <span class="badge badge-warning">member</span></p>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-lg-4 col-md-6">
+    <app-card [hidHeader]="true" cardClass="user-card user-card-1 mt-4" blockClass="pt-0">
+      <div class="user-about-block text-center">
+        <div class="row align-items-end">
+          <div class="col text-left pb-3">
+            <span class="badge badge-success">Active</span>
+          </div>
+          <div class="col"><img class="img-radius img-fluid wid-80" src="assets/images/user/avatar-2.jpg" alt="User image"></div>
+          <div class="col text-right pb-3">
+            <div class="dropdown" ngbDropdown>
+              <a class="drp-icon dropdown-toggle" ngbDropdownToggle data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="feather icon-more-horizontal"></i></a>
+              <div class="dropdown-menu dropdown-menu-right" ngbDropdownMenu>
+                <a class="dropdown-item" href="javascript:">Edit</a>
+                <a class="dropdown-item" href="javascript:">History</a>
+                <a class="dropdown-item" href="javascript:">Trash</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center">
+        <a href="javascript:" data-toggle="modal" data-target="#modal-report">
+          <h4 class="mb-1 mt-3">Henry Reyes</h4>
+        </a>
+        <p class="mb-3 text-muted"><i class="feather icon-calendar"> </i> 19 Jan 2016</p>
+        <p class="mb-1"><b>Email : </b><a href="mailto:dummy@example.com">Henry.Reyes@example.com</a></p>
+        <p class="mb-0"><b>Membership : </b>- <span class="badge badge-danger">editor</span></p>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-lg-4 col-md-6">
+    <app-card [hidHeader]="true" cardClass="user-card user-card-1 mt-4" blockClass="pt-0">
+      <div class="user-about-block text-center">
+        <div class="row align-items-end">
+          <div class="col text-left pb-3">
+            <span class="badge badge-danger">Banned</span>
+          </div>
+          <div class="col"><img class="img-radius img-fluid wid-80" src="assets/images/user/avatar-3.jpg" alt="User image"></div>
+          <div class="col text-right pb-3">
+            <div class="dropdown" ngbDropdown>
+              <a class="drp-icon dropdown-toggle" ngbDropdownToggle data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="feather icon-more-horizontal"></i></a>
+              <div class="dropdown-menu dropdown-menu-right" ngbDropdownMenu>
+                <a class="dropdown-item" href="javascript:">Edit</a>
+                <a class="dropdown-item" href="javascript:">History</a>
+                <a class="dropdown-item" href="javascript:">Trash</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center">
+        <a href="javascript:" data-toggle="modal" data-target="#modal-report">
+          <h4 class="mb-1 mt-3">Adam Dean</h4>
+        </a>
+        <p class="mb-3 text-muted"><i class="feather icon-calendar"> </i> 27 Oct 2015</p>
+        <p class="mb-1"><b>Email : </b><a href="mailto:dummy@example.com">Adam.Dean@example.com</a></p>
+        <p class="mb-0"><b>Membership : </b>TRIAL <span class="badge badge-warning">member</span></p>
+      </div>
+    </app-card>
+  </div>
+
+</div>
+<app-ui-modal #modalCustomer [dialogClass]="'modal-xl btn-page'">
+  <div class="app-modal-header">
+    <h5 class="modal-title">Add Customer</h5>
+    <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="modalCustomer.hide()"><span aria-hidden="true">&times;</span></button>
+  </div>
+  <div class="app-modal-body">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <input type="text" class="form-control" id="Name" placeholder="First Name">
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <input type="text" class="form-control" id="Last" placeholder="Last Name">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <input type="email" class="form-control" id="Email" placeholder="Email Address">
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <input type="password" class="form-control" id="Password" placeholder="New Password">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <select class="form-control" id="Membership">
+            <option value="">Change Membership</option>
+            <option value="2">Bronze</option>
+            <option value="3">Gold</option>
+            <option value="4">Platinum</option>
+            <option value="5">Silver</option>
+            <option value="1">Trial</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group fill">
+          <input type="date" class="form-control" id="Extend" placeholder="Extend Membership">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <label class="d-block mb-2">Status</label>
+        <div class="custom-control custom-radio custom-control-inline">
+          <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input" checked>
+          <label class="custom-control-label" for="customRadioInline1">Active</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline">
+          <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
+          <label class="custom-control-label" for="customRadioInline2">Inactive</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline">
+          <input type="radio" id="customRadioInline3" name="customRadioInline1" class="custom-control-input">
+          <label class="custom-control-label" for="customRadioInline3">Pending</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline">
+          <input type="radio" id="customRadioInline4" name="customRadioInline1" class="custom-control-input">
+          <label class="custom-control-label" for="customRadioInline3">Banned</label>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <label class="d-block mb-2 mt-3">User Type</label>
+        <div class="custom-control custom-radio custom-control-inline">
+          <input type="radio" id="customRadioInline21" name="customRadioInline2" class="custom-control-input" checked>
+          <label class="custom-control-label" for="customRadioInline21">Staff</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline">
+          <input type="radio" id="customRadioInline22" name="customRadioInline2" class="custom-control-input">
+          <label class="custom-control-label" for="customRadioInline22">Editor</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline">
+          <input type="radio" id="customRadioInline23" name="customRadioInline2" class="custom-control-input">
+          <label class="custom-control-label" for="customRadioInline23">Member</label>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <label class="d-block mb-2">Newsletter Subscriber</label>
+        <div class="custom-control custom-radio custom-control-inline">
+          <input type="radio" id="customRadioInline31" name="customRadioInline3" class="custom-control-input" checked>
+          <label class="custom-control-label" for="customRadioInline31">Yes</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline">
+          <input type="radio" id="customRadioInline32" name="customRadioInline3" class="custom-control-input">
+          <label class="custom-control-label" for="customRadioInline32">No</label>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <label class="d-block mb-2">Send Email Notification</label>
+        <div class="custom-control custom-switch">
+          <input type="checkbox" class="custom-control-input" id="customSwitch1">
+          <label class="custom-control-label" for="customSwitch1">Yes</label>
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <div class="form-group mt-3">
+          <textarea class="form-control" id="Note" rows="6" spellcheck="false" placeholder="User Note"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="app-modal-footer">
+    <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="modalCustomer.hide()">Clear</button>
+    <button type="button" class="btn btn-primary">Submit</button>
+  </div>
+</app-ui-modal>

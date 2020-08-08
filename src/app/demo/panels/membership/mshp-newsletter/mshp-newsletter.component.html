@@ -1,0 +1,36 @@
+<div class="row btn-page">
+  <div class="col-sm-12">
+    <app-card [hidHeader]="true">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <input type="email" class="form-control" id="Email" placeholder="Email From">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <input type="text" class="form-control" id="Recipients" placeholder="Recipients">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <input type="email" class="form-control" id="Subject" placeholder="Email Subject">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group fill">
+            <input type="file" class="form-control" id="Attachment" placeholder="Attachment">
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="label">Description</label>
+        <app-tinymce [(ngModel)]='basicContent' #tinymce='tinymce'></app-tinymce>
+      </div>
+      <button class="btn btn-primary"> Send Mail </button>
+      <button class="btn btn-danger"> Clear </button>
+    </app-card>
+  </div>
+</div>

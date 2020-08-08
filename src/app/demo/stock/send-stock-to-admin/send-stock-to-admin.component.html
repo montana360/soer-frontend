@@ -1,0 +1,300 @@
+<div class="row btn-page">
+  <div class="col-sm-12 btn-page">
+    <app-card [hidHeader]="true" cardClass="card-datatable">
+      <div *ngIf="this.isLoading" class="d-flex justify-content-center">
+        <div class="spinner-border" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+
+      <div *ngIf="!this.isLoading" class="row align-items-center m-l-0">
+        <div class="col-sm-6"></div>
+        <div class="col-sm-6 text-right">
+          <button class="btn btn-success btn-sm btn-round has-ripple" (click)="getAccountNumber(); modalIsto.show()"><i
+              class="feather icon-plus"></i>
+            Issue Stock
+          </button>
+        </div>
+
+        <!-- Creating transactions -->
+        <app-ui-modal #modalIsto [dialogClass]="'modal-xl'">
+          <div class="app-modal-header">
+            <h5 class="modal-title">Transaction Details</h5>
+            <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close"
+              (click)="isthForm.reset(); modalIsto.hide()"><span aria-hidden="true">&times;</span></button>
+          </div>
+
+          <div class="app-modal-body">
+            <form [formGroup]="isthForm">
+
+              <div class="row">
+                <!-- First Column -->
+                <div class="col-md-6 placeholder">
+                  <div class="form-group">
+                    <input class="form-control" style="color: black;" formControlName="transaction_number"
+                      placeholder="Transaction Number:     {{ transaction_number }}" [attr.disabled]="true">
+                  </div>
+
+                  <!-- <div class="form-group">
+                  <select class="form-control" formControlName="product" [(ngModel)]="product" (change)="getStock($event.target.value)">
+                    <option value="null">Select Product</option>
+                    <option *ngFor="let stock of allStocks" value="{{ stock.id }}">
+                      {{ stock.product }} | In Stock: {{ stock.quantity }} </option>
+                  </select>
+                </div> -->
+
+
+                  <!-- Search for Products -->
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="search" formControlName="search" [(ngModel)]="search"
+                      placeholder="Search for Product" (keyup)="clearSearch()"
+                      (input)="searchProducts($event.target.value);" autofocus>
+                    <br>
+
+                    <div *ngIf="isSearching" class="d-flex justify-content-center">
+                      <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                      </div>
+                    </div>
+
+
+                    <select *ngIf="isFound" class="form-control" formControlName="product" (change)="getStock($event.target.value)">
+                      <option value="null">Select Product</option>
+                      <option *ngFor="let item of searchList" value="{{ item.id }}">
+                        {{ item.product }} | In Stock: {{ item.quantity }}
+                      </option>
+                    </select>
+
+                    <p style="color: red;"
+                      *ngIf="isthForm.get('product').touched && isthForm.get('product').hasError('required')">
+                      Please select product
+                    </p>
+                  </div>
+
+                  <!-- If Product is not found -->
+                  <div *ngIf="isInfo" class="form-group">
+                    <p style="color: red;">
+                      No product found
+                    </p>
+                  </div>
+
+
+
+                  <div class="form-group">
+                    <input type="number" min="0" class="form-control" formControlName="quantity" [(ngModel)]="quantity"
+                      placeholder="Quantity">
+                  </div>
+
+                  <div class="form-group" *ngIf="(quantity > stockQuantity)? true:false">
+                    <p style="color: red;">
+                      Quantity cannot be greater than stock. Check your quantity.
+                    </p>
+                  </div>
+
+                  <div class="app-modal-footer text-right">
+                    <button [disabled]="(quantity > stockQuantity)? true:false" *ngIf="!this.isAdding" type="button"
+                      class="btn btn-success" color="primary" data-dismiss="modal" (click)="pushToProducts()">
+                      Add
+                    </button>
+
+                    <button *ngIf="this.isAdding" type="button" class="btn btn-warning" color="primary"
+                      data-dismiss="modal">
+                      <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                      </div>
+                    </button>
+                  </div>
+
+                </div>
+
+                <!-- Second Column -->
+                <div class="col-md-6">
+                  <b>Product Details</b>
+                  <table class="table table-striped table-hover mb-0">
+                    <thead>
+                      <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let product of products">
+                        <td> {{ product.name }}</td>
+                        <td>GH₵{{ product.cost }}</td>
+                        <td>{{ product.quantity }}</td>
+                        <td>GH₵{{ product.total | number:'1.2-2' }}</td>
+                      </tr>
+                      <br>
+                      <tr>
+                        &nbsp; &nbsp; <strong>Total: GH₵{{ total | number:'1.2-2' }}</strong>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+            </form>
+          </div>
+
+          <div class="app-modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal"
+              (click)="clearProducts(); isthForm.reset()">Clear</button>
+            <button [disabled]="(quantity > stockQuantity)? true:false" type="button" class="btn btn-primary"
+              (click)="sendStock(); clearProducts(); isthForm.reset(); modalIsto.hide()">
+              Save
+            </button>
+          </div>
+        </app-ui-modal>
+
+      </div>
+
+      <div *ngIf="!this.isLoading" class="table-responsive">
+        <table datatable [dtOptions]="dtOptions" id="report-table" class="table table-striped table-hover mb-0">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Transaction Number</th>
+
+              <th>Total</th>
+              <th>Approved</th>
+              <th>Status</th>
+              <th>Date Sent</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let isto of allIsto">
+              <td>{{ isto.id }}</td>
+              <td>
+                {{ isto.transaction_number }}
+                <small class="d-block">
+                  <a href="javascript:" (click)="view(isto?.id); editCustomer.show()">View</a>
+                </small>
+              </td>
+
+              <td> {{ isto.total | number:'1.2-2' }}</td>
+              <!-- <td>{{ isto.status }}</td> -->
+              <td>{{ isto.approved }}</td>
+              <td *ngIf="isto.status === 'Received'">
+                <span class="badge badge-success inline-block">{{ isto.status }}</span>
+              </td>
+              <td *ngIf="isto.status === 'Not-Received'">
+                <span class="badge badge-warning inline-block">{{ isto.status }}</span>
+              </td>
+              <td>{{ isto.created_at }}</td>
+            </tr>
+          </tbody>
+        </table>
+
+
+        <!-- view transaction -->
+        <app-ui-modal #editCustomer [dialogClass]="'modal-xl'">
+          <div class="app-modal-header">
+            <h5 class="modal-title">Transaction Details</h5>
+            <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close"
+              (click)="editCustomer.hide()"><span aria-hidden="true">&times;</span></button>
+          </div>
+
+          <div class="app-modal-body">
+            <div>
+              <app-card id="contentToConvert">
+                <div class="no-gutters">
+                  <div class="col-sm-12">
+                    <img src="../../../../assets/kcc.jpg" style="width:100%;">
+                    <img *ngIf="comData?.company_logo !== null" src="{{ comData?.company_logo }}" alt="logotipo"
+                      style="width: 100%; height: 160px;">
+                  </div>
+                </div>
+                <table class="example-table">
+                  <tr>
+                    <td><B>Transaction Number:</B> {{ isto?.transaction_number }}</td>
+                    <td>
+                      <div *ngFor="let branch of allBranches">
+                        <div *ngIf="branch.id == isto?.sending_branch_id"><b>Sending Branch:</b> {{ branch.name }}</div>
+                      </div>
+                    </td>
+                    <td>
+                      <div *ngFor="let branch of allBranches">
+                        <div *ngIf="branch.id == isto?.receiving_branch_id"><b>Receiving Branch:</b> {{ branch.name }}
+                        </div>
+                      </div>
+                    </td>
+                    <td><B>Date Issued:</B> {{ isto?.created_at }} </td>
+                    <td><B>Total:</B> GH₵{{ isto?.total | number:'1.2-2' }} </td>
+                  </tr>
+
+                  <br>
+
+                  <tr>
+                    <td><B>Status:</B> {{ isto?.status }}</td>
+                    <td>
+                      <div *ngFor="let user of allStaff">
+                        <div *ngIf="user.id == isto?.sender_id"><b>Sent By:</b>
+                          {{ user.first_name }}
+                          {{ user.last_name }}</div>
+                      </div>
+                    </td>
+                    <td>
+                      <div *ngFor="let user of allStaff">
+                        <div *ngIf="user.id == isto?.receiver_id"><b>Received By:</b>
+                          {{ user.first_name }}
+                          {{ user.last_name }}</div>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+
+                <br>
+
+                <table class="table table-striped table-hover mb-0">
+                  <thead>
+                    <tr>
+                      <th><b>Product</b></th>
+                      <th><b>Price</b></th>
+                      <th><b>Quantity</b></th>
+                      <th><b>Total</b></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let product of isto?.products">
+                      <td>{{ product.name }}</td>
+                      <td>GH₵{{ product.cost | number:'1.2-2' }}</td>
+                      <td>{{ product.quantity }}</td>
+                      <td>GH₵{{ product.total | number:'1.2-2' }}</td>
+                    </tr>
+
+
+                  </tbody>
+
+
+                </table>
+
+                <!-- <table class="example-table" id="contentToConvert">
+                  <tr>
+
+                  </tr>
+                </table> -->
+              </app-card>
+
+            </div>
+          </div>
+          <div class="app-modal-footer">
+            <button type="button" class="btn btn-primary buttons"
+              (click)="captureScreen(isto?.name); editCustomer.hide()">
+              Download
+            </button>
+          </div>
+
+        </app-ui-modal>
+
+
+      </div>
+
+
+
+
+    </app-card>
+  </div>
+
+</div>

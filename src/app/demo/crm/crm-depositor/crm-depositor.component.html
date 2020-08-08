@@ -1,0 +1,454 @@
+<div class="row btn-page">
+
+    <div class="col-sm-12 btn-page">
+        <app-card [hidHeader]="true" cardClass="card-datatable">
+            <div *ngIf="this.isLoading" class="d-flex justify-content-center">
+                <div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+
+            <div *ngIf="!this.isLoading" class="row align-items-center m-l-0">
+                <div class="col-sm-6"></div>
+                <div class="col-sm-6 text-right">
+                    <button class="btn btn-primary btn-sm btn-round has-ripple" (click)="AccountCustomer.show()">
+                        <i class="feather icon-search"></i>
+                        Search
+                    </button>
+                    <button class="btn btn-success btn-sm btn-round has-ripple"
+                        (click)="getAccountNumber(); modalCustomer.show()"><i class="feather icon-plus"></i> Add
+                        Depositor
+                    </button>
+                </div>
+
+
+                <!-- Searching for Depositor Account Details using Acct Number -->
+        <app-ui-modal #AccountCustomer>
+            <div class="app-modal-header">
+              <h5 class="modal-title">Search Account</h5>
+              <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close"
+                (click)="searchForm.reset(); AccountCustomer.hide()"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="app-modal-body">
+
+              <form [formGroup]="searchForm">
+                <!-- <div class="form-group">
+
+                    <select class="form-control" formControlName="account_number">
+                        <option value="null">Select Account</option>
+                        <option *ngFor="let depo of Depos" value="{{ depo.account_number }}">
+                            {{ depo.name }} | {{ depo.account_number }}</option>
+
+                    </select>
+
+                  <p style="color: red;"
+                    *ngIf="searchForm.get('account_number').touched && searchForm.get('account_number').hasError('required')">
+                    Please enter the account number of the Customer
+                  </p>
+                </div> -->
+
+                <div class="form-group">
+                    <input type="text" class="form-control" id="search" formControlName="search" [(ngModel)]="search"
+                      placeholder="Search for Deposit Customer" (keyup)="clearUserSearch()"
+                      (input)="searchDepositors($event.target.value);" autocomplete="off">
+                    <br>
+    
+                    <div *ngIf="isSearching" class="d-flex justify-content-center">
+                      <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                      </div>
+                    </div>
+    
+    
+                    <select *ngIf="isFound" class="form-control" formControlName="account_number">
+                      <option value="null">Select Deposit Customer</option>
+                      <option *ngFor="let item of searchList" value="{{ item.account_number }}">
+                        {{ item.name }} ({{ item.account_number }})
+                      </option>
+                    </select>
+    
+                    <p style="color: red;"
+                      *ngIf="searchForm.get('account_number').touched && searchForm.get('account_number').hasError('required')">
+                      Please select customer
+                    </p>
+                  </div>
+    
+                  <!-- If Product is not found -->
+                  <div *ngIf="isInfo" class="form-group">
+                    <p style="color: red;">
+                      No Customer with this details found
+                    </p>
+                  </div>
+
+              </form>
+
+            </div>
+            <div class="app-modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal"
+                (click)="clearUserSearch(); searchForm.reset()">Clear</button>
+              <button type="button" class="btn btn-primary"
+                (click)="getDepositorInfo(); clearUserSearch();  AccountCustomer.hide(); searchForm.reset();">
+                Search
+              </button>
+            </div>
+        </app-ui-modal>
+
+
+                <!-- Creating Debtor -->
+                <app-ui-modal #modalCustomer [dialogClass]="'modal-xl'">
+                    <div class="app-modal-header">
+                        <h5 class="modal-title">Depositor Details</h5>
+                        <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close"
+                            (click)="depositorForm.reset(); modalCustomer.hide()"><span
+                                aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="app-modal-body">
+
+                        <form [formGroup]="depositorForm">
+
+                            <div class="row">
+                                <!-- First Column -->
+                                <div class="col-md-6 placeholder">
+
+                                    <div class="form-group">
+                                        <input class="form-control" style="color: black;"
+                                            placeholder="Account Number:     {{ account_number }}"
+                                            [attr.disabled]="true">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="Name" formControlName="name"
+                                            placeholder="Full Name">
+                                        <p style="color: red;"
+                                            *ngIf="depositorForm.get('name').touched && depositorForm.get('name').hasError('required')">
+                                            Name field required
+                                        </p>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <select class="form-control" formControlName="gender" id="Gender">
+                                            <option value="null">Select Gender</option>
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                        </select>
+
+                                        <p style="color: red;"
+                                            *ngIf="depositorForm.get('gender').touched && depositorForm.get('gender').hasError('required')">
+                                            Please select the gender
+                                        </p>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="number" min="0" class="form-control" id="contact" formControlName="contact"
+                                            placeholder="Phone / Mobile">
+
+                                        <p style="color: red;"
+                                            *ngIf="depositorForm.get('contact').touched && depositorForm.get('contact').hasError('required')">
+                                            Please provide a valid contact number
+                                        </p>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="nationality"
+                                            formControlName="nationality" placeholder="Nationality">
+
+                                        <p style="color: red;"
+                                            *ngIf="depositorForm.get('nationality').touched && depositorForm.get('nationality').hasError('required')">
+                                            Please provide a valid email address
+                                        </p>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <textarea class="form-control" id="Address" rows="3" formControlName="address"
+                                            placeholder="Address" spellcheck="false">
+                                        </textarea>
+                                        <p style="color: red;"
+                                            *ngIf="depositorForm.get('address').touched && depositorForm.get('address').hasError('required')">
+                                            Please provide an address
+                                        </p>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="text" id="region" class="form-control" formControlName="region"
+                                            placeholder="Region">
+
+                                        <p style="color: red;"
+                                            *ngIf="depositorForm.get('region').touched && depositorForm.get('region').hasError('required')">
+                                            Please provide your region required
+                                        </p>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <input type="text" id="home_town" class="form-control"
+                                            formControlName="home_town" placeholder="Home Town">
+
+                                        <p style="color: red;"
+                                            *ngIf="depositorForm.get('home_town').touched && depositorForm.get('home_town').hasError('required')">
+                                            Please select a discount class
+                                        </p>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" formControlName="occupation"
+                                            placeholder="Occupation">
+
+                                        <p style="color: red;"
+                                            *ngIf="depositorForm.get('occupation').touched && depositorForm.get('occupation').hasError('required')">
+                                            Please enter your occupation
+                                        </p>
+                                    </div>
+
+                                </div>
+
+                                <!-- Second Column -->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" formControlName="dob"
+                                            placeholder="Date of Birth" onfocus="(this.type='date')"
+                                            onblur="(this.type='text')">
+
+                                        <p style="color: red;"
+                                            *ngIf="depositorForm.get('dob').touched && depositorForm.get('dob').hasError('required')">
+                                            Please enter your date of birth
+                                        </p>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" formControlName="nok"
+                                            placeholder="Next of Kin">
+
+                                        <p style="color: red;"
+                                            *ngIf="depositorForm.get('nok').touched && depositorForm.get('nok').hasError('required')">
+                                            Please enter the name next of kin
+                                        </p>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="number" min="0" class="form-control" formControlName="nok_contact"
+                                            placeholder="Next of Kin's Contact">
+
+                                        <p style="color: red;"
+                                            *ngIf="depositorForm.get('nok_contact').touched && depositorForm.get('nok_contact').hasError('required')">
+                                            Please enter the contact of next of kin
+                                        </p>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" formControlName="nok_relation"
+                                            placeholder="Relation with Next of Kin">
+
+                                        <p style="color: red;"
+                                            *ngIf="depositorForm.get('nok_relation').touched && depositorForm.get('nok_relation').hasError('required')">
+                                            Please enter your relation
+                                        </p>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" formControlName="product_name"
+                                            placeholder="Product Name">
+
+                                        <p style="color: red;"
+                                            *ngIf="depositorForm.get('product_name').touched && depositorForm.get('product_name').hasError('required')">
+                                            Please enter the name of the product of purchase
+                                        </p>
+                                    </div>
+                                    <div class="form-group">
+                                    <input type="text" class="form-control" formControlName="product_brand" placeholder="Product Brand">
+
+                                    <p style="color: red;"
+                                      *ngIf="depositorForm.get('product_brand').touched && depositorForm.get('product_brand').hasError('required')">
+                                      Please enter the name of the product of purchase
+                                    </p>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <select class="form-control" formControlName="product_policy_id">
+                                            <option value="null">Select Policy</option>
+                                            <option *ngFor="let policy of allPolicy" value="{{ policy.id }}">
+                                                {{ policy.name }} </option>
+                                        </select>
+
+                                        <p style="color: red;"
+                                            *ngIf="depositorForm.get('product_policy_id').touched && depositorForm.get('product_policy_id').hasError('required')">
+                                            Please select policy type
+                                        </p>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" formControlName="product_price"
+                                            placeholder="Product Price">
+
+                                        <p style="color: red;"
+                                            *ngIf="depositorForm.get('product_price').touched && depositorForm.get('product_price').hasError('required')">
+                                            Please enter the price of the product of purchase
+                                        </p>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" formControlName="duration"
+                                            placeholder="Date of Final Payment" onfocus="(this.type='date')"
+                                            onblur="(this.type='text')">
+
+                                        <p style="color: red;"
+                                            *ngIf="depositorForm.get('duration').touched && depositorForm.get('duration').hasError('required')">
+                                            Please enter final payment date
+                                        </p>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <select class="form-control" formControlName="agent_id">
+                                            <option value="null">Select Depositor`s Agent</option>
+                                            <option *ngFor="let agent of allAgents" value="{{ agent.id }}">
+                                                {{ agent.first_name }} {{ agent.last_name }}</option>
+                                        </select>
+
+                                        <p style="color: red;"
+                                            *ngIf="depositorForm.get('agent_id').touched && depositorForm.get('agent_id').hasError('required')">
+                                            Please select an agent
+                                        </p>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </form>
+
+                    </div>
+                    <div class="app-modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"
+                            (click)="depositorForm.reset()">Clear</button>
+                        <button type="button" class="btn btn-primary"[disabled]="!depositorForm.valid"
+                            (click)="createDepositor(); depositorForm.reset(); modalCustomer.hide()">
+                            Save
+                        </button>
+                    </div>
+                </app-ui-modal>
+
+            </div>
+
+            <div *ngIf="!this.isLoading" class="table-responsive">
+                <table datatable  [dtOptions]="dtOptions" id="report-table" class="table table-bordered table-striped mb-0">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Full Name</th>
+                            <th>Account Number</th>
+                            <th>Contact</th>
+                            <th>Gender</th>
+                            <th>Address</th>
+                            <th>Product Name</th>
+                            <th>Price</th>
+                            <th>Brand</th>
+                            <th>Occupation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let depositor of allDepositors">
+                            <td>{{ depositor.id }}</td>
+                            <td> {{ depositor.name }}
+                                <small class="d-block">
+                                    <a href="javascript:" (click)="view(depositor?.id); editCustomer.show()">View</a>
+                                        <!-- |  <a href="javascript:" class="text-danger"
+                                        (click)="confirmAlert(depositor?.id)">Delete</a> -->
+                                </small>
+                            </td>
+                            <td> {{ depositor.account_number }}</td>
+                            <td>{{ depositor.contact }}</td>
+                            <td>{{ depositor.gender }}</td>
+                            <td>{{ depositor.address }}</td>
+                            <td>{{ depositor.product_name }}</td>
+                            <td>{{ depositor.product_price }}</td>
+                            <td>{{ depositor.product_brand }}</td>
+                            <td>{{ depositor.occupation }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- Edit Depositor modals -->
+
+                <app-ui-modal #editCustomer [dialogClass]="'modal-xl'">
+                    <div class="app-modal-header">
+                        <h5 class="modal-title">Depositor's Details</h5>
+                        <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close"
+                            (click)=" editCustomer.hide()"><span
+                                aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="app-modal-body">
+                        <div>
+                          <app-card id="contentToConvert">
+                            <div class="no-gutters">
+                              <div class="col-sm-12">
+                                <img src="../../../../assets/kcc.jpg" style="width:100%;">
+                                <img *ngIf="comData?.company_logo !== null" src="{{ comData?.company_logo }}" alt="logotipo"
+                                  style="width: 100%; height: 160px;">
+                              </div>
+                            </div>
+                            <table>
+                              <tr>
+                                <td><B>Account Number:</B> {{ depositor?.account_number }}</td>
+                                <td><B>Name:</B> {{ depositor?.name }}</td>
+                              </tr>
+                              <tr>
+                                <td><B>Date of Birth:</B> {{ depositor?.dob }}</td>
+                                <td><B>Gender:</B> {{ depositor?.gender }}</td>
+                                </tr>
+                                <tr>
+                                <td><B>Contact:</B> {{ depositor?.contact }} </td>
+                                <td><B>Occupation:</B> {{ depositor?.occupation}}</td>
+                              </tr>
+                              <tr>
+                                <td><B>Nationality:</B> {{ depositor?.nationality }}</td>
+                                <td><B>Address:</B> {{ depositor?.address }}</td>
+                              </tr>
+                              <tr>
+                                <td><B>Home town:</B> {{ depositor?.home_town }}</td>
+                                <td><B>Region:</B> {{ depositor?.region }}</td>
+                              </tr>
+                            <tr>
+                                <td><B>Next of Kin:</B> {{ depositor?.nok }}</td>
+                                <td><B>Next of Kin's Contact:</B> {{ depositor?.nok_contact }}</td>
+                            </tr>
+                            <tr>
+                                <td><B>Relation with Next of Kin:</B> {{ depositor?.nok_relation }}</td>
+                                <td><B>Product Name:</B> {{ depositor?.product_name }}</td>
+                            </tr>
+                            <tr>
+                                <td><B>Product brand:</B> {{ depositor?.product_brand }}</td>
+                                <td><B>Product price:</B> {{ depositor?.product_price }}</td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <div *ngFor="let policy of allPolicy">
+                                  <div *ngIf="policy.id == depositor?.product_policy_id"><b>Policy:</b> {{ policy.name }}</div>
+                                </div>
+                              </td>
+
+                                <td><B>Duration:</B> {{ depositor?.duration }}</td>
+
+                            </tr>
+                            <tr>
+                                <td><div *ngFor="let branch of branches">
+                                  <div *ngIf="branch.id == depositor?.branch_id"><b>Branch:</b> {{ branch.name }}</div>
+                                </div></td>
+                                <td><div *ngFor="let agent of allAgents">
+                                  <div *ngIf="agent.id == depositor?.agent_id"><b>Agent:</b> {{ agent.first_name }} {{ agent.last_name }}</div>
+                                </div></td>
+                            </tr>
+                            </table>
+                          </app-card>
+                        </div>
+
+                    </div>
+                    <div class="app-modal-footer">
+                        <button type="button" class="btn btn-primary" (click)="captureScreen(depositor?.name);  editCustomer.hide()">
+                            Download
+                        </button>
+                    </div>
+                </app-ui-modal>
+
+            </div>
+        </app-card>
+    </div>
+</div>

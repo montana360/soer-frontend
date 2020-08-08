@@ -1,0 +1,105 @@
+<div class="row btn-page">
+  <div class="col-sm-12 btn-page">
+    <app-card [hidHeader]="true" cardClass="card-datatable">
+      <div *ngIf="this.isLoading" class="d-flex justify-content-center">
+        <div class="spinner-border" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+
+      <div *ngIf="!this.isLoading" class="row align-items-center m-l-0">
+        <div class="col-sm-6"></div>
+        <div class="col-sm-6 text-right">
+          <button class="btn btn-success btn-sm btn-round has-ripple" (click)="modalCustomer.show()"><i
+              class="feather icon-plus"></i> Receive Deposit
+          </button>
+        </div>
+
+        <!--Agents transactions-->
+
+        <app-ui-modal #modalCustomer [dialogClass]="'modal-md'">
+          <div class="app-modal-header">
+            <h5 class="modal-title">Depositor Details</h5>
+            <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close"
+              (click)="AgMoReceiveForm.reset(); modalCustomer.hide()"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="app-modal-body">
+
+            <form [formGroup]="AgMoReceiveForm">
+
+              <div class="row">
+                <div class="col-md-12">
+
+                  <!--select agent-->
+
+                  <div class="form-group">
+                    <select class="form-control" formControlName="agent_id">
+                      <option value="null">Select Agent</option>
+                      <option *ngFor="let agent of allAgents" value="{{ agent.id }}">
+                        {{ agent.first_name }} {{ agent.last_name }}</option>
+                    </select>
+
+                    <p style="color: red;"
+                      *ngIf="AgMoReceiveForm.get('agent_id').touched && AgMoReceiveForm.get('agent_id').hasError('required')">
+                      Please select an agent
+                    </p>
+                  </div>
+
+                  <!--Add amount -->
+                  <div class="form-group">
+                    <input type="number" min="0" class="form-control" formControlName="amount"
+                      placeholder="Amount Recieved">
+
+                    <p style="color: red;"
+                      *ngIf="AgMoReceiveForm.get('amount').touched && AgMoReceiveForm.get('amount').hasError('required')">
+                      Please enter the amount
+                    </p>
+                  </div>
+
+                </div>
+              </div>
+
+            </form>
+
+          </div>
+          <div class="app-modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal"
+              (click)="AgMoReceiveForm.reset()">Clear</button>
+            <button type="button" class="btn btn-primary" [disabled]="!AgMoReceiveForm.valid"
+              (click)="createTransaction(); AgMoReceiveForm.reset(); modalCustomer.hide()">
+              Deposit
+            </button>
+          </div>
+        </app-ui-modal>
+      </div>
+
+      <div *ngIf="!this.isLoading" class="table-responsive">
+        <table datatable [dtOptions]="dtOptions" id="report-table" class="table table-striped table-hover mb-0">
+          <thead>
+            <tr>
+              <th>AGENT NAME</th>
+              <th>AMOUNT DEPOSITED</th>
+              <th>AMOUNT Remaining</th>
+              <th>Session Date</th>
+              <th>DATE DEPOSITED</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let tans of allTransactions">
+              <td>
+                <div *ngFor="let agent of allAgents">
+                  <div *ngIf="agent.id == tans.agent_id">{{ agent.first_name }} {{agent.last_name}}</div>
+                </div>
+              </td>
+              <td> GH₵{{ tans.main_deposit | number:'1.2-2'}}</td>
+              <td> GH₵{{ tans.amount | number:'1.2-2'}}</td>
+              <td>{{ tans.session_date }}</td>
+              <td>{{ tans.created_at }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </app-card>
+  </div>
+</div>

@@ -1,0 +1,153 @@
+<div class="row btn-page">
+  <div class="col-sm-12">
+
+
+    <app-card [hidHeader]="true" cardClass="card-datatable">
+
+      <div *ngIf="this.isLoading" class="d-flex justify-content-center">
+        <div class="spinner-border" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+
+
+      <div *ngIf="!this.isLoading" class="row align-items-center m-l-0">
+        <div class="col-sm-6"></div>
+        <div class="col-sm-6 text-right">
+          <button class="btn btn-success btn-sm btn-round has-ripple" (click)="newSupplier.show()"><i
+              class="feather icon-plus"></i>Add New Supplier</button>
+        </div>
+        <app-ui-modal #newSupplier>
+          <div class="app-modal-header">
+            <h5 class="modal-title">Create New Supplier</h5>
+            <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close"
+              (click)="newSupplier.hide()"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="app-modal-body">
+            <form [formGroup]="suppliersForm">
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="Name" placeholder="Name" formControlName="name">
+                    <p style="color: red;"
+                      *ngIf="suppliersForm.get('name').touched && suppliersForm.get('name').hasError('required')">
+                      Required Field
+                    </p>
+                  </div>
+                </div>
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <textarea class="form-control" id="Description" placeholder="Address"
+                      formControlName="address"></textarea>
+                    <p style="color: red;"
+                      *ngIf="suppliersForm.get('address').touched && suppliersForm.get('address').hasError('required')">
+                      Required Field
+                    </p>
+                  </div>
+                </div>
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="Name" placeholder="Contact" formControlName="contact">
+                    <p style="color: red;" *ngIf="suppliersForm.get('contact').touched && suppliersForm.get('contact').hasError('required')">
+                      Required Field
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="app-modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="suppliersForm.reset()">
+              Clear
+            </button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" [disabled]="!suppliersForm.valid"
+              (click)="createSupplier(); suppliersForm.reset(); newSupplier.hide()">
+              <span *ngIf="this.isLoading" class="spinner-border spinner-border-sm" role="status"></span>
+              <span *ngIf="this.isLoading" class="load-text"> Saving...</span>
+              <span *ngIf="!this.isLoading" class="btn-text">Submit</span>
+            </button>
+          </div>
+        </app-ui-modal>
+      </div>
+
+
+      <div *ngIf="!this.isLoading" class="table-responsive">
+
+        <table datatable id="report-table" class="table table-bordered table-striped mb-0">
+          <thead>
+            <tr>
+              <th>Supplier's Name</th>
+              <th width="30%">Address</th>
+              <th>Contact</th>
+              <th>Options</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let supplier of allSuppliers">
+              <td>{{ supplier.name }}</td>
+              <td>{{ supplier.address }}</td>
+              <td>{{ supplier.contact }}</td>
+              <td>
+                <a href="javascript:" (click)="edit(supplier?.id); editSupplier.show()" class="btn btn-info btn-sm"><i
+                    class="feather icon-edit"></i>&nbsp;Edit </a>
+                <a href="javascript:" (click)="confirmAlert(supplier?.id)" class="btn btn-danger btn-sm"><i
+                    class="feather icon-trash-2"></i>&nbsp;Delete </a>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+
+        <app-ui-modal #editSupplier>
+          <div class="app-modal-header">
+            <h5 class="modal-title">Edit Discount Class</h5>
+            <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close"
+              (click)="editSupplier.hide()"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="app-modal-body">
+            <form [formGroup]="editSuppliersForm">
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="Name" placeholder="Supplier's Name" formControlName="name">
+                    <p style="color: red;"
+                      *ngIf="editSuppliersForm.get('name').touched && editSuppliersForm.get('name').hasError('required')">
+                      Required Field
+                    </p>
+                  </div>
+                </div>
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="Description" placeholder="Suppliers Address" formControlName="address">
+                    <p style="color: red;"
+                      *ngIf="editSuppliersForm.get('address').touched && editSuppliersForm.get('address').hasError('required')">
+                      Required Field
+                    </p>
+                  </div>
+                </div>
+                <div class="col-sm-12">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="Name" placeholder="Contact" formControlName="contact">
+                  <p style="color: red;"
+                    *ngIf="editSuppliersForm.get('contact').touched && editSuppliersForm.get('contact').hasError('required')">
+                    Required Field
+                  </p>
+                </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="app-modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal" [disabled]="!editSuppliersForm.valid"
+              (click)="editSuppliers(); editSupplier.hide()">
+              <span *ngIf="this.isLoading" class="spinner-border spinner-border-sm" role="status"></span>
+              <span *ngIf="this.isLoading" class="load-text"> Saving Changes...</span>
+              <span *ngIf="!this.isLoading" class="btn-text">Submit</span>
+            </button>
+          </div>
+        </app-ui-modal>
+
+      </div>
+    </app-card>
+  </div>
+</div>

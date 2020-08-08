@@ -1,0 +1,495 @@
+<div class="row btn-page">
+  <div class="col-sm-12">
+    <app-card [hidHeader]="true" cardClass="card-datatable">
+      <div class="row align-items-center m-l-0">
+        <div class="col-sm-6"></div>
+        <div class="col-sm-6 text-right">
+          <button class="btn btn-success btn-sm btn-round has-ripple" (click)="modalProduct.show()"><i class="feather icon-plus"></i> Add Product</button>
+        </div>
+        <app-ui-modal #modalProduct>
+          <div class="app-modal-header">
+            <h5 class="modal-title">Add Product</h5>
+            <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="modalProduct.hide()"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="app-modal-body">
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="Name" placeholder="Name">
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <select class="form-control" id="Category">
+                    <option value="">Select Category</option>
+                    <option value="1">Kids cloths</option>
+                    <option value="2">Man cloths</option>
+                    <option value="3">Man watch</option>
+                    <option value="3">Office Chairs</option>
+                    <option value="3">Travel bag</option>
+                    <option value="3">Woman cloath</option>
+                    <option value="3">Wooden Chairs</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="Price" placeholder="Price">
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="Quantity" placeholder="Quantity">
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group fill">
+                  <input type="file" class="form-control" id="Icon" placeholder="Profile Image">
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="custom-control custom-switch">
+                  <input type="checkbox" class="custom-control-input" id="customSwitch4" checked="">
+                  <label class="custom-control-label" for="customSwitch4">Active</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="app-modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="modalProduct.hide()">Clear</button>
+            <button type="button" class="btn btn-primary">Submit</button>
+          </div>
+        </app-ui-modal>
+      </div>
+      <div class="table-responsive">
+        <table datatable id="report-table" class="table mb-0">
+          <thead class="thead-light">
+          <tr>
+            <th>Product</th>
+            <th>Category</th>
+            <th>Added Date</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td class="align-middle">
+              <img src="assets/images/product/prod-1.jpg" alt="contact-img" title="contact-img" class="rounded mr-3" height="48" />
+              <p class="m-0 d-inline-block align-middle font-16">
+                <a href="javascript:" class="text-body">Amazing Rolling Chair</a>
+                <br />
+                <span class="text-warning feather icon-star-on"></span>
+                <span class="text-warning feather icon-star-on"></span>
+                <span class="text-warning feather icon-star-on"></span>
+                <span class="text-warning feather icon-star-on"></span>
+                <span class="text-warning feather icon-star-on"></span>
+              </p>
+            </td>
+            <td class="align-middle">
+              Office Chairs
+            </td>
+            <td class="align-middle">
+              16/12/2019
+            </td>
+            <td class="align-middle">
+              $597.66
+            </td>
+            <td class="align-middle">
+              654
+            </td>
+            <td class="align-middle">
+              <span class="badge badge-success">Active</span>
+            </td>
+
+            <td class="table-action">
+              <a href="javascript:" class="btn btn-icon btn-outline-primary"><i class="feather icon-eye"></i></a>
+              <a href="javascript:" class="btn btn-icon btn-outline-success"><i class="feather icon-edit"></i></a>
+              <a href="javascript:" class="btn btn-icon btn-outline-danger"><i class="feather icon-trash-2"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td class="align-middle">
+              <img src="assets/images/product/prod-2.jpg" alt="contact-img" title="contact-img" class="rounded mr-3" height="48" />
+              <p class="m-0 d-inline-block align-middle font-16">
+                <a href="javascript:" class="text-body">Minicap Dining Chair</a>
+                <br />
+                <span class="text-warning feather icon-star-on"></span>
+                <span class="text-warning feather icon-star-on"></span>
+                <span class="text-warning feather icon-star-on"></span>
+                <span class="text-warning feather icon-star-on"></span>
+                <span class="text-warning feather icon-star"></span>
+              </p>
+            </td>
+            <td class="align-middle">
+              Wooden Chairs
+            </td>
+            <td class="align-middle">
+              28/01/2019
+            </td>
+            <td class="align-middle">
+              $63.56
+            </td>
+            <td class="align-middle">
+              236
+            </td>
+            <td class="align-middle">
+              <span class="badge badge-success">Active</span>
+            </td>
+            <td class="table-action">
+              <a href="javascript:" class="btn btn-icon btn-outline-primary"><i class="feather icon-eye"></i></a>
+              <a href="javascript:" class="btn btn-icon btn-outline-success"><i class="feather icon-edit"></i></a>
+              <a href="javascript:" class="btn btn-icon btn-outline-danger"><i class="feather icon-trash-2"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td class="align-middle">
+              <img src="assets/images/product/prod-3.jpg" alt="contact-img" title="contact-img" class="rounded mr-3" height="48" />
+              <p class="m-0 d-inline-block align-middle font-16">
+                <a href="javascript:" class="text-body">Marvel T-shirts</a>
+                <br />
+                <span class="text-warning feather icon-star-on"></span>
+                <span class="text-warning feather icon-star-on"></span>
+                <span class="text-warning feather icon-star-on"></span>
+                <span class="text-warning feather icon-star"></span>
+                <span class="text-warning feather icon-star"></span>
+              </p>
+            </td>
+            <td class="align-middle">
+              Man cloths
+            </td>
+            <td class="align-middle">
+              08/23/2018
+            </td>
+            <td class="align-middle">
+              $12.00
+            </td>
+
+            <td class="align-middle">
+              234
+            </td>
+            <td class="align-middle">
+              <span class="badge badge-success">Active</span>
+            </td>
+            <td class="table-action">
+              <a href="javascript:" class="btn btn-icon btn-outline-primary"><i class="feather icon-eye"></i></a>
+              <a href="javascript:" class="btn btn-icon btn-outline-success"><i class="feather icon-edit"></i></a>
+              <a href="javascript:" class="btn btn-icon btn-outline-danger"><i class="feather icon-trash-2"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td class="align-middle">
+              <img src="assets/images/product/prod-4.jpg" alt="contact-img" title="contact-img" class="rounded mr-3" height="48" />
+              <p class="m-0 d-inline-block align-middle font-16">
+                <a href="javascript:" class="text-body">Lonaval jacket</a>
+                <br />
+                <span class="text-warning feather icon-star-on"></span>
+                <span class="text-warning feather icon-star-on"></span>
+                <span class="text-warning feather icon-star-on"></span>
+                <span class="text-warning feather icon-star-on"></span>
+                <span class="text-warning feather icon-star-on"></span>
+              </p>
+            </td>
+            <td class="align-middle">
+              Man cloths
+            </td>
+            <td class="align-middle">
+              08/02/2018
+            </td>
+            <td class="align-middle">
+              $49.54
+            </td>
+            <td class="align-middle">
+              124
+            </td>
+            <td class="align-middle">
+              <span class="badge badge-success">Active</span>
+            </td>
+            <td class="table-action">
+              <a href="javascript:" class="btn btn-icon btn-outline-primary"><i class="feather icon-eye"></i></a>
+              <a href="javascript:" class="btn btn-icon btn-outline-success"><i class="feather icon-edit"></i></a>
+              <a href="javascript:" class="btn btn-icon btn-outline-danger"><i class="feather icon-trash-2"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td class="align-middle">
+              <img src="assets/images/product/prod-5.jpg" alt="contact-img" title="contact-img" class="rounded mr-3" height="48" />
+              <p class="m-0 d-inline-block align-middle font-16">
+                <a href="javascript:" class="text-body">Goldyrose Kurta</a>
+                <br />
+                <span class="text-warning feather icon-star-on"></span>
+                <span class="text-warning feather icon-star-on"></span>
+                <span class="text-warning feather icon-star-on"></span>
+                <span class="text-warning feather icon-star-on"></span>
+                <span class="text-warning feather icon-star"></span>
+              </p>
+            </td>
+            <td class="align-middle">
+              Woman cloths
+            </td>
+            <td class="align-middle">
+              01/12/2018
+            </td>
+            <td class="align-middle">
+              $58.57
+            </td>
+
+            <td class="align-middle">
+              243
+            </td>
+            <td class="align-middle">
+              <span class="badge badge-danger">Deactive</span>
+            </td>
+            <td class="table-action">
+              <a href="javascript:" class="btn btn-icon btn-outline-primary"><i class="feather icon-eye"></i></a>
+              <a href="javascript:" class="btn btn-icon btn-outline-success"><i class="feather icon-edit"></i></a>
+              <a href="javascript:" class="btn btn-icon btn-outline-danger"><i class="feather icon-trash-2"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td class="align-middle">
+              <img src="assets/images/product/prod-6.jpg" alt="contact-img" title="contact-img" class="rounded mr-3" height="48" />
+              <p class="m-0 d-inline-block align-middle font-16">
+                <a href="javascript:" class="text-body">Zigzag shirts</a>
+                <br />
+                <span class="text-warning feather icon-star-on"></span>
+                <span class="text-warning feather icon-star-on"></span>
+                <span class="text-warning feather icon-star-on"></span>
+                <span class="text-warning feather icon-star-on"></span>
+                <span class="text-warning feather icon-star-on"></span>
+              </p>
+            </td>
+            <td class="align-middle">
+              Man cloths
+            </td>
+            <td class="align-middle">
+              12/04/2019
+            </td>
+            <td class="align-middle">
+              $45.26
+            </td>
+            <td class="align-middle">
+              350
+            </td>
+            <td class="align-middle">
+              <span class="badge badge-success">Active</span>
+            </td>
+            <td class="table-action">
+              <a href="javascript:" class="btn btn-icon btn-outline-primary"><i class="feather icon-eye"></i></a>
+              <a href="javascript:" class="btn btn-icon btn-outline-success"><i class="feather icon-edit"></i></a>
+              <a href="javascript:" class="btn btn-icon btn-outline-danger"><i class="feather icon-trash-2"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td class="align-middle">
+              <img src="assets/images/product/prod-7.jpg" alt="contact-img" title="contact-img" class="rounded mr-3" height="48" />
+              <p class="m-0 d-inline-block align-middle font-16">
+                <a href="javascript:" class="text-body">Foxy Bag</a>
+                <br />
+                <span class="text-warning feather icon-star-on"></span>
+                <span class="text-warning feather icon-star-on"></span>
+                <span class="text-warning feather icon-star-on"></span>
+                <span class="text-warning feather icon-star-on"></span>
+                <span class="text-warning feather icon-star-on"></span>
+              </p>
+            </td>
+            <td class="align-middle">
+              Woman cloths
+            </td>
+            <td class="align-middle">
+              06/30/2018
+            </td>
+            <td class="align-middle">
+              $76
+            </td>
+
+            <td class="align-middle">
+              560
+            </td>
+            <td class="align-middle">
+              <span class="badge badge-danger">Deactive</span>
+            </td>
+            <td class="table-action">
+              <a href="javascript:" class="btn btn-icon btn-outline-primary"><i class="feather icon-eye"></i></a>
+              <a href="javascript:" class="btn btn-icon btn-outline-success"><i class="feather icon-edit"></i></a>
+              <a href="javascript:" class="btn btn-icon btn-outline-danger"><i class="feather icon-trash-2"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td class="align-middle">
+              <img src="assets/images/product/prod-8.jpg" alt="contact-img" title="contact-img" class="rounded mr-3" height="48" />
+              <p class="m-0 d-inline-block align-middle font-16">
+                <a href="javascript:" class="text-body">Bluffly bag</a>
+                <br />
+                <span class="text-warning feather icon-star-on"></span>
+                <span class="text-warning feather icon-star-on"></span>
+                <span class="text-warning feather icon-star-on"></span>
+                <span class="text-warning feather icon-star-on"></span>
+                <span class="text-warning feather icon-star"></span>
+              </p>
+            </td>
+            <td class="align-middle">
+              Kids cloths
+            </td>
+            <td class="align-middle">
+              06/13/2019
+            </td>
+            <td class="align-middle">
+              $23
+            </td>
+            <td class="align-middle">
+              758
+            </td>
+            <td class="align-middle">
+              <span class="badge badge-success">Active</span>
+            </td>
+            <td class="table-action">
+              <a href="javascript:" class="btn btn-icon btn-outline-primary"><i class="feather icon-eye"></i></a>
+              <a href="javascript:" class="btn btn-icon btn-outline-success"><i class="feather icon-edit"></i></a>
+              <a href="javascript:" class="btn btn-icon btn-outline-danger"><i class="feather icon-trash-2"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td class="align-middle">
+              <img src="assets/images/product/prod-9.jpg" alt="contact-img" title="contact-img" class="rounded mr-3" height="48" />
+              <p class="m-0 d-inline-block align-middle font-16">
+                <a href="javascript:" class="text-body">Sonaminya Suits</a>
+                <br />
+                <span class="text-warning feather icon-star-on"></span>
+                <span class="text-warning feather icon-star-on"></span>
+                <span class="text-warning feather icon-star-on"></span>
+                <span class="text-warning feather icon-star-on"></span>
+                <span class="text-warning feather icon-star"></span>
+              </p>
+            </td>
+            <td class="align-middle">
+              Woman cloths
+            </td>
+            <td class="align-middle">
+              05/02/2019
+            </td>
+            <td class="align-middle">
+              $54
+            </td>
+            <td class="align-middle">
+              12
+            </td>
+            <td class="align-middle">
+              <span class="badge badge-success">Active</span>
+            </td>
+            <td class="table-action">
+              <a href="javascript:" class="btn btn-icon btn-outline-primary"><i class="feather icon-eye"></i></a>
+              <a href="javascript:" class="btn btn-icon btn-outline-success"><i class="feather icon-edit"></i></a>
+              <a href="javascript:" class="btn btn-icon btn-outline-danger"><i class="feather icon-trash-2"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td class="align-middle">
+              <img src="assets/images/product/prod-10.jpg" alt="contact-img" title="contact-img" class="rounded mr-3" height="48" />
+              <p class="m-0 d-inline-block align-middle font-16">
+                <a href="javascript:" class="text-body">Offradys bag</a>
+                <br />
+                <span class="text-warning feather icon-star-on"></span>
+                <span class="text-warning feather icon-star-on"></span>
+                <span class="text-warning feather icon-star-on"></span>
+                <span class="text-warning feather icon-star-on"></span>
+                <span class="text-warning feather icon-star"></span>
+              </p>
+            </td>
+            <td class="align-middle">
+              Travel bag
+            </td>
+            <td class="align-middle">
+              04/09/2019
+            </td>
+            <td class="align-middle">
+              $78.66
+            </td>
+            <td class="align-middle">
+              12
+            </td>
+            <td class="align-middle">
+              <span class="badge badge-danger">Deactive</span>
+            </td>
+            <td class="table-action">
+              <a href="javascript:" class="btn btn-icon btn-outline-primary"><i class="feather icon-eye"></i></a>
+              <a href="javascript:" class="btn btn-icon btn-outline-success"><i class="feather icon-edit"></i></a>
+              <a href="javascript:" class="btn btn-icon btn-outline-danger"><i class="feather icon-trash-2"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td class="align-middle">
+              <img src="assets/images/product/prod-11.jpg" alt="contact-img" title="contact-img" class="rounded mr-3" height="48" />
+              <p class="m-0 d-inline-block align-middle font-16">
+                <a href="javascript:" class="text-body">Fostroad watch</a>
+                <br />
+                <span class="text-warning feather icon-star-on"></span>
+                <span class="text-warning feather icon-star-on"></span>
+                <span class="text-warning feather icon-star-on"></span>
+                <span class="text-warning feather icon-star-on"></span>
+                <span class="text-warning feather icon-star"></span>
+              </p>
+            </td>
+            <td class="align-middle">
+              Man watch
+            </td>
+            <td class="align-middle">
+              03/24/2019
+            </td>
+            <td class="align-middle">
+              $5
+            </td>
+            <td class="align-middle">
+              204
+            </td>
+            <td class="align-middle">
+              <span class="badge badge-danger">Deactive</span>
+            </td>
+            <td class="table-action">
+              <a href="javascript:" class="btn btn-icon btn-outline-primary"><i class="feather icon-eye"></i></a>
+              <a href="javascript:" class="btn btn-icon btn-outline-success"><i class="feather icon-edit"></i></a>
+              <a href="javascript:" class="btn btn-icon btn-outline-danger"><i class="feather icon-trash-2"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td class="align-middle">
+              <img src="assets/images/product/prod-12.jpg" alt="contact-img" title="contact-img" class="rounded mr-3" height="48" />
+              <p class="m-0 d-inline-block align-middle font-16">
+                <a href="javascript:" class="text-body">Chamiu lipstick</a>
+                <br />
+                <span class="text-warning feather icon-star-on"></span>
+                <span class="text-warning feather icon-star-on"></span>
+                <span class="text-warning feather icon-star-on"></span>
+                <span class="text-warning feather icon-star-on"></span>
+                <span class="text-warning feather icon-star"></span>
+              </p>
+            </td>
+            <td class="align-middle">
+              Woman cloath
+            </td>
+            <td class="align-middle">
+              09/05/2019
+            </td>
+            <td class="align-middle">
+              $2.24
+            </td>
+            <td class="align-middle">
+              541
+            </td>
+            <td class="align-middle">
+              <span class="badge badge-success">Active</span>
+            </td>
+            <td class="table-action">
+              <a href="javascript:" class="btn btn-icon btn-outline-primary"><i class="feather icon-eye"></i></a>
+              <a href="javascript:" class="btn btn-icon btn-outline-success"><i class="feather icon-edit"></i></a>
+              <a href="javascript:" class="btn btn-icon btn-outline-danger"><i class="feather icon-trash-2"></i></a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </app-card>
+  </div>
+</div>

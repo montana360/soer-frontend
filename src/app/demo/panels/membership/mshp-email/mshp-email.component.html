@@ -1,0 +1,126 @@
+<div class="row">
+  <div class="col-sm-12">
+    <app-card [hidHeader]="true">
+      <div class="table-responsive">
+        <table datatable id="report-table" class="table table-hover table-striped">
+          <thead>
+          <tr>
+            <th class="disabled center aligned"><i class="icon disabled id"></i></th>
+            <th data-sort="string">Template Name</th>
+            <th data-sort="string">Subject</th>
+            <th class="disabled center aligned">Actions</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>1</td>
+            <td>Registration Email</td>
+            <td>Please verify your email</td>
+            <td><button type="button" class="btn btn-icon btn-outline-success" (click)="modalEmail.show()"><i class="feather icon-check-circle"></i></button></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Welcome Mail From Admin</td>
+            <td>You have been registered</td>
+            <td><button type="button" class="btn btn-icon btn-outline-success" (click)="modalEmail.show()"><i class="feather icon-check-circle"></i></button></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Default Newsletter</td>
+            <td>Newsletter</td>
+            <td><button type="button" class="btn btn-icon btn-outline-success" (click)="modalEmail.show()"><i class="feather icon-check-circle"></i></button></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>Single Email</td>
+            <td>Single User Email</td>
+            <td><button type="button" class="btn btn-icon btn-outline-success" (click)="modalEmail.show()"><i class="feather icon-check-circle"></i></button></td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>Forgot Password Admin</td>
+            <td>Password Reset</td>
+            <td><button type="button" class="btn btn-icon btn-outline-success" (click)="modalEmail.show()"><i class="feather icon-check-circle"></i></button></td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>Forgot Password User</td>
+            <td>Password Reset</td>
+            <td><button type="button" class="btn btn-icon btn-outline-success" (click)="modalEmail.show()"><i class="feather icon-check-circle"></i></button></td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td>Welcome Email</td>
+            <td>Welcome</td>
+            <td><button type="button" class="btn btn-icon btn-outline-success" (click)="modalEmail.show()"><i class="feather icon-check-circle"></i></button></td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td>Registration Pending</td>
+            <td>Registration Verification Pending</td>
+            <td><button type="button" class="btn btn-icon btn-outline-success" (click)="modalEmail.show()"><i class="feather icon-check-circle"></i></button></td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td>Notify Admin</td>
+            <td>New User Registration</td>
+            <td><button type="button" class="btn btn-icon btn-outline-success" (click)="modalEmail.show()"><i class="feather icon-check-circle"></i></button></td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td>Contact Request</td>
+            <td>Contact Inquiry</td>
+            <td><button type="button" class="btn btn-icon btn-outline-success" (click)="modalEmail.show()"><i class="feather icon-check-circle"></i></button></td>
+          </tr>
+          <tr>
+            <td>11</td>
+            <td>Transaction Completed Admin</td>
+            <td>Payment Completed</td>
+            <td><button type="button" class="btn btn-icon btn-outline-success" (click)="modalEmail.show()"><i class="feather icon-check-circle"></i></button></td>
+          </tr>
+          <tr>
+            <td>12</td>
+            <td>Transaction Completed User</td>
+            <td>Payment Completed</td>
+            <td><button type="button" class="btn btn-icon btn-outline-success" (click)="modalEmail.show()"><i class="feather icon-check-circle"></i></button></td>
+          </tr>
+          <tr>
+            <td>13</td>
+            <td>Membership Expired</td>
+            <td>Membership Has Expired</td>
+            <td><button type="button" class="btn btn-icon btn-outline-success" (click)="modalEmail.show()"><i class="feather icon-check-circle"></i></button></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </app-card>
+    <app-ui-modal [dialogClass]="'modal-xl btn-page'" #modalEmail>
+      <div class="app-modal-header">
+        <h5 class="modal-title">Edit Email Template</h5>
+        <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="modalEmail.hide()"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="app-modal-body">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <input type="text" class="form-control" id="Name" placeholder="Template Name">
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <input type="text" class="form-control" id="Subject" placeholder="Subject">
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="label">Description</label>
+          <app-tinymce [(ngModel)]='basicContent' #tinymce='tinymce'></app-tinymce>
+        </div>
+      </div>
+      <div class="app-modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="modalEmail.hide()">Clear</button>
+        <button type="button" class="btn btn-primary">Submit</button>
+      </div>
+    </app-ui-modal>
+  </div>
+</div>

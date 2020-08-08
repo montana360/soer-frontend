@@ -1,0 +1,105 @@
+<!-- Loading Animation -->
+<!-- <ngx-spinner bdOpacity=0.9 bdColor="#333" size="default" color="#fff" type="ball-circus" [fullScreen]="true">
+  <p style="color: white"> Loading, please wait... </p>
+</ngx-spinner> -->
+
+<div class="auth-wrapper align-items-stretch aut-bg-img">
+  <div class="flex-grow-1">
+    <div class="h-100 d-md-flex align-items-center auth-side-img">
+      <div class="col-sm-10 auth-content w-auto">
+        <img src="assets/images/logo-dark.png" alt="" class="img-fluid">
+        <h1 class="text-white my-4">Welcome you!</h1>
+        <h4 class="text-white font-weight-normal">Signup for an account and be a member of the KCC SmartHP 
+          Famliy.<br />
+          <!-- Do not forget to play with live customizer -->
+        </h4>
+      </div>
+    </div>
+    <form class="auth-side-form" [formGroup]="registerForm">
+      <div class=" auth-content">
+
+        <img src="assets/images/auth/auth-logo-dark.png" alt="" class="img-fluid mb-4 d-block d-xl-none d-lg-none">
+        <h4 class="mb-3 f-w-400">Sign up</h4>
+
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="First Name" formControlName="first_name">
+          <p style="color: red;"
+            *ngIf="registerForm.get('first_name').touched && registerForm.get('first_name').hasError('required')">
+            Your first name is reqiured
+          </p>
+        </div>
+
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Last Name" formControlName="last_name">
+          <p style="color: red;"
+            *ngIf="registerForm.get('last_name').touched && registerForm.get('last_name').hasError('required')">
+            Your last name is reqiured
+          </p>
+        </div>
+
+        <div class="input-group mb-3">
+          <select class="form-control" formControlName="gender">
+            <option value="null">Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+          <p style="color: red;"
+            *ngIf="registerForm.get('gender').touched && registerForm.get('gender').hasError('required')">
+            Please select your gender
+          </p>
+        </div>
+
+        <div class="input-group mb-3">
+          <input type="number" class="form-control" placeholder="Phone" formControlName="phone">
+          <p style="color: red;"
+            *ngIf="registerForm.get('phone').touched && registerForm.get('phone').hasError('required')">
+            Phone number is reqiured
+          </p>
+        </div>
+
+        <div class="input-group mb-3">
+          <input type="email" class="form-control" placeholder="Email address" formControlName="email">
+          <p style="color: red;"
+            *ngIf="registerForm.get('email').touched && registerForm.get('email').hasError('required')">
+            Email field must be filled
+          </p>
+        </div>
+
+        <div class="input-group mb-4">
+          <input type="password" class="form-control" placeholder="Password" [(ngModel)]="registerData.password"
+            formControlName="password">
+          <p style="color: red;"
+            *ngIf="registerForm.get('password').touched && registerForm.get('password').hasError('required')">
+            Secure your account with at least a 5 digit password
+          </p>
+        </div>
+
+        <div class="input-group mb-4">
+          <input type="password" class="form-control" placeholder="Confirm Password"
+            [(ngModel)]="registerData.confirm_password" formControlName="confirm_password">
+          <p style="color: red;"
+            *ngIf="registerForm.get('confirm_password').touched && registerForm.get('confirm_password').hasError('required')">
+            Please confirm your password
+          </p>
+
+          <p style="color: red;" *ngIf="registerData.password != registerData.confirm_password">
+            Password mismatch, please check and correct!!!
+          </p>
+
+        </div>
+
+        <button class="btn btn-primary btn-block mb-4" type="button" [disabled]="!registerForm.valid"
+          (click)="registration()">
+          <span *ngIf="this.isRegistering" class="spinner-border spinner-border-sm" role="status"></span>
+          <span *ngIf="this.isRegistering" class="load-text"> Loading...</span>
+          <span *ngIf="!this.isRegistering" class="btn-text">Sign up</span>
+        </button>
+
+        <div class="text-center">
+          <div class="saprator my-4"><span>OR</span></div>
+          <p class="mt-4">Already have an account? <a [routerLink]="['/auth/signin-v2']" class="f-w-400">Signin</a></p>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

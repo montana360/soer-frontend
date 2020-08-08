@@ -1,0 +1,145 @@
+<div class="row">
+  <div class="col-sm-6 text-center">
+    <app-card cardTitle="Cash Report" [options]="false">
+      <div *ngIf="this.isLoading" class="d-flex justify-content-center">
+        <div class="spinner-border" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+
+      <div *ngIf="!this.isLoading" class="row">
+        
+        <div class="col-sm-6">
+          <form [formGroup]="cashMulti">
+            <label><b>General Reports</b></label>
+            <div class="form-group">
+              <input type="text" class="form-control" formControlName="from_date" placeholder="From date"
+                onfocus="(this.type='date')" onblur="(this.type='text')">
+
+              <p style="color: red;"
+                *ngIf="cashMulti.get('from_date').touched && cashMulti.get('from_date').hasError('required')">
+                Please Select Date
+              </p>
+            </div>
+
+            <div class="form-group">
+              <input type="text" class="form-control" formControlName="to_date" placeholder="To date"
+                onfocus="(this.type='date')" onblur="(this.type='text')">
+
+              <p style="color: red;"
+                *ngIf="cashMulti.get('to_date').touched && cashMulti.get('to_date').hasError('required')">
+                Please Select Date
+              </p>
+            </div>
+
+
+            <button *ngIf="cashMulti.touched" (click)="cashMulti.reset()" type="button" class="btn btn-danger"
+              color="primary">
+              Cancel
+            </button>
+
+            &nbsp;
+
+            <button (click)="getCashMultiReport(); cashMulti.reset()" [disabled]="!cashMulti.valid" type="button" class="btn btn-success"
+              color="primary">
+              Search
+            </button>
+
+
+          </form>
+        </div>
+
+        <!-- Single Search -->
+        <div class="col-sm-6">
+
+          <form [formGroup]="cashSingle">
+            <label><b>Daily Reports</b></label>
+            <div class="form-group">
+              <input type="text" class="form-control" formControlName="date" placeholder="Select date"
+                onfocus="(this.type='date')" onblur="(this.type='text')">
+
+              <p style="color: red;"
+                *ngIf="cashSingle.get('date').touched && cashSingle.get('date').hasError('required')">
+                Please Select Date
+              </p>
+            </div>
+
+            <button (click)="getCashDailyReport(); cashSingle.reset(); clear()" [disabled]="!cashSingle.valid" type="button" class="btn btn-success"
+              color="primary">
+              Search
+            </button>
+
+
+          </form>
+
+        </div>
+        
+      </div>
+    </app-card>
+  </div>
+</div>
+
+
+
+<!-- Cash report details -->
+<div class="row btn-page" *ngIf="isLoaded">
+  <div class="col-sm-12 btn-page">
+    <app-card [hidHeader]="true" cardClass="card-datatable">
+      <div *ngIf="this.isLoading" class="d-flex justify-content-center">
+        <div class="spinner-border" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+
+      <div *ngIf="!this.isLoading" class="row align-items-center m-l-0">
+        <div class="col-sm-6"></div>
+        <div class="col-sm-6 text-right">
+          <label *ngIf="isLoaded"><b>Total: GH₵{{ total | number:'1.2-2' }}</b></label>
+          &nbsp;
+          <button *ngIf="isLoaded" class="btn btn-danger btn-sm btn-round has-ripple" (click)="clear()">
+            <i class="feather icon-trash"></i>
+          </button>
+        </div>
+      </div>
+
+
+      <div *ngIf="!this.isLoading" class="table-responsive">
+        <table datatable [dtOptions]="dtOptions" id="report-table" class="table table-striped table-hover mb-0">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Paid By</th>
+              <th> Amount</th>
+              <th>Date</th>
+              <th>Received By</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <tr *ngFor="let cash of allCash">
+              <td>{{ cash.id }}</td>
+              <td>
+                <div *ngFor="let user of allStaff">
+                  <div *ngIf="user.id == cash?.agent_id">
+                    {{ user.first_name }}
+                    {{ user.last_name }}</div>
+                </div>
+              </td>
+              <td>GH₵{{ cash.main_deposit | number:'1.2-2'  }}</td>
+              <td>{{ cash.created_at }}</td>
+              <td>
+                <div *ngFor="let user of allStaff">
+                  <div *ngIf="user.id == cash?.receiver_id">
+                    {{ user.first_name }}
+                    {{ user.last_name }}</div>
+                </div>
+              </td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+    </app-card>
+  </div>
+
+</div>
+

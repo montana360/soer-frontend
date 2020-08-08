@@ -1,0 +1,142 @@
+<div class="row btn-page">
+  <div class="col-sm-12 btn-page">
+    <app-card [hidHeader]="true" cardClass="card-datatable">
+      <div *ngIf="this.isLoading" class="d-flex justify-content-center">
+        <div class="spinner-border" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+
+      <div *ngIf="!this.isLoading" class="row align-items-center m-l-0">
+        <div class="col-sm-6"></div>
+        <div class="col-sm-6 text-right">
+
+        </div>
+
+        <!-- Creating Debtor -->
+
+        <!-- Edit Debtor -->
+
+
+      </div>
+
+      <div *ngIf="!this.isLoading" class="table-responsive">
+        <table datatable id="report-table" class="table table-striped table-hover mb-0">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Full Name</th>
+              <th>Account Number</th>
+              <th>Contact</th>
+              <th>Gender</th>
+              <th>Address</th>
+              <th>Occupation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let depositor of allDepositors">
+              <td>{{ depositor.id }}</td>
+              <td> {{ depositor.name }}
+                <small class="d-block">
+                  <!-- <a href="javascript:">View</a> | -->
+                  <a href="javascript:" (click)="view(depositor?.id); getCustomerTransactions(depositor?.account_number); viewCustomer.show()">View</a>
+
+                </small>
+              </td>
+              <td> {{ depositor.account_number }}</td>
+              <td>{{ depositor.contact }}</td>
+              <td>{{ depositor.gender }}</td>
+              <td>{{ depositor.address }}</td>
+              <td>{{ depositor.occupation }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <app-ui-modal #viewCustomer [dialogClass]="'modal-xl'">
+          <div class="app-modal-header">
+            <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close"
+              (click)=" viewCustomer.hide()"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="app-modal-body">
+
+            <div>
+              <app-card>
+                <div id="content" #content>
+                  <div class="alert alert-info">
+                    <strong>Transaction Details</strong>
+                  </div>
+                </div>
+                <table id="contentToConvert">
+                  <tr>
+                    <td><B>Full Name:</B>  {{ depositor?.name }}
+                    <td><b>Account Number:</b> {{ depositor?.account_number }}
+                      <td><b>Phone:</b> {{depositor?.contact}}</td>
+                      <td>
+                        <div *ngFor="let agent of allAgents">
+                          <div *ngIf="agent.id == depositor?.agent_id"><b>Agent:</b> {{ agent.first_name }} {{agent.last_name}}</div>
+                        </div>
+                      </td>
+                      <td>
+                        <div *ngFor="let policy of allPolicy">
+                          <div *ngIf="policy.id == depositor?.product_policy_id"><b>Policy:</b> {{ policy.name }}</div>
+                        </div>
+                      </td>
+                  </tr>
+                  <tr>
+                    <td><b>Product Name:</b>  {{depositor?.product_name}}</td>
+                    <td><b>Product Brand:</b> {{depositor?.product_brand}}</td>
+                    <td><b>Product Price:</b> {{depositor?.product_price}}</td>
+                    <td><b>Payment Duration</b> {{depositor?.duration}}</td>
+                    <td>
+                      <div *ngFor="let branch of branches">
+                        <div *ngIf="branch.id == depositor?.branch_id"><b>Branch:</b> {{ branch.name }}</div>
+                      </div>
+                    </td>
+                  </tr>
+                </table><br><br>
+                <table class="table table-striped table-hover mb-0">
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <!-- <th>Total Amount Paid</th> -->
+                      <th>Deposit Amount</th>
+                      <th>Balance</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let tran of customerTransactions">
+                      <td>{{ tran.created_at }}</td>
+                      <!-- <td>{{ tran.amount_paid }}</td> -->
+                      <td>{{ tran.deposit }}</td>
+                      <td>{{ tran.balance }}</td>
+                    </tr>
+
+
+                  </tbody>
+                </table>
+                <table >
+                  <tr >
+                    <td><B>Total: </B></td> 
+                    <td><b> {{ accountDetails }}</b>
+                    <td></td>
+                  </tr>
+                </table>
+
+              </app-card>
+            </div>
+
+
+
+          </div>
+          <div class="app-modal-footer">
+            <button type="button" class="btn btn-primary buttons" (click)="captureScreen(depositor?.name); viewCustomer.hide()">
+              Download
+            </button>
+          </div>
+        </app-ui-modal>
+
+
+
+      </div>
+    </app-card>
+  </div>
+</div>

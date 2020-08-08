@@ -1,0 +1,138 @@
+<div class="row">
+  <div class="col-xl-3 col-md-6">
+    <app-card [hidHeader]="true">
+      <div class="row align-items-center m-l-0">
+        <div class="col-auto">
+          <i class="fas fa-user-md f-36 text-c-purple"></i>
+        </div>
+        <div class="col-auto">
+          <h6 class="text-muted m-b-10">Doctor</h6>
+          <h2 class="m-b-0">35</h2>
+        </div>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-xl-3 col-md-6">
+    <app-card [hidHeader]="true">
+      <div class="row align-items-center m-l-0">
+        <div class="col-auto">
+          <i class="fas fa-user-injured f-36 text-c-red"></i>
+        </div>
+        <div class="col-auto">
+          <h6 class="text-muted m-b-10">Patient</h6>
+          <h2 class="m-b-0">368</h2>
+        </div>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-xl-3 col-md-6">
+    <app-card [hidHeader]="true">
+      <div class="row align-items-center m-l-0">
+        <div class="col-auto">
+          <i class="fas fa-user-nurse f-36 text-c-green"></i>
+        </div>
+        <div class="col-auto">
+          <h6 class="text-muted m-b-10">Nurse</h6>
+          <h2 class="m-b-0">79</h2>
+        </div>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-xl-3 col-md-6">
+    <app-card [hidHeader]="true">
+      <div class="row align-items-center m-l-0">
+        <div class="col-auto">
+          <i class="fas fa-prescription-bottle-alt f-36 text-c-blue"></i>
+        </div>
+        <div class="col-auto">
+          <h6 class="text-muted m-b-10">Pharmacist</h6>
+          <h2 class="m-b-0">10</h2>
+        </div>
+      </div>
+    </app-card>
+  </div>
+
+  <div class="col-xl-3 col-md-6">
+    <app-card [hidHeader]="true">
+      <div class="row align-items-center m-l-0">
+        <div class="col-auto">
+          <i class="fas fa-flask f-36 text-c-yellow"></i>
+        </div>
+        <div class="col-auto">
+          <h6 class="text-muted m-b-10">Laboratories</h6>
+          <h2 class="m-b-0">35</h2>
+        </div>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-xl-3 col-md-6">
+    <app-card [hidHeader]="true">
+      <div class="row align-items-center m-l-0">
+        <div class="col-auto">
+          <i class="fas fa-user-tie f-36 text-c-blue"></i>
+        </div>
+        <div class="col-auto">
+          <h6 class="text-muted m-b-10">Accountant</h6>
+          <h2 class="m-b-0">368</h2>
+        </div>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-xl-3 col-md-6">
+    <app-card [hidHeader]="true">
+      <div class="row align-items-center m-l-0">
+        <div class="col-auto">
+          <i class="fas fa-file-invoice-dollar f-36 text-c-red"></i>
+        </div>
+        <div class="col-auto">
+          <h6 class="text-muted m-b-10">Payment</h6>
+          <h2 class="m-b-0">79</h2>
+        </div>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-xl-3 col-md-6">
+    <app-card [hidHeader]="true">
+      <div class="row align-items-center m-l-0">
+        <div class="col-auto">
+          <i class="fas fa-pills f-36 text-c-purple"></i>
+        </div>
+        <div class="col-auto">
+          <h6 class="text-muted m-b-10">Medicine</h6>
+          <h2 class="m-b-0">10</h2>
+        </div>
+      </div>
+    </app-card>
+  </div>
+
+  <div class="col-md-12 col-lg-4">
+    <app-card [hidHeader]="true" blockClass="text-center p-0">
+      <div class="p-20 p-b-0">
+        <i class="fas fa-procedures text-c-blue d-block f-40"></i>
+        <h4 class="m-t-20 m-b-20"><span class="text-c-blue">8.62k</span> Operation</h4>
+        <button class="btn btn-primary btn-sm btn-round" data-toggle="modal" data-title="Operation" data-target="#modal-report">View Report</button>
+      </div>
+      <app-apex-chart chartID="monthly-profit-1" [chartConfig]="this.monthlyProfitChart1"></app-apex-chart>
+    </app-card>
+  </div>
+  <div class="col-md-6 col-lg-4">
+    <app-card [hidHeader]="true" blockClass="text-center p-0">
+      <div class="p-20 p-b-0">
+        <i class="fas fa-skull-crossbones text-c-green d-block f-40"></i>
+        <h4 class="m-t-20 m-b-20"><span class="text-c-green">+40</span> Death</h4>
+        <button class="btn btn-success btn-sm btn-round" data-toggle="modal" data-title="Death" data-target="#modal-report">View Report</button>
+      </div>
+      <app-apex-chart chartID="monthly-profit-2" [chartConfig]="this.monthlyProfitChart2"></app-apex-chart>
+    </app-card>
+  </div>
+  <div class="col-md-6 col-lg-4">
+    <app-card [hidHeader]="true" blockClass="text-center p-0">
+      <div class="p-20 p-b-0">
+        <i class="fas fa-baby text-c-red d-block f-40"></i>
+        <h4 class="m-t-20 m-b-20"><span class="text-c-red">+40</span> Birth</h4>
+        <button class="btn btn-danger btn-sm btn-round" data-toggle="modal" data-title="Birth" data-target="#modal-report">View Report</button>
+      </div>
+      <app-apex-chart chartID="monthly-profit-3" [chartConfig]="this.monthlyProfitChart3"></app-apex-chart>
+    </app-card>
+  </div>
+</div>

@@ -1,0 +1,112 @@
+<div class="row justify-content-center">
+  <div class="col-sm-4">
+    <app-card [hidHeader]="true" blockClass="text-center">
+      <img src="assets/images/pages/medal-trial.svg" alt="" class="img-fluid w-50">
+      <h4 class="mt-3">$1.99 Trial</h4>
+      <p class="mb-2">This is 2 days membership</p>
+      <p><span class="badge badge-primary">16 Sales</span> </p>
+      <hr>
+      <button type="button" class="btn btn-icon btn-outline-primary mr-2" (click)="modalMember.show()"><i class="feather icon-edit-2"></i></button>
+      <button type="button" class="btn btn-icon btn-outline-danger"><i class="feather icon-trash-2"></i></button>
+    </app-card>
+  </div>
+  <div class="col-sm-4">
+    <app-card [hidHeader]="true" blockClass="text-center">
+      <img src="assets/images/pages/medal-bronze.svg" alt="" class="img-fluid w-50">
+      <h4 class="mt-3">$2.99 BRONZE</h4>
+      <p class="mb-2">This is 30 days basic membership</p>
+      <p><span class="badge badge-primary">29 Sales</span> </p>
+      <hr>
+      <button type="button" class="btn btn-icon btn-outline-primary mr-2" (click)="modalMember.show()"><i class="feather icon-edit-2"></i></button>
+      <button type="button" class="btn btn-icon btn-outline-danger"><i class="feather icon-trash-2"></i></button>
+    </app-card>
+  </div>
+  <div class="col-sm-4">
+    <app-card [hidHeader]="true" blockClass="text-center">
+      <img src="assets/images/pages/medal-gold.svg" alt="" class="img-fluid w-50">
+      <h4 class="mt-3">$6.99 GOLD</h4>
+      <p class="mb-2">This is 90 days basic membership</p>
+      <p><span class="badge badge-primary">26 Sales</span> </p>
+      <hr>
+      <button type="button" class="btn btn-icon btn-outline-primary mr-2" (click)="modalMember.show()"><i class="feather icon-edit-2"></i></button>
+      <button type="button" class="btn btn-icon btn-outline-danger"><i class="feather icon-trash-2"></i></button>
+    </app-card>
+  </div>
+  <div class="col-sm-4">
+    <app-card [hidHeader]="true" blockClass="text-center">
+      <img src="assets/images/pages/medal-platinum.svg" alt="" class="img-fluid w-50">
+      <h4 class="mt-3">$149.99 PLATINUM</h4>
+      <p class="mb-2">Platinum Yearly Subscription</p>
+      <p><span class="badge badge-primary">29 Sales</span> </p>
+      <hr>
+      <button type="button" class="btn btn-icon btn-outline-primary mr-2" (click)="modalMember.show()"><i class="feather icon-edit-2"></i></button>
+      <button type="button" class="btn btn-icon btn-outline-danger"><i class="feather icon-trash-2"></i></button>
+    </app-card>
+  </div>
+  <div class="col-sm-4">
+    <app-card [hidHeader]="true" blockClass="text-center">
+      <img src="assets/images/pages/medal-silver.svg" alt="" class="img-fluid w-50">
+      <h4 class="mt-3">$1.99 SILVER</h4>
+      <p class="mb-2">This is 7 days basic membership</p>
+      <p><span class="badge badge-primary">0 Sales</span> </p>
+      <hr>
+      <button type="button" class="btn btn-icon btn-outline-primary mr-2" (click)="modalMember.show()"><i class="feather icon-edit-2"></i></button>
+      <button type="button" class="btn btn-icon btn-outline-danger"><i class="feather icon-trash-2"></i></button>
+    </app-card>
+  </div>
+  <div class="col-sm-12 text-center">
+    <button type="button" class="btn btn-primary" (click)="modalMember.show()"><i class="feather icon-plus"></i>New Membership</button>
+  </div>
+</div>
+
+<app-ui-modal #modalMember [dialogClass]="'modal-lg btn-page'">
+  <div class="app-modal-header">
+    <h5 class="modal-title">Membership</h5>
+    <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="modalMember.hide()"><span aria-hidden="true">&times;</span></button>
+  </div>
+  <div class="app-modal-body">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <input type="text" class="form-control" id="Name" placeholder="Name">
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <input type="text" class="form-control" id="Price" placeholder="Membership Price">
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <input type="text" class="form-control" id="Period" placeholder="Membership Period">
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group fill">
+          <input type="file" class="form-control" id="Icon" placeholder="Membership Image">
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <div class="custom-control custom-switch custom-control-inline">
+          <input type="checkbox" class="custom-control-input" id="customswitch1">
+          <label class="custom-control-label" for="customswitch1">Private Membership</label>
+        </div>
+        <div class="custom-control custom-switch custom-control-inline">
+          <input type="checkbox" class="custom-control-input" id="customswitch2">
+          <label class="custom-control-label" for="customswitch2">Recurring Payment</label>
+        </div>
+        <div class="custom-control custom-switch custom-control-inline">
+          <input type="checkbox" class="custom-control-input" id="customswitch3">
+          <label class="custom-control-label" for="customswitch3">Published</label>
+        </div>
+        <div class="form-group">
+          <textarea class="form-control" id="Description" rows="3" spellcheck="false" placeholder="Description"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="app-modal-footer">
+    <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="modalMember.hide()">Clear</button>
+    <button type="button" class="btn btn-primary">Submit</button>
+  </div>
+</app-ui-modal>

@@ -1,0 +1,138 @@
+<div class="row btn-page">
+    <div class="col-sm-12">
+
+
+        <app-card [hidHeader]="true" cardClass="card-datatable">
+
+            <div *ngIf="this.isLoading" class="d-flex justify-content-center">
+                <div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+
+
+            <div *ngIf="!this.isLoading" class="row align-items-center m-l-0">
+                <div class="col-sm-6"></div>
+                <div class="col-sm-6 text-right">
+                    <button class="btn btn-success btn-sm btn-round has-ripple" (click)="newPolicy.show()"><i
+                            class="feather icon-plus"></i> Add Policy</button>
+                </div>
+                <app-ui-modal #newPolicy>
+                    <div class="app-modal-header">
+                        <h5 class="modal-title">Create New Policy</h5>
+                        <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close"
+                            (click)="newPolicy.hide()"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="app-modal-body">
+                        <form [formGroup]="policyForm">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="Name" placeholder="Name"
+                                            formControlName="name">
+                                        <p style="color: red;"
+                                            *ngIf="policyForm.get('name').touched && policyForm.get('name').hasError('required')">
+                                            Required Field
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <textarea class="form-control" id="Description" placeholder="Description"
+                                            formControlName="description"></textarea>
+                                        <p style="color: red;"
+                                            *ngIf="policyForm.get('description').touched && policyForm.get('description').hasError('required')">
+                                            Required Field
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="app-modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"
+                            (click)="policyForm.reset()">
+                            Clear
+                        </button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal"
+                            [disabled]="!policyForm.valid"
+                            (click)="createPolicy(); policyForm.reset(); newPolicy.hide()">
+                            <span *ngIf="this.isLoading" class="spinner-border spinner-border-sm" role="status"></span>
+                            <span *ngIf="this.isLoading" class="load-text"> Saving...</span>
+                            <span *ngIf="!this.isLoading" class="btn-text">Submit</span>
+                        </button>
+                    </div>
+                </app-ui-modal>
+            </div>
+
+
+            <div *ngIf="!this.isLoading" class="table-responsive">
+
+                <table datatable id="report-table" class="table table-bordered table-striped mb-0">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th width="50%">Description</th>
+                            <th>Options</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let policy of allPolicy">
+                            <td>{{ policy.name }}</td>
+                            <td>{{ policy.description }}</td>
+                            <td>
+                                <a href="javascript:" (click)="edit(policy?.id); editPolicy.show()"
+                                    class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Edit </a>
+                                <a href="javascript:" (click)="confirmAlert(policy?.id)"
+                                    class="btn btn-danger btn-sm"><i class="feather icon-trash-2"></i>&nbsp;Delete </a>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+                <app-ui-modal #editPolicy>
+                    <div class="app-modal-header">
+                        <h5 class="modal-title">Edit Policy</h5>
+                        <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close"
+                            (click)="editPolicy.hide()"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="app-modal-body">
+                        <form [formGroup]="editPolicyForm">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="Name" placeholder="Name"
+                                            formControlName="name">
+                                        <p style="color: red;"
+                                            *ngIf="editPolicyForm.get('name').touched && editPolicyForm.get('name').hasError('required')">
+                                            Required Field
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <textarea class="form-control" id="Description" placeholder="Description"
+                                            formControlName="description"></textarea>
+                                        <p style="color: red;"
+                                        *ngIf="editPolicyForm.get('description').touched && editPolicyForm.get('description').hasError('required')">
+                                            Required Field
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="app-modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal"
+                            [disabled]="!editPolicyForm.valid" (click)="editPolicies(); editPolicy.hide()">
+                            <span *ngIf="this.isLoading" class="spinner-border spinner-border-sm" role="status"></span>
+                            <span *ngIf="this.isLoading" class="load-text"> Saving Changes...</span>
+                            <span *ngIf="!this.isLoading" class="btn-text">Submit</span>
+                        </button>
+                    </div>
+                </app-ui-modal>
+            </div>
+        </app-card>
+    </div>
+</div>

@@ -1,0 +1,211 @@
+<div class="row btn-page">
+  <div class="col-sm-12">
+    <app-card cardTitle="Teacher List" cardClass="card-datatable" [options]="false">
+      <div class="row align-items-center m-l-0">
+        <div class="col-sm-6"></div>
+        <div class="col-sm-6 text-right">
+          <button class="btn btn-success btn-sm btn-round has-ripple" (click)="modalTeacher.show()"><i class="feather icon-plus"></i> Add Teacher</button>
+        </div>
+        <app-ui-modal #modalTeacher [dialogClass]="'modal-xl btn-page'">
+          <div class="app-modal-header">
+            <h5 class="modal-title">Add Teacher</h5>
+            <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="modalTeacher.hide()"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="app-modal-body">
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="Name" placeholder="Name">
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group fill">
+                  <input type="email" class="form-control" id="Email" placeholder="Email">
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group fill">
+                  <input type="password" class="form-control" id="Password" placeholder="Password">
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="Subject" placeholder="Subject">
+                </div>
+              </div>
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <textarea class="form-control" id="Address" rows="3" placeholder="Address"></textarea>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <select class="form-control" id="Sex">
+                    <option value="">Select Sex</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group fill">
+                  <label class="floating-label" for="Icon">Profie Image</label>
+                  <input type="file" class="form-control" id="Icon" placeholder="sdf">
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group fill">
+                  <input type="date" class="form-control" id="Occupation" placeholder="Joining Date">
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="Age" placeholder="Age">
+                </div>
+              </div>
+              <div class="col-sm-12">
+                <button class="btn btn-primary">Submit</button>
+                <button class="btn btn-danger">Clear</button>
+              </div>
+            </div>
+          </div>
+        </app-ui-modal>
+      </div>
+      <div class="table-responsive">
+        <table datatable id="report-table" class="table table-bordered table-striped mb-0">
+          <thead>
+          <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Children Roll</th>
+            <th>Options</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td><img src="assets/images/user/avatar-1.jpg" class="img-radius" width="30px" height="30px"></td>
+            <td>Tanvir Hasan</td>
+            <td>patient@example.com</td>
+            <td>9876543</td>
+            <td>
+              <a href="javascript:" class="btn btn-info btn-sm">Edit</a>
+              <a href="javascript:" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+          </tr>
+          <tr>
+            <td><img src="assets/images/user/avatar-2.jpg" class="img-radius" width="30px" height="30px"></td>
+            <td>Joseph William</td>
+            <td>Joseph@example.com</td>
+            <td>1234567</td>
+            <td>
+              <a href="javascript:" class="btn btn-info btn-sm">Edit</a>
+              <a href="javascript:" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+          </tr>
+          <tr>
+            <td><img src="assets/images/user/avatar-3.jpg" class="img-radius" width="30px" height="30px"></td>
+            <td>Tanvir Hasan</td>
+            <td>patient@example.com</td>
+            <td>9876543</td>
+            <td>
+              <a href="javascript:" class="btn btn-info btn-sm">Edit</a>
+              <a href="javascript:" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+          </tr>
+          <tr>
+            <td><img src="assets/images/user/avatar-4.jpg" class="img-radius" width="30px" height="30px"></td>
+            <td>Joseph William</td>
+            <td>Joseph@example.com</td>
+            <td>1234567</td>
+            <td>
+              <a href="javascript:" class="btn btn-info btn-sm">Edit</a>
+              <a href="javascript:" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+          </tr>
+          <tr>
+            <td><img src="assets/images/user/avatar-1.jpg" class="img-radius" width="30px" height="30px"></td>
+            <td>Tanvir Hasan</td>
+            <td>patient@example.com</td>
+            <td>9876543</td>
+            <td>
+              <a href="javascript:" class="btn btn-info btn-sm">Edit</a>
+              <a href="javascript:" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+          </tr>
+          <tr>
+            <td><img src="assets/images/user/avatar-2.jpg" class="img-radius" width="30px" height="30px"></td>
+            <td>Joseph William</td>
+            <td>Joseph@example.com</td>
+            <td>1234567</td>
+            <td>
+              <a href="javascript:" class="btn btn-info btn-sm">Edit</a>
+              <a href="javascript:" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+          </tr>
+          <tr>
+            <td><img src="assets/images/user/avatar-3.jpg" class="img-radius" width="30px" height="30px"></td>
+            <td>Tanvir Hasan</td>
+            <td>patient@example.com</td>
+            <td>9876543</td>
+            <td>
+              <a href="javascript:" class="btn btn-info btn-sm">Edit</a>
+              <a href="javascript:" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+          </tr>
+          <tr>
+            <td><img src="assets/images/user/avatar-4.jpg" class="img-radius" width="30px" height="30px"></td>
+            <td>Joseph William</td>
+            <td>Joseph@example.com</td>
+            <td>1234567</td>
+            <td>
+              <a href="javascript:" class="btn btn-info btn-sm">Edit</a>
+              <a href="javascript:" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+          </tr>
+          <tr>
+            <td><img src="assets/images/user/avatar-1.jpg" class="img-radius" width="30px" height="30px"></td>
+            <td>Tanvir Hasan</td>
+            <td>patient@example.com</td>
+            <td>9876543</td>
+            <td>
+              <a href="javascript:" class="btn btn-info btn-sm">Edit</a>
+              <a href="javascript:" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+          </tr>
+          <tr>
+            <td><img src="assets/images/user/avatar-2.jpg" class="img-radius" width="30px" height="30px"></td>
+            <td>Joseph William</td>
+            <td>Joseph@example.com</td>
+            <td>1234567</td>
+            <td>
+              <a href="javascript:" class="btn btn-info btn-sm">Edit</a>
+              <a href="javascript:" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+          </tr>
+          <tr>
+            <td><img src="assets/images/user/avatar-3.jpg" class="img-radius" width="30px" height="30px"></td>
+            <td>Tanvir Hasan</td>
+            <td>patient@example.com</td>
+            <td>9876543</td>
+            <td>
+              <a href="javascript:" class="btn btn-info btn-sm">Edit</a>
+              <a href="javascript:" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+          </tr>
+          <tr>
+            <td><img src="assets/images/user/avatar-4.jpg" class="img-radius" width="30px" height="30px"></td>
+            <td>Joseph William</td>
+            <td>Joseph@example.com</td>
+            <td>1234567</td>
+            <td>
+              <a href="javascript:" class="btn btn-info btn-sm">Edit</a>
+              <a href="javascript:" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </app-card>
+  </div>
+</div>

@@ -1,0 +1,130 @@
+<div class="row btn-page">
+
+  <div class="col-sm-12 btn-page">
+    <app-card [hidHeader]="true" cardClass="card-datatable">
+      <!-- <div *ngIf="this.isLoading" class="d-flex justify-content-center">
+        <div class="spinner-border" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div> -->
+
+      <div class="table-responsive">
+        <table datatable  [dtOptions]="dtOptions"  id="report-table" class="table table-striped table-hover mb-0">
+          <thead>
+            <tr>
+              <!-- <th>#</th> -->
+              <th>Transaction Number</th>
+              <!-- <th>Branch Sent From</th> -->
+              <th>Total</th>
+              <th>Status</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let tran of allTrans">
+              <td>
+                {{ tran.transaction_number }}
+                <small class="d-block">
+                  <a href="javascript:" (click)="view(tran?.id); editCustomer.show()" class="center-text">View</a>
+
+                </small>
+
+              </td>
+
+              <td> GH₵{{ tran.total | number:'1.2-2' }}</td>
+              <td *ngIf="tran.status === 'Received'">
+                <span class="badge badge-success inline-block">{{ tran.status }}</span>
+              </td>
+              <td *ngIf="tran.status === 'Not-Received'">
+                <span class="badge badge-warning inline-block">{{ tran.status }}</span>
+              </td>
+              <td>{{ tran.created_at }}</td>
+
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- view transaction -->
+        <app-ui-modal #editCustomer [dialogClass]="'modal-xl'">
+          <div class="app-modal-header">
+            <h5 class="modal-title"> Details</h5>
+            <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close"
+              (click)="editCustomer.hide()"><span aria-hidden="true">&times;</span></button>
+          </div>
+
+          <div class="app-modal-body">
+            <div>
+              <app-card id="contentToConvert">
+                <div class="no-gutters">
+                  <div class="col-sm-12">
+                    <img src="../../../../assets/kcc.jpg" style="width:100%;">
+                    <img *ngIf="comData?.company_logo !== null" src="{{ comData?.company_logo }}" alt="logotipo"
+                      style="width: 100%; height: 160px;">
+                  </div>
+                </div>
+                <table class="table table-striped table-hover mb-0">
+                  <tr>
+                    <td><B>Transaction Number:</B> {{ tran?.transaction_number }}</td>
+                    <td>
+                      <div *ngFor="let branch of allBranches">
+                        <div *ngIf="branch.id == tran?.branch_id"><b>Branch:</b> {{ branch.name }}</div>
+                      </div>
+                    </td>
+                    <td><B>Date Issued:</B> {{ tran?.created_at }} </td>
+                    <td><B>Total:</B> GH₵{{ tran?.total | number:'1.2-2' }} </td>
+                  </tr>
+                </table>
+                <table class="table table-striped table-hover mb-0">
+                  <thead>
+                    <tr>
+                      <th>Product</th>
+                      <th>Price</th>
+                      <th>Quantity</th>
+                      <th>Total</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let product of tran?.products">
+                      <td>{{ product.name }}</td>
+                      <td>GH₵{{ product.cost | number:'1.2-2' }}</td>
+                      <td>{{ product.quantity }}</td>
+                      <td>GH₵{{ product.total | number:'1.2-2' }}</td>
+                    </tr>
+
+
+                  </tbody>
+
+
+                </table>
+              </app-card>
+
+            </div>
+          </div>
+
+          <div class="app-modal-footer">
+
+            <button type="button" class="btn btn-primary buttons"
+              (click)="captureScreen(tran?.transaction_number); editCustomer.hide()">
+              Download
+            </button>
+            <!-- <button type="button" class="btn btn-success buttons" (click)="receiveStock(tran); editCustomer.hide()">
+              Recieve
+            </button> -->
+
+          </div>
+
+        </app-ui-modal>
+
+
+
+
+      </div>
+
+
+    </app-card>
+
+
+  </div>
+
+
+</div>

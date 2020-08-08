@@ -1,0 +1,244 @@
+<div class="row">
+  <div class="col-xl-3 col-lg-12">
+    <app-card cardTitle="Market" cardClass="task-board-left" blockClass="p-0">
+      <div class="p-20">
+        <div class="input-group mb-0">
+          <input type="text" class="form-control add_task_todo" placeholder="Search here..." required="">
+          <div class="input-group-append">
+            <button class="btn waves-effect waves-light btn-primary btn-msg-send" type="button"><i class="fas fa-search"></i></button>
+          </div>
+        </div>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item border-top-0">
+          <div class="float-right">231.65</div>
+          <div class="d-flex align-items-center"> <i class="f-24 m-r-10 fab fa-bitcoin text-c-yellow"></i> Bitcoin </div>
+        </li>
+        <li class="list-group-item">
+          <div class="float-right">113.05</div>
+          <div class="d-flex align-items-center"> <i class="f-24 m-r-10 fab fa-cloudsmith text-c-green"></i>DASH </div>
+        </li>
+        <li class="list-group-item">
+          <div class="float-right">341.22</div>
+          <div class="d-flex align-items-center"> <i class="f-24 m-r-10 fab fa-ethereum text-c-red"></i>Litecoin </div>
+        </li>
+        <li class="list-group-item">
+          <div class="float-right">241.68</div>
+          <div class="d-flex align-items-center"><i class="f-24 m-r-10 fab fa-asymmetrik text-c-blue"></i>NEO</div>
+        </li>
+        <li class="list-group-item">
+          <div class="float-right">231.65</div>
+          <div class="d-flex align-items-center"> <i class="f-24 m-r-10 fab fa-bitcoin text-c-yellow"></i> ANC </div>
+        </li>
+        <li class="list-group-item">
+          <div class="float-right">113.05</div>
+          <div class="d-flex align-items-center"> <i class="f-24 m-r-10 fab fa-cloudsmith text-c-green"></i>ARK </div>
+        </li>
+        <li class="list-group-item">
+          <div class="float-right">341.22</div>
+          <div class="d-flex align-items-center"> <i class="f-24 m-r-10 fab fa-ethereum text-c-red"></i>BTA </div>
+        </li>
+        <li class="list-group-item">
+          <div class="float-right">241.68</div>
+          <div class="d-flex align-items-center"><i class="f-24 m-r-10 fab fa-asymmetrik text-c-blue"></i>ETH</div>
+        </li>
+        <li class="list-group-item">
+          <div class="float-right">113.05</div>
+          <div class="d-flex align-items-center"> <i class="f-24 m-r-10 fab fa-cloudsmith text-c-green"></i>NEO </div>
+        </li>
+        <li class="list-group-item">
+          <div class="float-right">341.22</div>
+          <div class="d-flex align-items-center"> <i class="f-24 m-r-10 fab fa-ethereum text-c-red"></i>XMR </div>
+        </li>
+        <li class="list-group-item border-bottom-0">
+          <div class="float-right">241.68</div>
+          <div class="d-flex align-items-center"><i class="f-24 m-r-10 fab fa-asymmetrik text-c-blue"></i>XRP</div>
+        </li>
+      </ul>
+    </app-card>
+  </div>
+  <div class="col-xl-9 col-lg-12">
+    <app-card cardTitle="Trading Chart" [options]="false">
+      <app-apex-chart chartID="chart-trade" [chartConfig]="this.siteVisitorCAC" [newData]="this.data"></app-apex-chart>
+    </app-card>
+
+    <app-card cardTitle="Open Orders" [options]="false">
+      <div class="table-responsive">
+        <table datatable id="report-table" class="table table-striped mb-0">
+          <thead>
+          <tr>
+            <th>Coin</th>
+            <th>Date</th>
+            <th>Volume</th>
+            <th>Status</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>
+              <div class="d-flex align-items-center"> <i class="f-24 m-r-10 fab fa-bitcoin text-c-yellow"></i> Bitcoin </div>
+            </td>
+            <td>
+              <div>02/12/2018</div>
+            </td>
+            <td>
+              <div>0.725.00</div>
+            </td>
+            <td>
+              <div class="badge badge-success badge-pill">Completed</div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="d-flex align-items-center"> <i class="f-24 m-r-10 fab fa-ethereum text-c-red"></i>Litecoin </div>
+            </td>
+            <td>7
+              <div>05/30/2018</div>
+            </td>
+            <td>
+              <div>0.134.00</div>
+            </td>
+            <td>
+              <div class="badge badge-danger badge-pill">Cancel</div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="d-flex align-items-center"><i class="f-24 m-r-10 fab fa-asymmetrik text-c-blue"></i>NEO</div>
+            </td>
+            <td>
+              <div>06/27/2019</div>
+            </td>
+            <td>
+              <div>1.345.00</div>
+            </td>
+            <td>
+              <div class="badge badge-primary badge-pill">Pending</div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="d-flex align-items-center"> <i class="f-24 m-r-10 fab fa-cloudsmith text-c-green"></i>DASH </div>
+            </td>
+            <td>
+              <div>12/10/2020</div>
+            </td>
+            <td>
+              <div>0.755.00</div>
+            </td>
+            <td>
+              <div class="badge badge-primary badge-pill">Pending</div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="d-flex align-items-center"> <i class="f-24 m-r-10 fab fa-cloudsmith text-c-green"></i>DASH </div>
+            </td>
+            <td>
+              <div>06/02/2021</div>
+            </td>
+            <td>
+              <div>0.124.00</div>
+            </td>
+            <td>
+              <div class="badge badge-success badge-pill">Completed</div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="d-flex align-items-center"> <i class="f-24 m-r-10 fab fa-ethereum text-c-red"></i>Litecoin </div>
+            </td>
+            <td>
+              <div>08/11/2022</div>
+            </td>
+            <td>
+              <div>0.123.00</div>
+            </td>
+            <td>
+              <div class="badge badge-success badge-pill">Completed</div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </app-card>
+
+    <app-card cardTitle="Your Trades" [options]="false">
+      <div class="table-responsive">
+        <table datatable id="report-table1" class="table table-striped mb-0">
+          <thead>
+          <tr>
+            <th>Date</th>
+            <th>Coin</th>
+            <th>Volume</th>
+            <th>Receiver</th>
+            <th>Status</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>
+              <div class="d-flex align-items-center"> <i class="f-24 m-r-10 fab fa-ethereum text-c-red"></i>Litecoin </div>
+            </td>
+            <td>
+              <div>02/12/2018</div>
+            </td>
+            <td>
+              <div>0.1235.00</div>
+            </td>
+            <td>Bank - 1025********347</td>
+            <td>
+              <div class="badge badge-success badge-pill">Completed</div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="d-flex align-items-center"><i class="f-24 m-r-10 fab fa-asymmetrik text-c-blue"></i>NEO</div>
+            </td>
+            <td>
+              <div>07/12/2020</div>
+            </td>
+            <td>
+              <div>0.550</div>
+            </td>
+            <td>NEO Wallet - #17642</td>
+            <td>
+              <div class="badge badge-primary badge-pill">Pending</div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="d-flex align-items-center"> <i class="f-24 m-r-10 fab fa-bitcoin text-c-yellow"></i> Bitcoin </div>
+            </td>
+            <td>
+              <div>02/10/2017</div>
+            </td>
+            <td>
+              <div>0.4345.00</div>
+            </td>
+            <td>BTC Wallet - #23562</td>
+            <td>
+              <div class="badge badge-success badge-pill">Completed</div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="d-flex align-items-center"> <i class="f-24 m-r-10 fab fa-cloudsmith text-c-green"></i>DASH </div>
+            </td>
+            <td>
+              <div>07/10/2020</div>
+            </td>
+            <td>
+              <div>1.234.00</div>
+            </td>
+            <td>Bank - 1550********879</td>
+            <td>
+              <div class="badge badge-danger badge-pill">Cancel</div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </app-card>
+  </div>
+</div>
