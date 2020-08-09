@@ -3,8 +3,8 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { interval, Subscription } from 'rxjs';
 
-const server = 'https://api.kccsmarthp.com/api/';
-// const server = 'http://41.211.11.228:8010/api/';
+// const server = 'https://api.kccsmarthp.com/api/';
+const server = 'http://127.0.0.1:8010/api/';
 
 @Injectable({
   providedIn: 'root'
@@ -92,8 +92,8 @@ export class AuthenticationService {
       Authorization: 'Bearer ' + localStorage.getItem('token')
     });
     config.append('Accept', 'application/json');
-    return this.http.post('https://api.kccsmarthp.com/oauth/token', payload, {
-    // return this.http.post('http://41.211.11.228:8010/oauth/token', payload, {
+    // return this.http.post('https://api.kccsmarthp.com/oauth/token', payload, {
+    return this.http.post('http://127.0.0.1:8010/oauth/token', payload, {
       headers: config
     });
   }

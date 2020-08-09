@@ -26,8 +26,8 @@ export class AuthSigninV2Component implements OnInit {
     password: '',
     grant_type: 'password',
     client_id: '2',
-    client_secret: 'KJv7MHWz4GlKhARFI5PUDOHZBjPgDBa6QC2WvYDC', // server auth key
-    // client_secret: 'Gizh0kwHiwoxvYkgdWgrmJ92f5NWdf45W83zWJTO',
+    // client_secret: 'fJkJrufrUHgGcgTlYvy9fQCP7LJPP7xJdBWWPeJr', // server auth key
+    client_secret: 'vOmq6Hy3SPTFxYGfptSgpPYzJpyIU3QZmgeuTRI6',
     scope: '*',
   };
 
@@ -104,9 +104,9 @@ export class AuthSigninV2Component implements OnInit {
         localStorage.setItem('branch', response['user']['branch_id']);
 
         if (access_level !== 'Administrator') {
-          // this.alert.success('Welcome ' + localStorage.getItem('username'));
+          this.alert.success('Welcome ' + localStorage.getItem('username'));
           localStorage.setItem('access_level', access_level);
-          this.checkSession(localStorage.getItem('branch'));
+          this.router.navigate(['/dashboard/default']);
         } else {
           localStorage.clear();
           this.isLoading = false;
@@ -122,39 +122,4 @@ export class AuthSigninV2Component implements OnInit {
     );
   }
 
-  checkSession(id) {
-    this.auth.show('branch_session', id).subscribe(
-      (response) => {
-        // console.log(response['data']);
-        const session = response['data'][0]['close_session'];
-        if (response['data'][0] !== null || response['data'][0] !== undefined) {
-          if (session === 'N/A') {
-            localStorage.setItem('session', response['data'][0]['start_session']);
-            localStorage.setItem('sessionID', response['data'][0]['id']);
-            this.isLoading = false;
-            // console.log(localStorage.getItem('session'));
-            this.router.navigate(['/dashboard/default']);
-            this.alert.success('Welcome ' + localStorage.getItem('username'));
-          } else {
-            localStorage.clear();
-            this.isLoading = false;
-            this.alert.info('Contact admin to open a new session for this Branch');
-            this.router.navigate(['/auth/signin-v2/']);
-          }
-        } else {
-          localStorage.clear();
-          this.isLoading = false;
-          this.alert.info('No session has been created for this Branch');
-          this.router.navigate(['/auth/signin-v2/']);
-        }
-      },
-      (error) => {
-        console.log(error);
-        localStorage.clear();
-        this.isLoading = false;
-        this.alert.error('Signing In unsuccessful, please try again later.');
-        this.router.navigate(['/auth/signin-v2/']);
-      }
-    );
-  }
 }

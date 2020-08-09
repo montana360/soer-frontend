@@ -9,7 +9,7 @@
 
     <div *ngIf="!this.isLoading" class="row">
       <div class="col-md-3 col-xs-6 border-right">
-        <h5>KCC Company Limited</h5>
+        <h5>Bernard Company Limited</h5>
         <span class="text-primary">Company</span>
       </div>
 
@@ -17,7 +17,7 @@
         <div *ngFor="let branch of allBranches">
           <h5 *ngIf="branch.id == branchID">{{ branch?.name }}</h5>
         </div>
-        <span class="text-primary">Branch</span>
+        <span class="text-primary">Store</span>
       </div>
 
       <div class="col-md-2 col-xs-6 border-right">
@@ -30,17 +30,7 @@
         <span class="text-primary">Name</span>
       </div>
 
-      <div class="col-md-2  col-xs-6 border-right">
-        <h5>{{  date | date:'mediumDate' }}</h5>
-        <span class="text-primary">Current Session Date</span>
-        <hr>
-        <div>
-          <button class="btn btn-danger btn-sm btn-round has-ripple" (click)="modalCustomer.show()">
-            Close Session &nbsp;
-            <i class="feather icon-log-out"></i>
-          </button>
-        </div>
-      </div>
+     
 
       <app-ui-modal #modalCustomer [dialogClass]="'modal-md'">
         <div class="app-modal-header">
@@ -168,9 +158,9 @@
         </app-card>
       </div>
     </div>
-    <!-- 
+    <!--
     <div class="row">
-     
+
     </div> -->
   </div>
 </div>
