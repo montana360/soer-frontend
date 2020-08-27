@@ -26,15 +26,15 @@ export class BranchStockReportComponent implements OnInit {
     this.getAllStock();
     this.getBranches();
 
-    this.dtOptions = {
-      // searching: false,
-      dom: 'Bfrtip',
-      buttons: [
-        'print',
-        // 'excel',
-        // 'csv'
-      ]
-    };
+    // this.dtOptions = {
+    //   // searching: false,
+    //   dom: 'Bfrtip',
+    //   buttons: [
+    //     'print',
+    //     // 'excel',
+    //     // 'csv'
+    //   ]
+    // };
   }
 
   getBranches() {
@@ -74,7 +74,7 @@ export class BranchStockReportComponent implements OnInit {
       }
     );
   }
-  
+
 
 
 }

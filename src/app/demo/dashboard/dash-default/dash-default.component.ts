@@ -175,7 +175,7 @@ export class DashDefaultComponent implements OnInit {
       },
       (error) => {
         this.isLoading = false;
-        this.alert.error('Could not get expense information');
+        // this.alert.error('Could not get expense information');
       }
     );
   }
@@ -198,7 +198,7 @@ export class DashDefaultComponent implements OnInit {
       },
       (error) => {
         this.isLoading = false;
-        this.alert.error('Could not get Deposit(s) Information');
+        // this.alert.error('Could not get Deposit(s) Information');
       }
     );
   }
@@ -256,9 +256,9 @@ export class DashDefaultComponent implements OnInit {
       (error) => {
         console.log(error);
         this.isLoading = false;
-        this.alert.error(
-          'Could not close session, please check network connectivity'
-        );
+        // this.alert.error(
+        //   'Could not close session, please check network connectivity'
+        // );
       }
     );
   }
@@ -276,9 +276,9 @@ export class DashDefaultComponent implements OnInit {
       (error) => {
         console.log(error);
         this.isLoading = false;
-        this.alert.error(
-          'Could not close session, please check network connectivity'
-        );
+        // this.alert.error(
+        //   'Could not close session, please check network connectivity'
+        // );
       }
     );
   }

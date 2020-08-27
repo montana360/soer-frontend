@@ -130,6 +130,8 @@ export class SalesShopWalkinComponent implements OnInit {
     this.getBranches();
     this.getStaff();
     this.getBranchWalkinSales();
+    this.getTransaction();
+    this.getstore()
   }
 
 
@@ -156,7 +158,7 @@ export class SalesShopWalkinComponent implements OnInit {
           this.isLoading = false;
         } else {
           this.isLoading = false;
-          this.alert.info('No branches created yet');
+          // this.alert.info('No Store created yet');
         }
       },
       error => {
@@ -220,7 +222,25 @@ export class SalesShopWalkinComponent implements OnInit {
       }
     );
   }
-
+ getstore(){
+  this.isLoading = true;
+  this.auth.get('branch_stock_search').subscribe(
+    response => {
+      if (response['data'].length > 0) {
+        this.allSales = response['data'];
+        console.log(this.allSales);
+        this.isLoading = false;
+      } else {
+        this.isLoading = false;
+        this.alert.info('No Staff account created yet');
+      }
+    },
+    error => {
+      console.log(error);
+      this.isLoading = false;
+    }
+  );
+ }
 
 
   // Getting Selected Item information

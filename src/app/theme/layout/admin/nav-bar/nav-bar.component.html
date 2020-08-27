@@ -5,8 +5,9 @@
   <div class="m-header">
     <a href="javascript:" class="mobile-menu" id="mobile-collapse" (click)="navCollapse()"><span></span></a>
     <a [routerLink]="['/dashboard/default']" class="b-brand">
-      <img id="main-logo" src="assets/images/logo.png" alt="" class="logo">
-      <img src="assets/images/logo-icon.png" alt="" class="logo-thumb">
+      <h4 class="mb-2" style="color: white;">NASOO
+        <!-- <small class="font-weight-normal">Customizer</small> -->
+      </h4>
     </a>
     <a class="mob-toggler" [ngClass]="{'on' : this.menuClass}" href="javascript:" (click)="toggleMobOption()"><i class="feather icon-more-vertical"></i></a>
   </div>

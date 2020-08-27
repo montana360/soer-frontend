@@ -145,96 +145,96 @@ const NavigationItems = [
       },
 
       // Reports
-      // {
-      //   id: 'report',
-      //   title: 'Reports',
-      //   type: 'collapse',
-      //   icon: 'feather icon-bar-chart-2',
-      //   children: [
-      //     // Sales Report
-      //     {
-      //       id: 'cash-report',
-      //       title: 'Cash Report',
-      //       type: 'item',
-      //       url: '/reports/cash-report',
-      //     },
-      //     {
-      //       id: 'agents-cash-report',
-      //       title: 'Agents Cash Report',
-      //       type: 'item',
-      //       url: '/reports/agents-cash-report',
-      //       // target: true,
-      //     },
-      //     {
-      //       id: 'agent-customer-report',
-      //       title: 'Agent Customer Report',
-      //       type: 'item',
-      //       url: '/reports/agent-customer-report',
-      //       // target: true,
-      //     },
+      {
+        id: 'report',
+        title: 'Reports',
+        type: 'collapse',
+        icon: 'feather icon-bar-chart-2',
+        children: [
+          // Sales Report
+          // {
+          //   id: 'cash-report',
+          //   title: 'Cash Report',
+          //   type: 'item',
+          //   url: '/reports/cash-report',
+          // },
+          // {
+          //   id: 'agents-cash-report',
+          //   title: 'Agents Cash Report',
+          //   type: 'item',
+          //   url: '/reports/agents-cash-report',
+          //   // target: true,
+          // },
+          // {
+          //   id: 'agent-customer-report',
+          //   title: 'Agent Customer Report',
+          //   type: 'item',
+          //   url: '/reports/agent-customer-report',
+          //   // target: true,
+          // },
 
-      //     // Stock Report
-      //     {
-      //       id: 'stock-report',
-      //       title: 'Stock Report',
-      //       type: 'collapse',
-      //       children: [
-      //         {
-      //           id: 'branch-stock-report',
-      //           title: 'Branch Stock Report',
-      //           type: 'item',
-      //           url: '/reports/branch-stock-report',
-      //         },
-      //         {
-      //           id: 'stock-sales-report',
-      //           title: 'Stock Sales Report',
-      //           type: 'item',
-      //           url: '/reports/stock-sales-report',
-      //           // target: true,
-      //         },
-      //         {
-      //           id: 'inter-branch-stock-report',
-      //           title: 'Inter Branch Stock Report',
-      //           type: 'item',
-      //           url: '/reports/inter-branch-stock-report',
-      //           // target: true,
-      //         },
-      //       ]
-      //     },
+          // Stock Report
+          {
+            id: 'stock-report',
+            title: 'Stock Report',
+            type: 'collapse',
+            children: [
+              {
+                id: 'branch-stock-report',
+                title: 'Store Stock Report',
+                type: 'item',
+                url: '/reports/branch-stock-report',
+              },
+              {
+                id: 'stock-sales-report',
+                title: 'Stock Sales Report',
+                type: 'item',
+                url: '/reports/stock-sales-report',
+                // target: true,
+              },
+              // {
+              //   id: 'inter-branch-stock-report',
+              //   title: 'Inter Branch Stock Report',
+              //   type: 'item',
+              //   url: '/reports/inter-branch-stock-report',
+              //   target: true,
+              // },
+            ]
+          },
 
 
-      //     // Stock Transfer Report
-      //     {
-      //       id: 'stock-transfer-report',
-      //       title: 'Stock Transfer Report',
-      //       type: 'collapse',
-      //       children: [
-      //         {
-      //           id: 'receive-stock-report',
-      //           title: 'Receive Stock Report',
-      //           type: 'item',
-      //           url: '/reports/receive-stock-report',
-      //         },
-      //         {
-      //           id: 'receive-stock-from-branch-report',
-      //           title: 'Receive Stock From Branch Report',
-      //           type: 'item',
-      //           url: '/reports/receive-stock-from-branch-report',
-      //         },
-      //         {
-      //           id: 'send-stock-to-branch-report',
-      //           title: 'Send Stock To Branch Report',
-      //           type: 'item',
-      //           url: '/reports/send-stock-to-branch-report',
-      //         },
-      //         {
-      //           id: 'send-stock-back-to-hq-report',
-      //           title: 'Send Stock Back To HQ',
-      //           type: 'item',
-      //           url: '/reports/send-stock-back-to-hq-report',
-      //         },
-      //       ]
-      //     },
+          // Stock Transfer Report
+          {
+            id: 'stock-transfer-report',
+            title: 'Stock Transfer Report',
+            type: 'collapse',
+            children: [
+              {
+                id: 'receive-stock-report',
+                title: 'Receive Stock Report',
+                type: 'item',
+                url: '/reports/receive-stock-report',
+              },
+              // {
+              //   id: 'receive-stock-from-branch-report',
+              //   title: 'Receive Stock From Store Report',
+              //   type: 'item',
+              //   url: '/reports/receive-stock-from-branch-report',
+              // },
+              // {
+              //   id: 'send-stock-to-branch-report',
+              //   title: 'Send Stock To Store Report',
+              //   type: 'item',
+              //   url: '/reports/send-stock-to-branch-report',
+              // },
+              // {
+              //   id: 'send-stock-back-to-hq-report',
+              //   title: 'Send Stock Back To HQ',
+              //   type: 'item',
+              //   url: '/reports/send-stock-back-to-hq-report',
+              // },
+            ]
+          },
 
       //     // Deposit Customer Report
       //     {
@@ -316,8 +316,8 @@ const NavigationItems = [
       //     //     }
       //     //   ]
       //     // },
-      //   ]
-      // },
+        ]
+      },
 
       // Settings
       {
