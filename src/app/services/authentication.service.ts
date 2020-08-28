@@ -3,8 +3,8 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { interval, Subscription } from 'rxjs';
 
-// const server = 'http://45.76.46.240/api/';
-const server = 'http://127.0.0.1:8000/api/';
+const server = 'http://45.76.46.240/api/';
+// const server = 'http://127.0.0.1:8000/api/';
 
 @Injectable({
   providedIn: 'root'
@@ -92,8 +92,8 @@ export class AuthenticationService {
       Authorization: 'Bearer ' + localStorage.getItem('token')
     });
     config.append('Accept', 'application/json');
-    // return this.http.post('http://45.76.46.240/oauth/token', payload, {
-    return this.http.post('http://127.0.0.1:8000/oauth/token', payload, {
+    return this.http.post('http://45.76.46.240/oauth/token', payload, {
+    // return this.http.post('http://127.0.0.1:8000/oauth/token', payload, {
       headers: config
     });
   }

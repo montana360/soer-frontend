@@ -101,12 +101,12 @@ export class StockSalesReportComponent implements OnInit {
   ngOnInit() {
     this.dtOptions = {
       // searching: false,
-      // dom: 'Bfrtip',
-      // buttons: [
-      //   'print',
-      //   'excel',
-      //   'csv'
-      // ]
+      dom: 'Bfrtip',
+      buttons: [
+        'print',
+        // 'excel',
+        // 'csv'
+      ]
     };
   }
 

@@ -26,8 +26,8 @@ export class AuthSigninV2Component implements OnInit {
     password: '',
     grant_type: 'password',
     client_id: '2',
-    // client_secret: 'GwTUp5aXDeAz5T02SknoBOQMMkfsCM9Qc0FenHrB', // server auth key
-    client_secret: 'vOmq6Hy3SPTFxYGfptSgpPYzJpyIU3QZmgeuTRI6',
+    client_secret: 'GwTUp5aXDeAz5T02SknoBOQMMkfsCM9Qc0FenHrB', // server auth key
+    // client_secret: 'vOmq6Hy3SPTFxYGfptSgpPYzJpyIU3QZmgeuTRI6',
     scope: '*',
   };
 
